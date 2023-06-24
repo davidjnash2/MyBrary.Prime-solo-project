@@ -28,7 +28,7 @@ else {
     pool = new pg.Pool({
         host: 'localhost',
         port: 5432,
-        database: 'library_solo_project',   // 	💥 Change this to the name of your database!
+        database: 'mybrary_solo_test',   // CHANGED!!! NEED TO CHANGE TO 'mybrary_solo_final' WHEN READY TO ROLL OUT
     });
 }
 

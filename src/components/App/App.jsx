@@ -8,6 +8,7 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
+
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
@@ -19,6 +20,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import ApiSearch from '../ApiSearch/ApiSearch';
 
 import './App.css';
 
@@ -33,6 +35,8 @@ function App() {
 
   return (
     <Router>
+      {/* THIS LINE IS FOR TESTING CLIENT SIDE OF SEARCH API; NEED TO ADJUST LATER */}
+      <ApiSearch />
       <div>
         <Nav />
         <Switch>

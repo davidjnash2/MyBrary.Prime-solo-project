@@ -4,6 +4,7 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import ApiSearch from '../ApiSearch/ApiSearch';
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome');
@@ -32,6 +33,7 @@ function LandingPage() {
             just who’s got your copy of Slaughterhouse-Five. 
 
           </p>
+          <ApiSearch />
         </div>
         <div className="grid-col grid-col_4">
           <RegisterForm />

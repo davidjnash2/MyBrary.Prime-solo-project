@@ -29,34 +29,40 @@ function SearchBook({ book }) {
 
     }
 
-    // using conditional rendering here to only display volumes with ISBNs assigned,
-    // so that user will only see volumes with that value, and will allow me to double-check
-    // it against their libary to prevent duplicate entries
-    // also using && AND operators to ensure that any missing volume data doesn't render an 
-    // empty field; title and author are assumed a given (perhaps to my later detriment)
+    // using conditional rendering, optional chaining, AND operators to ensure that only results which contain
+    // the information I want for POST is accessible and available as choice options for user
     return (
         <>
-            {(book?.volumeInfo?.industryIdentifiers[0]?.type === 'ISBN_13' || book?.volumeInfo?.industryIdentifiers[1]?.type === 'ISBN_13')
-                && book?.volumeInfo?.imageLinks
-                && (
+            {book &&
+                (book?.volumeInfo?.industryIdentifiers?.[0]?.type === 'ISBN_13' ||
+                    (book?.volumeInfo?.industryIdentifiers?.[1] && book?.volumeInfo?.industryIdentifiers?.[1]?.type === 'ISBN_13')) &&
+                book?.volumeInfo?.imageLinks &&
+                book?.volumeInfo?.title !== undefined &&
+                book?.volumeInfo?.subtitle !== undefined &&
+                book?.volumeInfo?.authors !== undefined &&
+                book?.volumeInfo?.publisher !== undefined &&
+                book?.volumeInfo?.publishedDate !== undefined &&
+                book?.volumeInfo?.categories !== undefined &&
+                book?.volumeInfo?.pageCount !== undefined &&
+                book?.volumeInfo?.description !== undefined && (
                     <div>
                         <img
                             src={book?.volumeInfo?.imageLinks?.thumbnail}
                             onClick={addBook}>
                         </img>
-                        {book.volumeInfo.title && <p>Title: {book.volumeInfo.title}</p>}
-                        {book.volumeInfo.subtitle && <p>Subtitle: {book.volumeInfo.subtitle}</p>}
-                        {book.volumeInfo.authors && <p>Author: {book.volumeInfo.authors}</p>}
-                        {book.volumeInfo.publisher && <p>Publisher: {book.volumeInfo.publisher}</p>}
-                        {book.volumeInfo.publishedDate && <p>Published: {book.volumeInfo.publishedDate}</p>}
-                        {book.volumeInfo.categorie && <p>Genre: {book.volumeInfo.categories}</p>}
-                        {book.volumeInfo.pageCount && book.volumeInfo.pageCount !== 0 && <p>Pages: {book.volumeInfo.pageCount}</p>}
-                        {book.volumeInfo.industryIdentifiers[0].type === 'ISBN_13' ?
-                            <p>ISBN: {book.volumeInfo.industryIdentifiers[0].identifier}</p>
+                        {book?.volumeInfo?.title && book?.volumeInfo?.title !== 0 && book?.volumeInfo?.title !== undefined && <p>Title: {book.volumeInfo.title}</p>}
+                        {book?.volumeInfo?.subtitle && book?.volumeInfo?.subtitle !== 0 && book?.volumeInfo?.subtitle !== undefined && <p>Subtitle: {book.volumeInfo.subtitle}</p>}
+                        {book?.volumeInfo?.authors && book?.volumeInfo?.authors !== 0 && book?.volumeInfo?.authors !== undefined && <p>Author: {book.volumeInfo.authors}</p>}
+                        {book?.volumeInfo?.publisher && book?.volumeInfo?.publisher !== 0 && book?.volumeInfo?.publisher !== undefined && <p>Publisher: {book.volumeInfo.publisher}</p>}
+                        {book?.volumeInfo?.publishedDate && book?.volumeInfo?.publishedDate !== 0 && book?.volumeInfo?.publishedDate !== undefined && <p>Published: {book.volumeInfo.publishedDate}</p>}
+                        {book?.volumeInfo?.categories && book?.volumeInfo?.categories !== 0 && book?.volumeInfo?.categories !== undefined && <p>Genre: {book.volumeInfo.categories}</p>}
+                        {book?.volumeInfo?.pageCount && book?.volumeInfo?.pageCount !== 0 && book?.volumeInfo?.pageCount !== undefined && <p>Pages: {book.volumeInfo.pageCount}</p>}
+                        {book?.volumeInfo?.industryIdentifiers[0]?.type === 'ISBN_13' ?
+                            <p>ISBN: {book.volumeInfo.industryIdentifiers[0]?.identifier}</p>
                             :
-                            <p>ISBN: {book.volumeInfo.industryIdentifiers[1].identifier}</p>
+                            <p>ISBN: {book.volumeInfo.industryIdentifiers[1]?.identifier}</p>
                         }
-                        {book.volumeInfo.description && <p>Description: {book.volumeInfo.description}</p>}
+                        {book?.volumeInfo?.description && book?.volumeInfo?.description !== 0 && book?.volumeInfo?.description !== undefined && <p>Description: {book.volumeInfo.description}</p>}
                     </div>
                 )}
         </>

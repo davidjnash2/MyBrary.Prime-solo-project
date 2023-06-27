@@ -23,15 +23,24 @@ function ApiSearch() {
     // ensure universal button styling on submit button
     return (
         <>
-            <form onSubmit={sendSearch}>
+            <form
+                id="user-search"
+                onSubmit={sendSearch}
+            >
+                <label
+                    htmlFor="search-input">
+                    WHAT BOOK DO YOU WANT?
+                </label>
                 <input
+                    id="search-input"
                     onChange={(event) => setSearch(event.target.value)}
                     type="text"
                     placeholder="Pick a book, any book."
                     required
+                    autoComplete="on"
                     value={search}
                 />
-                <button type="submit">GET THOSE BOOKS</button>
+                <button type="submit">GET THAT BOOK</button>
             </form>
             {/* <SearchList /> */}
         </>

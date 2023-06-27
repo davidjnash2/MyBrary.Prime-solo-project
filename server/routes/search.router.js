@@ -1,30 +1,31 @@
-// const express = require('express');
-// const pool = require('../modules/pool');
-// const router = express.Router();
-// const axios = require('axios');
+const express = require('express');
+const pool = require('../modules/pool');
+const router = express.Router();
+const axios = require('axios');
 
 
-// // GET route to GoogleBooks API
-// // q=user search terms
-// // restrict to max 10 results
-// // ordered by relevance
-// // limiting to books only
-// router.get('/', (req, res) => {
-//   if (req.isAuthenticated()) {
-//     console.log('IN SERVER API GET, AND req.body IS:', req.body);
-//     const userSearch = req.body;
-//     axios.get(`https://www.googleapis.com/books/v1/volumes?q=${userSearch}&maxResults=10&orderBy=relevance&printType=books&key=${process.env.key}`)
-//       .then((response) => {
-//         console.log(response.data);
-//         res.send(response.data);
-//       })
-//       .catch((error) => {
-//         console.log('ERROR IN SERVER API GET!', error);
-//       });
-//   } else {
-//     res.sendStatus(403);
-//   }
-// });
+// GET route to GoogleBooks API
+// q=user search terms
+// restrict to max 10 results
+// ordered by relevance
+// limiting to books only
+router.get('/:searchTerm', (req, res) => {
+  if (req.isAuthenticated()) {
+    console.log('in server api GET, and req.params is:', req.params);
+    const searchTerm = req.params.searchTerm;
+    const key=process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
+    axios.get(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=10&orderBy=relevance&printType=books&key=${key}`)
+      .then((response) => {
+        console.log(response.data);
+        res.send(response.data);
+      })
+      .catch((error) => {
+        console.log('ERROR IN SERVER API GET!', error);
+      });
+  } else {
+    res.sendStatus(403);
+  }
+});
 
 
-// module.exports = router;
+module.exports = router;

@@ -5,15 +5,17 @@ const router = express.Router();
 
 // GET route
 router.get('/', (req, res) => {
-  const userLibraryQuery = `
+  if (req.isAuthenticated()) {
+    const userLibraryQuery = `
   SELECT "user"."username", "book".*
   FROM "user"
   JOIN user_book
   ON "user"."id" = "user_book"."user_id"
   JOIN book
-ON "user_book"."book_id" = "book"."id";`;
-  pool.query(userLibraryQuery, user.id); // need to verify that this is correct way to pass userid from passport
-}
+  ON "user_book"."book_id" = "book"."id";`;
+    pool.query(userLibraryQuery, user.id); // need to verify that this is correct way to pass userid from passport
+  }
+})
 
 // POST route
 // will be using 10 properties per entry

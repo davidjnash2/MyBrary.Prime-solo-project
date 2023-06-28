@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux';
 
 function SearchBook({ book }) {
 
+    const dispatch = useDispatch();
+
     //     // FOR BLOCKING ADD OF BOOK ALREADY IN LIBRARY:
     //     // USE SERVER GET TO HOLD LIBRARY IN STATE, LOOP THROUGH ISBN 
     //     // VALUES TO ENSURE NOT MATCH WITH ATTEMPTED ADD
@@ -25,11 +27,37 @@ function SearchBook({ book }) {
 
     // isbn= book.volumeInfo.industryIdentifiers[0].identifier
 
+
+    // 
     const addBook = () => {
+
+        const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
+        book.volumeInfo.industryIdentifiers[0].identifier
+        :
+        book.volumeInfo.industryIdentifiers[1].identifier);
+        console.log('isbn is:', isbn);
+
+        
+
+        dispatch({
+            action: 'ADD_BOOK',
+            payload: {
+                cover_url: book.volumeInfo.imageLinks.thumbnail,
+                title: book.volumeInfo.title,
+                subtitle: book.volumeInfo.subtitle,
+                author: book.volumeInfo.authors,
+                publisher: book.volumeInfo.publisher,
+                published: book.volumeInfo.publishedDate,
+                genre: book.volumeInfo.categories,
+                pages: book.volumeInfo.pageCount,
+                description: book.volumeInfo.description,
+                isbn: isbn,
+            }
+        })
 
     }
 
-    // using conditional rendering, optional chaining, AND operators to ensure that only results which contain
+    // using conditional rendering, optional chaining, and &&/AND operators to ensure that only results which contain
     // the information I want for POST is accessible and available as choice options for user
     return (
         <>

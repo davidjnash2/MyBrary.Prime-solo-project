@@ -2,12 +2,18 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+
+// GET route
 router.get('/', (req, res) => {
-  // GET route code here
-});
+  const userLibraryQuery = `
+  SELECT "user"."username", "book".*
+  FROM "user"
+  JOIN user_book
+  ON "user"."id" = "user_book"."user_id"
+  JOIN book
+ON "user_book"."book_id" = "book"."id";`;
+  pool.query(userLibraryQuery, user.id); // need to verify that this is correct way to pass userid from passport
+}
 
 // POST route
 // will be using 10 properties per entry
@@ -18,9 +24,15 @@ router.get('/', (req, res) => {
 // user_book table
 router.post('/', (req, res) => {
   if (req.isAuthenticated()) {
+
+    pool.query(`SELECT `
+
+    )
+
+    // if ( SELECT * db isbn !== this ibsn){
     console.log('IN SERVER POST, AND req.body is:', req.body);
     const book = req.body; // will probably need to define properties
-    const postQuery = `INSERT INTO book (
+    const postBookQuery = `INSERT INTO book (
       cover_url, 
       title,
       subtitle,
@@ -31,16 +43,19 @@ router.post('/', (req, res) => {
       pages,	
       description,
       isbn)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);
-
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+    RETURNING "id";
   `;
-    pool.query(postQuery, [book]) // will need to define book properties from req.body
+    pool.query(postBookQuery, [book]) // will need to define book properties from req.body
       .then((response) => {
         res.sendStatus(202);
       })
       .catch((error) => {
         console.log('ERROR IN SERVER POST', error);
       });
+
+
+
   } else {
     res.sendStatus(400);
   }

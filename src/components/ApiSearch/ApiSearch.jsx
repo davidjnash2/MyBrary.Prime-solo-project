@@ -1,16 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
-import SearchList from '../SearchList/SearchList';
+// import SearchList from '../SearchList/SearchList';
 
 function ApiSearch() {
 
     const [search, setSearch] = useState([]);
     const dispatch = useDispatch();
-    const history = useHistory();
-
-    const results = useSelector((store) => store.results);
 
     const sendSearch = (event) => {
         event.preventDefault();
@@ -19,38 +15,34 @@ function ApiSearch() {
             type: 'FETCH_RESULTS',
             payload: search
         })
-       
+        // history.push('/results');
+        // once results page is more defined, need to include this redirect to results view
     }
 
 
-
+    // ensure universal button styling on submit button
     return (
         <>
-            <form onSubmit={sendSearch}>
+            <form
+                id="user-search"
+                onSubmit={sendSearch}
+            >
+                <label
+                    htmlFor="search-input">
+                    WHAT BOOK DO YOU WANT?
+                </label>
                 <input
+                    id="search-input"
                     onChange={(event) => setSearch(event.target.value)}
                     type="text"
                     placeholder="Pick a book, any book."
                     required
+                    autoComplete="on"
                     value={search}
                 />
-                <button type="submit">GET THOSE BOOKS</button>
+                <button type="submit">GET THAT BOOK</button>
             </form>
-            <SearchList />
-            {/* <p></p>
-            {results && results.items?.map((book, i) => (
-                <div key={i}> */}
-                    {/* <img src={book && book.volumeInfo.imageLinks.thumbnail}></img>
-                    <p>Title: {book && book.volumeInfo.title}</p>
-                    <p>Subtitle: CONDITIONALLY RENDER IF NOT AVAILABLE {book && book.volumeInfo.subtitle}</p>
-                    <p>Author: {book && book.volumeInfo.authors}</p>
-                    <p>Publisher: {book && book.volumeInfo.publisher}</p>
-                    <p>Year Published: {book && book.volumeInfo.publishedDate}</p>
-                    <p>Genre: {book && book.volumeInfo.categories}</p>
-                    <p>Pages: {book && book.volumeInfo.pageCount} </p>
-                    <p>Description: {book && book.volumeInfo.description}</p> */}
-                {/* </div>
-            ))} */}
+            {/* <SearchList /> */}
         </>
     )
 }

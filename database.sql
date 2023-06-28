@@ -41,8 +41,9 @@ CREATE TABLE book (
 	genre VARCHAR(255),
 	pages INTEGER,
 	description TEXT,
-	isbn INTEGER UNIQUE NOT NULL
+	isbn VARCHAR(13) UNIQUE NOT NULL
 );
+
 
 
 --creating test user_book table

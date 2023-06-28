@@ -5,7 +5,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* fetchResults(action) {
 
     try {
-        // const searchTerm = action.payload;
         const results = yield axios.get(`/api/search/${action.payload}`)
         console.log('search API with client ', action.payload);
         yield put({

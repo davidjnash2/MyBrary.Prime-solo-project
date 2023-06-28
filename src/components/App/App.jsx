@@ -21,7 +21,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ApiSearch from '../ApiSearch/ApiSearch';
-// import SearchList from '../SearchList/SearchList';
+import SearchList from '../SearchList/SearchList';
 
 import './App.css';
 
@@ -37,6 +37,7 @@ function App() {
   return (
     <Router>
       <ApiSearch />
+      <SearchList />
       <div>
         <Nav />
         <Switch>

@@ -1,31 +1,31 @@
-// import React, { useEffect } from 'react';
-// import { useSelector, useDispatch } from "react-redux";
-// import SearchBook from '../SearchBook/SearchBook';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import LibraryBook from '../LibraryBook/LibraryBook';
 
-// function LibraryList() {
+function LibraryList() {
 
-//     const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-//     useEffect(() => {
-//         dispatch({
-//             type: 'FETCH_LIBRARY'
-//         })
-//     }, []);
+    const library = useSelector(store => store.library);
 
-//     // access search results from global state via store
-//     const library = useSelector((store) => store.library);
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_LIBRARY'
+        })
+    }, []);
 
-//     // map over results array, making sure there are actually
-//     //  values present before mapping so as not to crash DOM
-//     return (
-//         <>
-//             {library && library.items?.map((book, i) => (
-//                 <div key={i}>
-//                     <SearchBook book={book} />
-//                 </div>
-//             ))}
-//         </>
-//     )
-// }
 
-// export default LibraryList;
+    // map over library array, making sure there are actually
+    //  values present before mapping so as not to crash DOM
+    return (
+        <>
+            {library && library.map((userBook, i) => (
+                <div key={i}>
+                    <LibraryBook userBook={userBook} />
+                </div>
+            ))}
+        </>
+    )
+}
+
+export default LibraryList;

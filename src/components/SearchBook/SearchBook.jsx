@@ -13,34 +13,17 @@ function SearchBook({ book }) {
     //     // IF NOT, NO
 
 
-    // this will add searched book result to client library
-    // need to also pull in book ISBN numbers to see if match
-    // will also need to present user with some sort of 
-    // alert/confirmation(breadcrumb?) that book was added, or 
-    // same if not able to add
-
-    // add unique book details to global state, POST those 
-    // state values; look to feedback repo for reference
-
-    // "click to confirm" alert/notification for adding
-
-
-    // isbn= book.volumeInfo.industryIdentifiers[0].identifier
-
-
-    // 
+    // addBook 
     const addBook = () => {
 
         const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
         book.volumeInfo.industryIdentifiers[0].identifier
         :
         book.volumeInfo.industryIdentifiers[1].identifier);
-        console.log('isbn is:', isbn);
-
-        
+        console.log('this addBook isbn is:', isbn);
 
         dispatch({
-            action: 'ADD_BOOK',
+            type: 'ADD_BOOK',
             payload: {
                 cover_url: book.volumeInfo.imageLinks.thumbnail,
                 title: book.volumeInfo.title,
@@ -54,8 +37,8 @@ function SearchBook({ book }) {
                 isbn: isbn,
             }
         })
-
     }
+    
 
     // using conditional rendering, optional chaining, and &&/AND operators to ensure that only results which contain
     // the information I want for POST is accessible and available as choice options for user

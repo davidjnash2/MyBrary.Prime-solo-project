@@ -22,6 +22,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import ApiSearch from '../ApiSearch/ApiSearch';
 import SearchList from '../SearchList/SearchList';
+// import LibraryList from '../LibraryList/LibraryList';
 
 import './App.css';
 
@@ -38,6 +39,7 @@ function App() {
     <Router>
       <ApiSearch />
       <SearchList />
+      {/* <LibraryList /> */}
       <div>
         <Nav />
         <Switch>

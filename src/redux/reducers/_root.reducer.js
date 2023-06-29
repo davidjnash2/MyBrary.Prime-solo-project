@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import results from './results.reducer';
-import postReducer from './post.reducer';
 import library from './library.reducer';
 
 const rootReducer = combineReducers({

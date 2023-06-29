@@ -50,6 +50,8 @@ function LibraryBook({ userBook }) {
                 <p>ISBN: {userBook.isbn}</p>
                 <p>Description: {userBook.description}</p>
             </div >
+            <button name="delete" onClick={deleteUserBook}>DELETE BOOK</button>
+            <button name="update" onClick={updateUserBook}>UPDATE BOOK</button>
         </>
     )
 }

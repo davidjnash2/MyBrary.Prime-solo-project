@@ -4,6 +4,7 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import resultsSaga from './results.saga';
 import postSaga from './post.saga';
+import librarySaga from './library.saga';
 
 
 export default function* rootSaga() {
@@ -13,5 +14,6 @@ export default function* rootSaga() {
     userSaga(),
     resultsSaga(),
     postSaga(),
+    librarySaga(),
   ]);
 }

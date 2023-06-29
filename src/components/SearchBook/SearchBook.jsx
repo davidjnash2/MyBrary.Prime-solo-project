@@ -6,14 +6,8 @@ function SearchBook({ book }) {
 
     const dispatch = useDispatch();
 
-    //     // FOR BLOCKING ADD OF BOOK ALREADY IN LIBRARY:
-    //     // USE SERVER GET TO HOLD LIBRARY IN STATE, LOOP THROUGH ISBN 
-    //     // VALUES TO ENSURE NOT MATCH WITH ATTEMPTED ADD
-    //     // IF SO, ALLOW,
-    //     // IF NOT, NO
 
-
-    // addBook 
+    
     const addBook = () => {
 
         const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?

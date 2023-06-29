@@ -6,17 +6,15 @@ function LibraryBook({ userBook }) {
 
     const dispatch = useDispatch();
 
+    const deleteUserBook = () => {
 
+        console.log('in deleteUserBook');
 
-    // const deleteUserBook = () => {
-
-    //     console.log('in deleteUserBook');
-
-    //     dispatch({
-    //         type: 'DELETE_USER_BOOK',
-    //         payload: book.id
-    //     });
-    // }
+        dispatch({
+            type: 'DELETE_USER_BOOK',
+            payload: userBook.id
+        });
+    }
 
     // const updateUserBook = () => {
     //     console.log('in updateUserBook');
@@ -51,7 +49,7 @@ function LibraryBook({ userBook }) {
                 <p>Description: {userBook.description}</p>
             </div >
             <button name="delete" onClick={deleteUserBook}>DELETE BOOK</button>
-            <button name="update" onClick={updateUserBook}>UPDATE BOOK</button>
+            {/* <button name="update" onClick={updateUserBook}>UPDATE BOOK</button> */}
         </>
     )
 }

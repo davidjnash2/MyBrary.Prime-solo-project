@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     JOIN book
     ON "user_book"."book_id" = "book"."id"
     WHERE "user"."id" = $1;`
-    ;
+      ;
     pool.query(userLibraryQuery, [userId])
       .then((result) => {
         res.send(result.rows);
@@ -79,6 +79,29 @@ router.post('/', (req, res) => {
       });
   } else {
     res.sendStatus(400);
+  }
+});
+
+// DELETE route
+router.delete('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    const userId = req.user.id;
+    const bookId = req.params.id;
+    const deleteUserBookQuery = `
+      DELETE FROM "user_book"
+      WHERE "user_id" = $1
+      AND "book_id" = $2
+      ;`;
+    pool.query(userLibraryQuery, [userId, bookId])
+      .then((result) => {
+        res.sendStatus(200);
+      })
+      .catch((error) => {
+        console.log('ERROR IN DELETE', error);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403)
   }
 });
 

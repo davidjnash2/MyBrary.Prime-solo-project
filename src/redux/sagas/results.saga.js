@@ -6,14 +6,14 @@ function* fetchResults(action) {
 
     try {
         const results = yield axios.get(`/api/search/${action.payload}`)
-        console.log('search API with client ', action.payload);
+        console.log('CLIENT API SEARCH ', action.payload);
         yield put({
             type: "SET_RESULTS",
             payload: results.data
         })
     }
     catch (error) {
-        console.log('Error with fetchResults saga.', error);
+        console.log('ERROR WITH fetchResults SAGA.', error);
 
     }
 }

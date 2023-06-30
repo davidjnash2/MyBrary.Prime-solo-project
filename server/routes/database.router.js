@@ -8,7 +8,17 @@ router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
     const userLibraryQuery = `
-    SELECT "user"."username", "book".*
+    SELECT "user_book"."id", 
+    "user"."username", 
+    "book"."cover_url", 
+    "book"."title", 
+    "book"."subtitle", 
+    "book"."author", 
+    "book"."publisher", 
+    "book"."published", 
+    "book"."genre", 
+    "book"."pages", 
+    "book"."description"
     FROM "user"
     JOIN user_book
     ON "user"."id" = "user_book"."user_id"
@@ -84,16 +94,16 @@ router.post('/', (req, res) => {
 
 // DELETE route
 router.delete('/:id', (req, res) => {
+  console.log('IN SERVER DELETE ROUTE, and req.params is:', req.params);
   if (req.isAuthenticated()) {
-    const userId = req.user.id;
-    const bookId = req.params.id;
+    const deleteId = req.params.id;
     const deleteUserBookQuery = `
-      DELETE FROM "user_book"
-      WHERE "user_id" = $1
-      AND "book_id" = $2
-      ;`;
-    pool.query(userLibraryQuery, [userId, bookId])
-      .then((result) => {
+    DELETE FROM "user_book"
+    WHERE "id" = $1
+    ;`
+      ;
+    pool.query(deleteUserBookQuery, [deleteId])
+      .then(() => {
         res.sendStatus(200);
       })
       .catch((error) => {

@@ -7,9 +7,12 @@ function* fetchUserLibrary() {
     try {
         const library = yield axios.get('/api/database');
         console.log('fetchLibrary GET results are', library.data);
-        yield put({ type: 'SET_LIBRARY', payload: library.data });
+        yield put({
+            type: 'SET_LIBRARY',
+            payload: library.data
+        });
     } catch {
-        console.log('Error with fetchLibrary', error);
+        console.log('Error with fetchLibrary');
     };
 }
 

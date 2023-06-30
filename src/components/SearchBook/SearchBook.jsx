@@ -7,13 +7,13 @@ function SearchBook({ book }) {
     const dispatch = useDispatch();
 
 
-    
+
     const addBook = () => {
 
         const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
-        book.volumeInfo.industryIdentifiers[0].identifier
-        :
-        book.volumeInfo.industryIdentifiers[1].identifier);
+            book.volumeInfo.industryIdentifiers[0].identifier
+            :
+            book.volumeInfo.industryIdentifiers[1].identifier);
         console.log('this addBook isbn is:', isbn);
 
         dispatch({
@@ -32,10 +32,14 @@ function SearchBook({ book }) {
             }
         })
     }
-    
+
 
     // using conditional rendering, optional chaining, and &&/AND operators to ensure that only results which contain
     // the information I want for POST is accessible and available as choice options for user
+    
+    // results from original build have been more restricted than is optimally functional, so commenting
+    // out some of the key restrictions for rendering, to see if better search results present for user
+    // without breaking everything else
     return (
         <>
             {book &&
@@ -43,13 +47,14 @@ function SearchBook({ book }) {
                     (book?.volumeInfo?.industryIdentifiers?.[1] && book?.volumeInfo?.industryIdentifiers?.[1]?.type === 'ISBN_13')) &&
                 book?.volumeInfo?.imageLinks &&
                 book?.volumeInfo?.title !== undefined &&
-                book?.volumeInfo?.subtitle !== undefined &&
+                // book?.volumeInfo?.subtitle !== undefined &&
                 book?.volumeInfo?.authors !== undefined &&
-                book?.volumeInfo?.publisher !== undefined &&
-                book?.volumeInfo?.publishedDate !== undefined &&
-                book?.volumeInfo?.categories !== undefined &&
-                book?.volumeInfo?.pageCount !== undefined &&
-                book?.volumeInfo?.description !== undefined && (
+                // book?.volumeInfo?.publisher !== undefined &&
+                // book?.volumeInfo?.publishedDate !== undefined &&
+                // book?.volumeInfo?.categories !== undefined &&
+                // book?.volumeInfo?.pageCount !== undefined &&
+                // book?.volumeInfo?.description !== undefined && 
+                (
                     <div>
                         <img
                             src={book?.volumeInfo?.imageLinks?.thumbnail}

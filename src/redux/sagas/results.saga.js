@@ -8,7 +8,7 @@ function* fetchResults(action) {
         const results = yield axios.get(`/api/search/${action.payload}`)
         console.log('CLIENT API SEARCH ', action.payload);
         yield put({
-            type: "SET_RESULTS",
+            type: 'SET_RESULTS',
             payload: results.data
         })
     }

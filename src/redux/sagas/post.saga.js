@@ -3,13 +3,12 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 
 function* postBook(action) {
-    const newBook = action.payload;
     console.log('IN CLIENT DB postSaga, AND action.payload is:', action.payload);
     try {
         const newBook = action.payload;
         yield axios.post('/api/database', newBook);
         yield put({
-            type: "SET_BOOK",
+            type: 'SET_BOOK',
             payload: newBook.data
         })
     }

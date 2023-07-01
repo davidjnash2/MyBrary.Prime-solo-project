@@ -47,6 +47,12 @@ function LibraryBook({ userBook }) {
             type: 'UPDATE_USER_BOOK',
             payload: {
                 id: userBook.book_id,
+                subtitle: userBook.subtitle,
+                publisher: userBook.publisher,
+                published: userBook.published,
+                genre: userBook.genre,
+                pages: userBook.pages,
+                description: userBook.description,
                 read_status: userBook.read_status,
                 rating: userBook.rating,
                 review: userBook.review,

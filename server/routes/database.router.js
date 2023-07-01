@@ -8,23 +8,33 @@ router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
     const userLibraryQuery = `
-    SELECT "user_book"."id", 
-    "user"."username", 
-    "book"."cover_url", 
-    "book"."title", 
-    "book"."subtitle", 
-    "book"."author", 
-    "book"."publisher", 
-    "book"."published", 
-    "book"."genre", 
-    "book"."pages", 
-    "book"."description"
-    FROM "user"
-    JOIN user_book
-    ON "user"."id" = "user_book"."user_id"
-    JOIN book
-    ON "user_book"."book_id" = "book"."id"
-    WHERE "user"."id" = $1;`
+      SELECT "user"."username",
+      "user_book"."id",
+      "user_book"."read_status",
+      "user_book"."rating",
+      "user_book"."review",
+      "user_book"."borrowed",
+      "user_book"."borrower",
+      "user_book"."borrowed_date",
+      "user_book"."time_added",
+      "book"."cover_url",
+      "book"."title",
+      "book"."subtitle",
+      "book"."author",
+      "book"."publisher",
+      "book"."published",
+      "book"."genre",
+      "book"."pages",
+      "book"."description",
+      "book"."isbn"
+      FROM "user"
+      JOIN user_book
+      ON "user"."id" = "user_book"."user_id"
+      JOIN book
+      ON "user_book"."book_id" = "book"."id"
+      WHERE "user"."id" = $1
+      ORDER BY "book"."title"
+    ;`
       ;
     pool.query(userLibraryQuery, [userId])
       .then((result) => {
@@ -70,7 +80,7 @@ router.post('/', (req, res) => {
       book.description,
       book.isbn]) // book properties from req.body
       .then((bookResult) => {
-        const newBookId = bookResult.rows[0].id
+        const newBookId = bookResult.rows[0].id;
         const userBookQuery = `
         INSERT INTO "user_book" (user_id, book_id)
         VALUES ($1, $2);

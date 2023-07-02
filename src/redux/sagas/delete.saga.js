@@ -8,7 +8,7 @@ function* deleteBook(action) {
     console.log('IN CLIENT DB deleteSaga, AND action.payload is:', action.payload);
     try {
         const deleteId = action.payload;
-        yield axios.delete(`/api/database/${deleteId}`);
+        yield axios.delete(`/api/database/delete/${deleteId}`);
         yield put({
             type: 'DELETE_BOOK',
             payload: deleteId

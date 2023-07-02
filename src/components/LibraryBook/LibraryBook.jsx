@@ -8,8 +8,7 @@ function LibraryBook({ userBook }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // user click anywhere on book 
-    // info will bring to details page for that book
+    // user click on book will bring to details page for that book
     const clickCover = () => {
         console.log('clicked userBook.book_id is', userBook.book_id);
         history.push('/details')

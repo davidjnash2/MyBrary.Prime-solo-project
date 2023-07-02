@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './BookDetails.css';
 
 function BookDetails({ }) {
 
-    // const [updatedUserBook, setUpdatedUserBook] = useState(userBook);
+    const bookDetails = useSelector(store => store.details);
+
+    console.log('in BookDetails, and bookDetails is:', bookDetails);
+
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    
     const [editing, setEditing] = useState(false);
 
     const [subtitle, setSubtitle] = useState();
@@ -22,8 +29,6 @@ function BookDetails({ }) {
     const [borrowedDate, setBorrowedDate] = useState();
 
 
-    const dispatch = useDispatch();
-
     const switchEditing = () => {
         setEditing(!editing);
     }
@@ -32,11 +37,12 @@ function BookDetails({ }) {
 
     const deleteUserBook = (event) => {
         event.preventDefault();
-        console.log('in deleteUserBook');
+        console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
         dispatch({
             type: 'DELETE_USER_BOOK',
-            payload: userBook.id
+            payload: bookDetails[0].book_id
         });
+        history.push('/library');
     }
 
     const updateUserBook = (event) => {
@@ -46,7 +52,7 @@ function BookDetails({ }) {
         dispatch({
             type: 'UPDATE_USER_BOOK',
             payload: {
-                id: userBook.book_id,
+                id: bookDetails[0].book_id,
                 subtitle,
                 publisher,
                 published,
@@ -69,7 +75,7 @@ function BookDetails({ }) {
         const currentYear = new Date().getFullYear();
         const startYear = currentYear;
         const endYear = currentYear - 999;
-    
+
         const options = [];
         for (let year = startYear; year >= endYear; year--) {
             options.push(
@@ -84,23 +90,24 @@ function BookDetails({ }) {
 
     return (
         <>
+            
             {editing ? (
                 <>
                     <div>
                         <form onSubmit={updateUserBook}>
                             <h2>Book Info</h2>
-                            <img src={userBook.cover_url} />
-                            <p>Title: {userBook.title}</p>
+                            <img src={bookDetails[0].cover_url} />
+                            <p>Title: {bookDetails[0].title}</p>
 
                             <label htmlFor="subtitle">Subtitle:</label>
                             <input
                                 onChange={(event) => setSubtitle(event.target.value)}
                                 type='text'
                                 value={subtitle}
-                                placeholder={userBook.subtitle}
+                                placeholder={bookDetails[0].subtitle}
                             />
 
-                            <p>Author: {userBook.author}</p>
+                            <p>Author: {bookDetails[0].author}</p>
 
 
                             <label htmlFor="publisher">Publisher:</label>
@@ -108,7 +115,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setPublisher(event.target.value)}
                                 type='text'
                                 value={publisher}
-                                placeholder={userBook.publisher}
+                                placeholder={bookDetails[0].publisher}
                             />
 
                             <label htmlFor="published">Published:</label>
@@ -123,7 +130,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setGenre(event.target.value)}
                                 type='text'
                                 value={genre}
-                                placeholder={userBook.genre}
+                                placeholder={bookDetails[0].genre}
                             />
 
 
@@ -132,17 +139,17 @@ function BookDetails({ }) {
                                 onChange={(event) => setPages(event.target.value)}
                                 type='number'
                                 value={pages}
-                                placeholder={userBook.pages}
+                                placeholder={bookDetails[0].pages}
                             />
 
-                            <p>ISBN: {userBook.isbn}</p>
+                            <p>ISBN: {bookDetails[0].isbn}</p>
 
                             <label htmlFor="description">Description:</label>
                             <input
                                 onChange={(event) => setDescription(event.target.value)}
                                 type='text'
                                 value={description}
-                                placeholder={userBook.description}
+                                placeholder={bookDetails[0].description}
                             />
 
                             <h2>Your info</h2>
@@ -155,7 +162,7 @@ function BookDetails({ }) {
                                     value={read} />
                                 <span className="slider round"></span>
                             </label>
-                            <p>Read it? {userBook.read_status}</p> */}
+                            <p>Read it? {bookDetails.read_status}</p> */}
 
 
                             <label htmlFor="read">Read?</label>
@@ -163,7 +170,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setRead(event.target.value)}
                                 type='text'
                                 value={read}
-                                placholder={userBook.read_status.toString()}
+                                placholder={bookDetails[0].read_status.toString()}
                             />
 
 
@@ -172,8 +179,8 @@ function BookDetails({ }) {
                             {/* <input
                                 onChange={(event) => setComments(event.target.value)}
                                 type='text'
-                                value={description}
-                                placeholder={userBook.rating}
+                                value={rating}
+                                placeholder={bookDetails[0].rating}
                             /> */}
                             <input
                                 onChange={(event) => setRating(event.target.value)}
@@ -181,7 +188,7 @@ function BookDetails({ }) {
                                 min='0'
                                 max='5'
                                 value={rating}
-                                placeholder={userBook.rating}
+                                placeholder={bookDetails[0].rating}
                             />
 
 
@@ -197,7 +204,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setReview(event.target.value)}
                                 type='text'
                                 value={review}
-                                placholder={userBook.review}
+                                placholder={bookDetails[0].review}
                             />
 
 
@@ -210,7 +217,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setBorrowed(event.target.value)}
                                 type='text'
                                 value={borrowed}
-                                placeholder={userBook.borrowed.toString()}
+                                placeholder={bookDetails[0].borrowed.toString()}
                             />
                             {/* <label>
                                 <input
@@ -232,7 +239,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setBorrower(event.target.value)}
                                 type='text'
                                 value={borrower}
-                                placeholder={userBook.borrower}
+                                placeholder={bookDetails[0].borrower}
                             />
 
 
@@ -250,7 +257,7 @@ function BookDetails({ }) {
                                 onChange={(event) => setBorrowedDate(event.target.value)}
                                 type='text'
                                 value={borrowedDate}
-                                placeholder={userBook.borrowed_date}
+                                placeholder={bookDetails[0].borrowed_date}
                             /> */}
 
                             <button
@@ -263,76 +270,77 @@ function BookDetails({ }) {
                 </>
             ) : (
                 <>
+                {bookDetails &&  bookDetails.length > 0 && (
                     <div>
                         <h2>Book Info</h2>
 
-                        <img src={userBook.cover_url} />
+                        <img src={bookDetails[0].cover_url} />
 
-                        <p>Title: {userBook.title}</p>
+                        <p>Title: {bookDetails[0].title}</p>
 
-                        {(userBook.subtitle === undefined || userBook.subtitle === null || userBook.subtitle === 0) ? (
+                        {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
                             <p>Subtitle: n/a</p>
                         ) : (
-                            <p>Subtitle: {userBook.subtitle}</p>
+                            <p>Subtitle: {bookDetails[0].subtitle}</p>
                         )}
 
-                        <p>Author: {userBook.author}</p>
+                        <p>Author: {bookDetails[0].author}</p>
 
-                        {(userBook.publisher === undefined || userBook.publisher === null || userBook.publisher === 0) ? (
+                        {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
                             <p>Publisher: n/a</p>
                         ) : (
-                            <p>Publisher: {userBook.publisher}</p>
+                            <p>Publisher: {bookDetails[0].publisher}</p>
                         )}
 
-                        {(userBook.published === undefined || userBook.published === null || userBook.published === 0) ? (
+                        {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
                             <p>Published: n/a</p>
                         ) : (
-                            <p>Published: {userBook.published}</p>
+                            <p>Published: {bookDetails[0].published}</p>
                         )}
 
-                        {(userBook.genre === undefined || userBook.genre === null || userBook.genre === 0) ? (
+                        {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
                             <p>Genre: n/a</p>
                         ) : (
-                            <p>Genre: {userBook.genre}</p>
+                            <p>Genre: {bookDetails[0].genre}</p>
                         )}
 
-                        {(userBook.pages === undefined || userBook.pages === null || userBook.pages === 0) ? (
+                        {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
                             <p>Pages: n/a</p>
                         ) : (
-                            <p>Pages: {userBook.pages}</p>
+                            <p>Pages: {bookDetails[0].pages}</p>
                         )}
 
-                        <p>ISBN: {userBook.isbn}</p>
+                        <p>ISBN: {bookDetails[0].isbn}</p>
 
-                        {(userBook.description === undefined || userBook.description === null || userBook.description === 0) ? (
+                        {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
                             <p>Description: n/a</p>
                         ) : (
-                            <p>Description: {userBook.description}</p>
+                            <p>Description: {bookDetails[0].description}</p>
                         )}
 
                         <h2>Your info</h2>
 
                         {/* yes/no toggle box here */}
-                        <p>Read it? {userBook.read_status}</p>
+                        <p>Read it? {bookDetails[0].read_status}</p>
 
-                        {(userBook.rating === undefined || userBook.rating === null || userBook.rating === 0) ? (
+                        {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
                             <p>Like it?  n/a</p>
                         ) : (
-                            <p>Like it? {userBook.rating}</p>
+                            <p>Like it? {bookDetails[0].rating}</p>
                         )}
 
-                        {(userBook.review === undefined || userBook.review === null || userBook.review === 0) ? (
+                        {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
                             <p>What'd you think? n/a</p>
                         ) : (
-                            <p>What'd you think? {userBook.review}</p>
+                            <p>What'd you think? {bookDetails[0].review}</p>
                         )}
 
                         {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
-                        <p>Somebody got it currently? {userBook.borrowed}</p>
+                        <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
 
-                        <p>Who? {userBook.borrower}</p>
-                        <p>Since when? {userBook.borrowed_date}</p>
+                        <p>Who? {bookDetails[0].borrower}</p>
+                        <p>Since when? {bookDetails[0].borrowed_date}</p>
 
 
                         <button
@@ -348,6 +356,7 @@ function BookDetails({ }) {
                             DELETE BOOK
                         </button>
                     </div>
+                )}
                 </>
             )}
         </>

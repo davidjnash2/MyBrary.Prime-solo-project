@@ -8,7 +8,7 @@ function* updateBook(action) {
     try {
         console.log('IN CLIENT DB updateSaga, AND action.payload is:', action.payload);
         const bookUpdates = action.payload;
-        // yield axios.put(`/api/database/${}`);
+        // yield axios.put(`/api/database/update/${}`);
         // yield put({
         //     type: 'SET_UPDATE',
         //     payload: bookUpdates

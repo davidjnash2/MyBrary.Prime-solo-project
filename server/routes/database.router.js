@@ -153,6 +153,9 @@ router.post('/', (req, res) => {
 });
 
 // DELETE route
+// deletes from both book and user_book tables
+// discovered needed to nest the second query in the .then of the first,
+// b/c was getting server errors about re-sending headers
 router.delete('/delete/:id', (req, res) => {
   console.log('IN SERVER DELETE ROUTE, and req.params is:', req.params.id);
   if (req.isAuthenticated()) {

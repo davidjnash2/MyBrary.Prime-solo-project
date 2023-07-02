@@ -6,7 +6,8 @@ import resultsSaga from './results.saga';
 import postSaga from './post.saga';
 import librarySaga from './library.saga';
 import deleteSaga from'./delete.saga';
-
+import updateSaga from './update.saga';
+import detailsSaga from './details.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -17,5 +18,7 @@ export default function* rootSaga() {
     postSaga(),
     librarySaga(),
     deleteSaga(),
+    updateSaga(),
+    detailsSaga(),
   ]);
 }

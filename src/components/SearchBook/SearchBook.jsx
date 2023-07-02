@@ -63,16 +63,16 @@ function SearchBook({ book }) {
                         {book?.volumeInfo?.title && book?.volumeInfo?.title !== 0 && book?.volumeInfo?.title !== undefined && <p>Title: {book.volumeInfo.title}</p>}
                         {book?.volumeInfo?.subtitle && book?.volumeInfo?.subtitle !== 0 && book?.volumeInfo?.subtitle !== undefined && <p>Subtitle: {book.volumeInfo.subtitle}</p>}
                         {book?.volumeInfo?.authors && book?.volumeInfo?.authors !== 0 && book?.volumeInfo?.authors !== undefined && <p>Author: {book.volumeInfo.authors}</p>}
-                        {book?.volumeInfo?.publisher && book?.volumeInfo?.publisher !== 0 && book?.volumeInfo?.publisher !== undefined && <p>Publisher: {book.volumeInfo.publisher}</p>}
+                        {/* {book?.volumeInfo?.publisher && book?.volumeInfo?.publisher !== 0 && book?.volumeInfo?.publisher !== undefined && <p>Publisher: {book.volumeInfo.publisher}</p>} */}
                         {book?.volumeInfo?.publishedDate && book?.volumeInfo?.publishedDate !== 0 && book?.volumeInfo?.publishedDate !== undefined && <p>Published: {book.volumeInfo.publishedDate}</p>}
-                        {book?.volumeInfo?.categories && book?.volumeInfo?.categories !== 0 && book?.volumeInfo?.categories !== undefined && <p>Genre: {book.volumeInfo.categories}</p>}
-                        {book?.volumeInfo?.pageCount && book?.volumeInfo?.pageCount !== 0 && book?.volumeInfo?.pageCount !== undefined && <p>Pages: {book.volumeInfo.pageCount}</p>}
-                        {book?.volumeInfo?.industryIdentifiers[0]?.type === 'ISBN_13' ?
+                        {/* {book?.volumeInfo?.categories && book?.volumeInfo?.categories !== 0 && book?.volumeInfo?.categories !== undefined && <p>Genre: {book.volumeInfo.categories}</p>}
+                        {book?.volumeInfo?.pageCount && book?.volumeInfo?.pageCount !== 0 && book?.volumeInfo?.pageCount !== undefined && <p>Pages: {book.volumeInfo.pageCount}</p>} */}
+                        {/* {book?.volumeInfo?.industryIdentifiers[0]?.type === 'ISBN_13' ?
                             <p>ISBN: {book.volumeInfo.industryIdentifiers[0]?.identifier}</p>
                             :
                             <p>ISBN: {book.volumeInfo.industryIdentifiers[1]?.identifier}</p>
                         }
-                        {book?.volumeInfo?.description && book?.volumeInfo?.description !== 0 && book?.volumeInfo?.description !== undefined && <p>Description: {book.volumeInfo.description}</p>}
+                        {book?.volumeInfo?.description && book?.volumeInfo?.description !== 0 && book?.volumeInfo?.description !== undefined && <p>Description: {book.volumeInfo.description}</p>} */}
                     </div>
                 )}
         </>

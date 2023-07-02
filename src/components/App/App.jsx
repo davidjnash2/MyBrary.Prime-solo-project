@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ApiSearch from '../ApiSearch/ApiSearch';
 import SearchList from '../SearchList/SearchList';
 import LibraryList from '../LibraryList/LibraryList';
+import BookDetails from '../BookDetails/BookDetails';
 
 import './App.css';
 
@@ -37,9 +38,6 @@ function App() {
 
   return (
     <Router>
-      <ApiSearch />
-      <SearchList />
-      <LibraryList />
       <div>
         <Nav />
         <Switch>
@@ -54,6 +52,22 @@ function App() {
           >
             <AboutPage />
           </Route>
+
+          <Route
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/search"
+          >
+            <ApiSearch />
+
+          </Route>
+          <Route
+            exact
+            path="/results"
+          >
+            <SearchList />
+          </Route>
+
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -73,6 +87,22 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows library else shows LoginPage
+            exact
+            path="/library"
+          >
+            <LibraryList />
+          </ProtectedRoute>
+
+
+          <ProtectedRoute
+            exact
+            path="/details"
+          >
+            <BookDetails />
           </ProtectedRoute>
 
           <Route

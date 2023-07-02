@@ -40,18 +40,31 @@ CREATE TABLE book (
     isbn VARCHAR(13) UNIQUE NOT NULL
 );
 
---creating test user_book table
+-- creating test user_book table
+-- changing formatting to include entry timestamp for later sorting purposes
+-- added value constraints on rating column
 CREATE TABLE user_book (
 	id SERIAL PRIMARY KEY,
 	user_id INT REFERENCES "user"(id),
 	book_id INT REFERENCES book (id),
 	read_status BOOLEAN DEFAULT FALSE,
-	rating INT,
+	rating INT  CHECK (rating >= 0 AND rating <= 5),
 	review TEXT,
 	borrowed BOOLEAN DEFAULT FALSE,
 	borrowed_date DATE,
-	borrower VARCHAR(255)
+	borrower VARCHAR(255),
+	time_added TIMESTAMP DEFAULT NOW()
 );
 
 
+-- author and genre columns in book table have started including curly
+-- braces and quotes with data entries, so below two queries are to be run
+-- sporadically/at end to remove those values
 
+-- perhaps there's a way to *saftely* include those queries as part of a get??? but don't want
+-- to include something so potentially destructive in a regularly-occuring function juuuust yet
+UPDATE book
+SET author = replace(replace(replace(author, '{', ''), '}', ''), '"', '');
+
+UPDATE book
+SET genre = replace(replace(replace(genre, '{', ''), '}', ''), '"', '');

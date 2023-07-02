@@ -7,6 +7,7 @@ function ApiSearch() {
 
     const [search, setSearch] = useState([]);
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const sendSearch = (event) => {
         event.preventDefault();
@@ -15,8 +16,7 @@ function ApiSearch() {
             type: 'FETCH_RESULTS',
             payload: search
         })
-        // history.push('/results');
-        // once results page is more defined, need to include this redirect to results view
+        history.push('/results');
     }
 
 
@@ -42,7 +42,6 @@ function ApiSearch() {
                 />
                 <button type="submit">GET THAT BOOK</button>
             </form>
-            {/* <SearchList /> */}
         </>
     )
 }

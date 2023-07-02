@@ -23,6 +23,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import ApiSearch from '../ApiSearch/ApiSearch';
 import SearchList from '../SearchList/SearchList';
 import LibraryList from '../LibraryList/LibraryList';
+import BookDetails from '../BookDetails/BookDetails';
 
 import './App.css';
 
@@ -58,9 +59,16 @@ function App() {
             path="/search"
           >
             <ApiSearch />
-            <SearchList />
 
           </Route>
+          <Route
+            exact
+            path="/results"
+          >
+            <SearchList />
+          </Route>
+
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
@@ -82,11 +90,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
+            // logged in shows library else shows LoginPage
             exact
             path="/library"
           >
             <LibraryList />
+          </ProtectedRoute>
+
+
+          <ProtectedRoute
+            exact
+            path="/details"
+          >
+            <BookDetails />
           </ProtectedRoute>
 
           <Route

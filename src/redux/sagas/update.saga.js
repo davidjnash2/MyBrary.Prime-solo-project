@@ -5,14 +5,14 @@ import { put, takeEvery } from 'redux-saga/effects';
 // sends axios put to server along with id as url parameter, and update info
 // also dispatches action to update reducer to update state
 function* updateBook(action) {
-    console.log('IN CLIENT DB updateSaga, AND action.payload is:', action.payload);
     try {
-        // const bookUpdates = action.payload;
-        yield axios.put(`/api/database/${}`);
-        yield put({
-            type: 'SET_UPDATE',
-            // payload: bookUpdates
-        })
+        console.log('IN CLIENT DB updateSaga, AND action.payload is:', action.payload);
+        const bookUpdates = action.payload;
+        // yield axios.put(`/api/database/${}`);
+        // yield put({
+        //     type: 'SET_UPDATE',
+        //     payload: bookUpdates
+        // })
     }
     catch (error) {
         console.log('ERROR WITH updateSaga.', error);

@@ -49,7 +49,7 @@ router.get('/', (req, res) => {
   } else {
     res.sendStatus(403)
   }
-});
+}); // end library GET route
 
 // detail view GET route
 router.get('/details/:id', (req, res) => {
@@ -97,7 +97,7 @@ router.get('/details/:id', (req, res) => {
   } else {
     res.sendStatus(403)
   }
-});
+}); // end detail view GET route
 
 // POST route
 router.post('/', (req, res) => {
@@ -150,7 +150,7 @@ router.post('/', (req, res) => {
   } else {
     res.sendStatus(400);
   }
-});
+}); // end POST route
 
 // DELETE route
 // deletes from both book and user_book tables
@@ -187,13 +187,16 @@ router.delete('/delete/:id', (req, res) => {
   } else {
     res.sendStatus(403)
   }
-});
+}); // end DELETE route
 
 
+// PUT route to update both book table and user_book table
+// with info from user inputs
 router.put('/update/:id', (req, res) => {
   if (req.isAuthenticated()) {
+    console.log('IN SERVER PUT, AND req.params is:', req.params.id);
     console.log('IN SERVER PUT, AND req.body is:', req.body);
-    const updateInfo = req.body; // will probably need to define properties
+    const updateInfo = req.body; 
     const updateBookQuery = `
       UPDATE book 
       SET 
@@ -225,35 +228,31 @@ router.put('/update/:id', (req, res) => {
       updateInfo.description,
       updateInfo.id])
       .then((response) => {
-        res.sendStatus(202);
+        pool.query(updateUserBookQuery, [
+          updateInfo.read,
+          updateInfo.rating,
+          updateInfo.review,
+          updateInfo.borrowed,
+          updateInfo.borrowedDate,
+          updateInfo.borrower,
+          updateInfo.id])
+          .then((response) => {
+            res.sendStatus(202);
+          })
+          .catch((error) => {
+            console.log('ERROR IN SERVER updateUserBookQuery PUT', error);
+            res.sendStatus(500);
+          });
       })
       .catch((error) => {
         console.log('ERROR IN SERVER updateBookQuery PUT', error);
-      });
-
-    pool.query(updateUserBookQuery, [
-      updateInfo.read_status,
-      updateInfo.rating,
-      updateInfo.review,
-      updateInfo.borrowed,
-      updateInfo.borrowed_date,
-      updateInfo.borrower,
-      updateInfo.id])
-      .then((response) => {
-        res.sendStatus(202);
-      })
-      .catch((error) => {
-        console.log('ERROR IN SERVER updateUserBookQuery PUT', error);
         res.sendStatus(500);
       });
 
   } else {
     res.sendStatus(400);
   }
-
-
-
-});
+}); // end PUT route
 
 
 

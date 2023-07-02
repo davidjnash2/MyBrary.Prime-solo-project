@@ -4,9 +4,22 @@ const router = express.Router();
 
 
 // full library GET route
+// first two queries are to scrub curlies and quotation marks from author and genre db table columns
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
+    const fixAuthor = `
+      UPDATE book
+      SET author = replace(replace(replace(author, '{', ''), '}', ''), '"', '')
+      ;`
+      ;
+
+    const fixGenre = `
+      UPDATE book
+      SET genre = replace(replace(replace(genre, '{', ''), '}', ''), '"', '')
+      ;`
+      ;
+
     const userLibraryQuery = `
       SELECT "user"."username",
       "user_book"."id",
@@ -38,9 +51,24 @@ router.get('/', (req, res) => {
       ORDER BY "book"."title"
     ;`
       ;
-    pool.query(userLibraryQuery, [userId])
-      .then((result) => {
-        res.send(result.rows);
+
+    pool.query(fixAuthor)
+      .then(() => {
+        pool.query(fixGenre)
+          .then(() => {
+            pool.query(userLibraryQuery, [userId])
+              .then((result) => {
+                res.send(result.rows);
+              })
+              .catch((error) => {
+                console.log('ERROR IN SERVER GET', error);
+                res.sendStatus(500);
+              });
+          })
+          .catch((error) => {
+            console.log('ERROR IN SERVER GET', error);
+            res.sendStatus(500);
+          });
       })
       .catch((error) => {
         console.log('ERROR IN SERVER GET', error);
@@ -196,7 +224,7 @@ router.put('/update/:id', (req, res) => {
   if (req.isAuthenticated()) {
     console.log('IN SERVER PUT, AND req.params is:', req.params.id);
     console.log('IN SERVER PUT, AND req.body is:', req.body);
-    const updateInfo = req.body; 
+    const updateInfo = req.body;
     const updateBookQuery = `
       UPDATE book 
       SET 
@@ -224,16 +252,16 @@ router.put('/update/:id', (req, res) => {
       updateInfo.publisher,
       updateInfo.published,
       updateInfo.genre,
-      updateInfo.pages,
+      updateInfo.pages !== '' ? updateInfo.pages : null,
       updateInfo.description,
       updateInfo.id])
       .then((response) => {
         pool.query(updateUserBookQuery, [
-          updateInfo.read,
+          updateInfo.read !== '' ? updateInfo.read : null,
           updateInfo.rating,
           updateInfo.review,
-          updateInfo.borrowed,
-          updateInfo.borrowedDate,
+          updateInfo.borrowed !== '' ? updateInfo.borrowed : null,
+          updateInfo.borrowedDate !== '' ? updateInfo.borrowedDate : null,
           updateInfo.borrower,
           updateInfo.id])
           .then((response) => {

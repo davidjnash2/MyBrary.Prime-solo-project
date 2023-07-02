@@ -15,19 +15,38 @@ function BookDetails({ }) {
 
     const [editing, setEditing] = useState(false);
 
-    const [subtitle, setSubtitle] = useState('');
-    const [publisher, setPublisher] = useState('');
-    const [published, setPublished] = useState('');
-    const [genre, setGenre] = useState('');
-    const [pages, setPages] = useState('');
-    const [description, setDescription] = useState('');
-    const [read, setRead] = useState('');
-    const [rating, setRating] = useState('');
-    const [review, setReview] = useState('');
-    const [borrowed, setBorrowed] = useState('');
-    const [borrower, setBorrower] = useState('');
-    const [borrowedDate, setBorrowedDate] = useState(bookDetails.borrowed_date);
+    const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
+    const [publisher, setPublisher] = useState(bookDetails[0]?.publisher || '');
+    const [published, setPublished] = useState(bookDetails[0]?.published || '');
+    const [genre, setGenre] = useState(bookDetails[0]?.genre || '');
+    const [pages, setPages] = useState(bookDetails[0]?.pages || '');
+    const [description, setDescription] = useState(bookDetails[0]?.description || '');
+    const [read, setRead] = useState(bookDetails[0]?.read_status || '');
+    const [rating, setRating] = useState(bookDetails[0]?.rating || '');
+    const [review, setReview] = useState(bookDetails[0]?.review || '');
+    const [borrowed, setBorrowed] = useState(bookDetails[0]?.borrowed || '');
+    const [borrower, setBorrower] = useState(bookDetails[0]?.borrower || '');
+    const [borrowedDate, setBorrowedDate] = useState(bookDetails[0]?.borrowed_date || '');
 
+
+    useEffect(() => {
+        if (bookDetails && bookDetails.length > 0) {
+          const book = bookDetails[0];
+          setSubtitle(book.subtitle || '');
+          setPublisher(book.publisher || '');
+          setPublished(book.published || '');
+          setGenre(book.genre || '');
+          setPages(book.pages || '');
+          setDescription(book.description || '');
+          setRead(book.read_status || '');
+          setRating(book.rating || '');
+          setReview(book.review || '');
+          setBorrowed(book.borrowed || '');
+          setBorrower(book.borrower || '');
+          setBorrowedDate(book.borrowed_date || '');
+        }
+      }, [bookDetails]);
+      
 
     const switchEditing = () => {
         setEditing(!editing);
@@ -66,8 +85,9 @@ function BookDetails({ }) {
                 borrower,
             }
         });
-        switchEditing();
-    }
+            switchEditing(); 
+    };
+    
 
 
     function renderYearOptions() {
@@ -93,7 +113,7 @@ function BookDetails({ }) {
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 1);
+        }, 3);
     }, []); // Empty dependency array to run the effect only once
 
     // ...
@@ -265,6 +285,7 @@ function BookDetails({ }) {
                                     type="date"
                                     id="borrowed_date"
                                     value={borrowedDate}
+                                    placeholder={bookDetails[0].borrowed_date}
                                     onChange={(event) => setBorrowedDate(event.target.value)}
                                 />
 

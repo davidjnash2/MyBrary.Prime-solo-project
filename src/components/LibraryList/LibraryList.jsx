@@ -15,13 +15,13 @@ function LibraryList() {
     }, []);
 
     const [isLoading, setIsLoading] = useState(true);
-    
+
     useEffect(() => {
         // Simulate an asynchronous API call to fetch book details
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 100);
+        }, 10);
     }, []); // Empty dependency array to run the effect only once
 
     // ...

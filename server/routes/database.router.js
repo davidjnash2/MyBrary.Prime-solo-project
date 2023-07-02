@@ -252,16 +252,16 @@ router.put('/update/:id', (req, res) => {
       updateInfo.publisher,
       updateInfo.published,
       updateInfo.genre,
-      updateInfo.pages !== '' ? updateInfo.pages : null,
+      updateInfo.pages !== '' ? updateInfo.pages : null, // updated so put doesn't break if field submits empty
       updateInfo.description,
       updateInfo.id])
       .then((response) => {
         pool.query(updateUserBookQuery, [
-          updateInfo.read !== '' ? updateInfo.read : null,
+          updateInfo.read !== '' ? updateInfo.read : null, // updated so put doesn't break if field submits empty
           updateInfo.rating,
           updateInfo.review,
-          updateInfo.borrowed !== '' ? updateInfo.borrowed : null,
-          updateInfo.borrowedDate !== '' ? updateInfo.borrowedDate : null,
+          updateInfo.borrowed !== '' ? updateInfo.borrowed : null, // updated so put doesn't break if field submits empty
+          updateInfo.borrowedDate !== '' ? updateInfo.borrowedDate : null, // updated so put doesn't break if field submits empty
           updateInfo.borrower,
           updateInfo.id])
           .then((response) => {

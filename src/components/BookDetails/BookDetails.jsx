@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './BookDetails.css';
+import { Grid, Button } from '@mui/material';
+
 
 function BookDetails({ }) {
 
@@ -31,21 +33,21 @@ function BookDetails({ }) {
 
     useEffect(() => {
         if (bookDetails && bookDetails.length > 0) {
-          const book = bookDetails[0];
-          setSubtitle(book.subtitle || '');
-          setPublisher(book.publisher || '');
-          setPublished(book.published || '');
-          setGenre(book.genre || '');
-          setPages(book.pages || '');
-          setDescription(book.description || '');
-          setRead(book.read_status || '');
-          setRating(book.rating || '');
-          setReview(book.review || '');
-          setBorrowed(book.borrowed || '');
-          setBorrower(book.borrower || '');
-          setBorrowedDate(book.borrowed_date || '');
+            const book = bookDetails[0];
+            setSubtitle(book.subtitle || '');
+            setPublisher(book.publisher || '');
+            setPublished(book.published || '');
+            setGenre(book.genre || '');
+            setPages(book.pages || '');
+            setDescription(book.description || '');
+            setRead(book.read_status || '');
+            setRating(book.rating || '');
+            setReview(book.review || '');
+            setBorrowed(book.borrowed || '');
+            setBorrower(book.borrower || '');
+            setBorrowedDate(book.borrowed_date || '');
         }
-      }, [bookDetails]);
+    }, [bookDetails]);
 
 
     const switchEditing = () => {
@@ -85,9 +87,9 @@ function BookDetails({ }) {
                 borrower,
             }
         });
-            switchEditing(); 
+        switchEditing();
     };
-    
+
 
 
     function renderYearOptions() {
@@ -316,96 +318,100 @@ function BookDetails({ }) {
             ) : (
                 <>
                     {bookDetails && bookDetails.length > 0 && (
-                        <div>
-                            <h2>Book Info</h2>
+                        <div className="details-container">
+                            <Grid container spacing={1}>
+                                <Grid item xs={12}>
+                                    <h1>{bookDetails[0].title}</h1>
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
+                                </Grid>
+                                <Grid item xs={12} md={6}>
+                                    {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
+                                        <p>Subtitle: n/a</p>
+                                    ) : (
+                                        <p>Subtitle: {bookDetails[0].subtitle}</p>
+                                    )}
 
-                            <img src={bookDetails[0].cover_url} />
+                                    <p>Author: {bookDetails[0].author}</p>
 
-                            <p>Title: {bookDetails[0].title}</p>
+                                    {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
+                                        <p>Publisher: n/a</p>
+                                    ) : (
+                                        <p>Publisher: {bookDetails[0].publisher}</p>
+                                    )}
 
-                            {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
-                                <p>Subtitle: n/a</p>
-                            ) : (
-                                <p>Subtitle: {bookDetails[0].subtitle}</p>
-                            )}
+                                    {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
+                                        <p>Published: n/a</p>
+                                    ) : (
+                                        <p>Published: {bookDetails[0].published}</p>
+                                    )}
 
-                            <p>Author: {bookDetails[0].author}</p>
+                                    {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
+                                        <p>Genre: n/a</p>
+                                    ) : (
+                                        <p>Genre: {bookDetails[0].genre}</p>
+                                    )}
 
-                            {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
-                                <p>Publisher: n/a</p>
-                            ) : (
-                                <p>Publisher: {bookDetails[0].publisher}</p>
-                            )}
+                                    {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
+                                        <p>Pages: n/a</p>
+                                    ) : (
+                                        <p>Pages: {bookDetails[0].pages}</p>
+                                    )}
 
-                            {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
-                                <p>Published: n/a</p>
-                            ) : (
-                                <p>Published: {bookDetails[0].published}</p>
-                            )}
+                                    <p>ISBN: {bookDetails[0].isbn}</p>
 
-                            {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
-                                <p>Genre: n/a</p>
-                            ) : (
-                                <p>Genre: {bookDetails[0].genre}</p>
-                            )}
+                                    {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
+                                        <p>Description: n/a</p>
+                                    ) : (
+                                        <p>Description: {bookDetails[0].description}</p>
+                                    )}
 
-                            {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
-                                <p>Pages: n/a</p>
-                            ) : (
-                                <p>Pages: {bookDetails[0].pages}</p>
-                            )}
+                                    <h2>Your info</h2>
 
-                            <p>ISBN: {bookDetails[0].isbn}</p>
+                                    {/* yes/no toggle box here */}
+                                    <p>Read it? {bookDetails[0].read_status}</p>
 
-                            {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
-                                <p>Description: n/a</p>
-                            ) : (
-                                <p>Description: {bookDetails[0].description}</p>
-                            )}
+                                    {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                        <p>Like it?  n/a</p>
+                                    ) : (
+                                        <p>Like it? {bookDetails[0].rating}</p>
+                                    )}
 
-                            <h2>Your info</h2>
+                                    {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
+                                        <p>What'd you think? n/a</p>
+                                    ) : (
+                                        <p>What'd you think? {bookDetails[0].review}</p>
+                                    )}
 
-                            {/* yes/no toggle box here */}
-                            <p>Read it? {bookDetails[0].read_status}</p>
-
-                            {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                <p>Like it?  n/a</p>
-                            ) : (
-                                <p>Like it? {bookDetails[0].rating}</p>
-                            )}
-
-                            {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                <p>What'd you think? n/a</p>
-                            ) : (
-                                <p>What'd you think? {bookDetails[0].review}</p>
-                            )}
-
-                            {/* yes/no toggle box here, too
+                                    {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
-                            <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
+                                    <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
 
-                            <p>Who? {bookDetails[0].borrower}</p>
-                            <p>Since when? {bookDetails[0].borrowed_date}</p>
+                                    <p>Who? {bookDetails[0].borrower}</p>
+                                    <p>Since when? {bookDetails[0].borrowed_date}</p>
 
 
-                            <button
-                                type="button"
-                                onClick={switchEditing}
-                            >
-                                EDIT
-                            </button>
-                            <button
-                                name="delete"
-                                onClick={deleteUserBook}
-                            >
-                                DELETE BOOK
-                            </button>
-                            <button
-                                name="back_to_library"
-                                onClick={() => history.push('/library')}
-                            >
-                                BACK TO LIBRARY
-                            </button>
+                                    <button
+                                        type="button"
+                                        onClick={switchEditing}
+                                    >
+                                        EDIT
+                                    </button>
+                                    <button
+                                        name="delete"
+                                        onClick={deleteUserBook}
+                                    >
+                                        DELETE BOOK
+                                    </button>
+                                    <button
+                                        name="back_to_library"
+                                        onClick={() => history.push('/library')}
+                                    >
+                                        BACK TO LIBRARY
+                                    </button>
+                                </Grid>
+                            </Grid>
                         </div>
                     )}
                 </>

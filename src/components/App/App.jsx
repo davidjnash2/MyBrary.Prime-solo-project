@@ -24,6 +24,7 @@ import ApiSearch from '../ApiSearch/ApiSearch';
 import SearchList from '../SearchList/SearchList';
 import LibraryList from '../LibraryList/LibraryList';
 import BookDetails from '../BookDetails/BookDetails';
+import SignInSide from '../SignInSide/SignInSide';
 
 import './App.css';
 
@@ -115,7 +116,8 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
-              <LoginPage />
+              // <LoginPage />
+              <SignInSide />
             }
           </Route>
 

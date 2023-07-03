@@ -27,28 +27,29 @@ CREATE TABLE "user" (
 -- using INTEGER for publised date, as DATE was causing errors from 
 -- inconsistent date formatting
 CREATE TABLE book (
-    id SERIAL PRIMARY KEY,
-    cover_url VARCHAR(500),
-    title VARCHAR(1000) NOT NULL,
-    subtitle VARCHAR(2000),
-    author VARCHAR(500) NOT NULL,
-    publisher VARCHAR(500),
-    published VARCHAR(50),
-    genre VARCHAR(255),
-    pages INTEGER,
-    description TEXT,
-    isbn VARCHAR(13) UNIQUE NOT NULL
+	id SERIAL PRIMARY KEY,
+	cover_url VARCHAR(500),
+	title VARCHAR(1000) NOT NULL,
+	subtitle VARCHAR(2000),
+	author VARCHAR(500) NOT NULL,
+	publisher VARCHAR(500),
+	published VARCHAR,
+	genre VARCHAR(255),
+	pages INTEGER,
+	description TEXT,
+	isbn VARCHAR(13) NOT NULL
 );
 
 -- creating test user_book table
 -- changing formatting to include entry timestamp for later sorting purposes
--- added value constraints on rating column
+-- added value constraints on rating column; nope removed those
+-- updated rating column to varchar, will have input restrictions on client side, instead
 CREATE TABLE user_book (
 	id SERIAL PRIMARY KEY,
 	user_id INT REFERENCES "user"(id),
 	book_id INT REFERENCES book (id),
 	read_status BOOLEAN DEFAULT FALSE,
-	rating INT  CHECK (rating >= 0 AND rating <= 5),
+	rating VARCHAR,
 	review TEXT,
 	borrowed BOOLEAN DEFAULT FALSE,
 	borrowed_date DATE,

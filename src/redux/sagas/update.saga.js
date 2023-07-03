@@ -8,11 +8,11 @@ function* updateBook(action) {
     try {
         console.log('IN CLIENT DB updateSaga, AND action.payload is:', action.payload);
         const bookUpdates = action.payload;
-        // yield axios.put(`/api/database/update/${}`);
-        // yield put({
-        //     type: 'SET_UPDATE',
-        //     payload: bookUpdates
-        // })
+        yield axios.put(`/api/database/update/${bookUpdates.id}`, bookUpdates);
+        yield put({
+            type: 'SET_UPDATE',
+            payload: bookUpdates
+        })
     }
     catch (error) {
         console.log('ERROR WITH updateSaga.', error);

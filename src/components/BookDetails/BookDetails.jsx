@@ -46,7 +46,7 @@ function BookDetails({ }) {
           setBorrowedDate(book.borrowed_date || '');
         }
       }, [bookDetails]);
-      
+
 
     const switchEditing = () => {
         setEditing(!editing);
@@ -207,7 +207,7 @@ function BookDetails({ }) {
                                     onChange={(event) => setRead(event.target.value)}
                                     type='text'
                                     value={read}
-                                    placholder={bookDetails[0].read_status.toString()}
+                                    placholder={bookDetails[0].read_status}
                                 />
 
 
@@ -254,7 +254,7 @@ function BookDetails({ }) {
                                     onChange={(event) => setBorrowed(event.target.value)}
                                     type='text'
                                     value={borrowed}
-                                    placeholder={bookDetails[0].borrowed.toString()}
+                                    placeholder={bookDetails[0].borrowed}
                                 />
                                 {/* <label>
                                 <input

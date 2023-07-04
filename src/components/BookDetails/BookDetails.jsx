@@ -38,25 +38,27 @@ function BookDetails({ }) {
         dispatch({
             type: 'FETCH_DETAILS',
             payload: bookId.id
-        })
-        // if (bookDetails && bookDetails.length > 0) {
-        //     const book = bookDetails[0];
-        //     setSubtitle(book.subtitle || '');
-        //     setPublisher(book.publisher || '');
-        //     setPublished(book.published || '');
-        //     setGenre(book.genre || '');
-        //     setPages(book.pages || '');
-        //     setDescription(book.description || '');
-        //     setRead(book.read_status || '');
-        //     setRating(book.rating || '');
-        //     setReview(book.review || '');
-        //     setBorrowed(book.borrowed || '');
-        //     setBorrower(book.borrower || '');
-        //     setBorrowedDate(book.borrowed_date || '');
-        // }
-        // }, [bookDetails,
+            });
+        }, []);
 
-    }, [dispatch], 25);
+
+
+    //     if (bookDetails && bookDetails.length > 0) {
+    //         const book = bookDetails[0];
+    //         setSubtitle(book.subtitle || '');
+    //         setPublisher(book.publisher || '');
+    //         setPublished(book.published || '');
+    //         setGenre(book.genre || '');
+    //         setPages(book.pages || '');
+    //         setDescription(book.description || '');
+    //         setRead(book.read_status || '');
+    //         setRating(book.rating || '');
+    //         setReview(book.review || '');
+    //         setBorrowed(book.borrowed || '');
+    //         setBorrower(book.borrower || '');
+    //         setBorrowedDate(book.borrowed_date || '');
+    //         }
+    //     }, [bookDetails]);
 
 
 
@@ -97,13 +99,20 @@ function BookDetails({ }) {
                 borrower,
             },
         });
-        //    dispatch({
-        //         type: 'FETCH_DETAILS',
-        //         payload: bookDetails[0].book_id,
-        //     });
         switchEditing();
-
-    }
+        // setSubtitle(book.subtitle || '');
+        //     setPublisher(book.publisher || '');
+        //     setPublished(book.published || '');
+        //     setGenre(book.genre || '');
+        //     setPages(book.pages || '');
+        //     setDescription(book.description || '');
+        //     setRead(book.read_status || '');
+        //     setRating(book.rating || '');
+        //     setReview(book.review || '');
+        //     setBorrowed(book.borrowed || '');
+        //     setBorrower(book.borrower || '');
+        //     setBorrowedDate(book.borrowed_date || '')
+    };
 
 
 

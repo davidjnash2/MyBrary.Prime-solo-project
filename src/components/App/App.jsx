@@ -101,7 +101,7 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/details/:id"
+            path="/details/:id" // added :id to allow for useParams hook on this component, to allow for state to persist on refresh
           >
             <BookDetails />
           </ProtectedRoute>

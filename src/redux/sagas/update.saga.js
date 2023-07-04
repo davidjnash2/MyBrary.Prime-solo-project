@@ -10,12 +10,12 @@ function* updateBook(action) {
         const bookUpdates = action.payload;
         yield axios.put(`/api/database/update/${bookUpdates.id}`, bookUpdates);
         yield put({
-            type: 'FETCH_DETAILS',
-            payload: bookUpdates.id
-        })
-        yield put({
             type: 'SET_UPDATE',
             payload: bookUpdates
+        })
+        yield put({
+            type: 'FETCH_DETAILS',
+            payload: bookUpdates.id
         })
     }
     catch (error) {

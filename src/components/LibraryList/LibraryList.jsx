@@ -21,7 +21,7 @@ function LibraryList() {
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 10);
+        }, 50);
     }, []); // Empty dependency array to run the effect only once
 
     // ...

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './BookDetails.css';
 import { Grid, Button } from '@mui/material';
+
 
 
 function BookDetails({ }) {
@@ -14,6 +15,8 @@ function BookDetails({ }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const bookId = useParams();
+    console.log('bookId is:', bookId);
 
     const [editing, setEditing] = useState(false);
 
@@ -32,22 +35,29 @@ function BookDetails({ }) {
 
 
     useEffect(() => {
-        if (bookDetails && bookDetails.length > 0) {
-            const book = bookDetails[0];
-            setSubtitle(book.subtitle || '');
-            setPublisher(book.publisher || '');
-            setPublished(book.published || '');
-            setGenre(book.genre || '');
-            setPages(book.pages || '');
-            setDescription(book.description || '');
-            setRead(book.read_status || '');
-            setRating(book.rating || '');
-            setReview(book.review || '');
-            setBorrowed(book.borrowed || '');
-            setBorrower(book.borrower || '');
-            setBorrowedDate(book.borrowed_date || '');
-        }
-    }, [bookDetails]);
+        dispatch({
+            type: 'FETCH_DETAILS',
+            payload: bookId.id
+        })
+        // if (bookDetails && bookDetails.length > 0) {
+        //     const book = bookDetails[0];
+        //     setSubtitle(book.subtitle || '');
+        //     setPublisher(book.publisher || '');
+        //     setPublished(book.published || '');
+        //     setGenre(book.genre || '');
+        //     setPages(book.pages || '');
+        //     setDescription(book.description || '');
+        //     setRead(book.read_status || '');
+        //     setRating(book.rating || '');
+        //     setReview(book.review || '');
+        //     setBorrowed(book.borrowed || '');
+        //     setBorrower(book.borrower || '');
+        //     setBorrowedDate(book.borrowed_date || '');
+        // }
+        // }, [bookDetails,
+
+    }, [dispatch], 25);
+
 
 
     const switchEditing = () => {
@@ -85,10 +95,15 @@ function BookDetails({ }) {
                 borrowed,
                 borrowedDate,
                 borrower,
-            }
+            },
         });
+        //    dispatch({
+        //         type: 'FETCH_DETAILS',
+        //         payload: bookDetails[0].book_id,
+        //     });
         switchEditing();
-    };
+
+    }
 
 
 
@@ -115,7 +130,7 @@ function BookDetails({ }) {
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 3);
+        }, 10);
     }, []); // Empty dependency array to run the effect only once
 
     // ...
@@ -323,10 +338,10 @@ function BookDetails({ }) {
                                 <Grid item xs={12}>
                                     <h1>{bookDetails[0].title}</h1>
                                 </Grid>
-                                <Grid item xs={12} md={6}>
+                                <Grid item xs={12} lg={4}>
                                     <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
+                                </Grid> 
+                                <Grid item xs={12} lg={4}>
                                     {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
                                         <p>Subtitle: n/a</p>
                                     ) : (
@@ -366,31 +381,30 @@ function BookDetails({ }) {
                                     ) : (
                                         <p>Description: {bookDetails[0].description}</p>
                                     )}
+                                    <Grid item xs={12} lg={4}>
+                                        <h2>Your info</h2>
 
-                                    <h2>Your info</h2>
+                                        {/* yes/no toggle box here */}
+                                        <p>Read it? {bookDetails[0].read_status}</p>
 
-                                    {/* yes/no toggle box here */}
-                                    <p>Read it? {bookDetails[0].read_status}</p>
+                                        {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                            <p>Like it?  n/a</p>
+                                        ) : (
+                                            <p>Like it? {bookDetails[0].rating}</p>
+                                        )}
 
-                                    {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                        <p>Like it?  n/a</p>
-                                    ) : (
-                                        <p>Like it? {bookDetails[0].rating}</p>
-                                    )}
+                                        {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
+                                            <p>What'd you think? n/a</p>
+                                        ) : (
+                                            <p>What'd you think? {bookDetails[0].review}</p>
+                                        )}
 
-                                    {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                        <p>What'd you think? n/a</p>
-                                    ) : (
-                                        <p>What'd you think? {bookDetails[0].review}</p>
-                                    )}
-
-                                    {/* yes/no toggle box here, too
+                                        {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
-                                    <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
+                                        <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
 
-                                    <p>Who? {bookDetails[0].borrower}</p>
-                                    <p>Since when? {bookDetails[0].borrowed_date}</p>
-
+                                        <p>Who? {bookDetails[0].borrower}</p>
+                                        <p>Since when? {bookDetails[0].borrowed_date}</p>
 
                                     <button
                                         type="button"
@@ -410,6 +424,7 @@ function BookDetails({ }) {
                                     >
                                         BACK TO LIBRARY
                                     </button>
+                                    </Grid>
                                 </Grid>
                             </Grid>
                         </div>

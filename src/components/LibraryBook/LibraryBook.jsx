@@ -11,7 +11,7 @@ function LibraryBook({ userBook }) {
     // user click on book will bring to details page for that book
     const clickCover = () => {
         console.log('clicked userBook.book_id is', userBook.book_id);
-        history.push('/details')
+        history.push(`/details/${userBook.book_id}`)
         dispatch({
             type: 'FETCH_DETAILS',
             payload: userBook.book_id

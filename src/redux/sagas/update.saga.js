@@ -10,15 +10,21 @@ function* updateBook(action) {
         const bookUpdates = action.payload;
         yield axios.put(`/api/database/update/${bookUpdates.id}`, bookUpdates);
         yield put({
+            type: 'FETCH_DETAILS',
+            payload: bookUpdates.id
+        })
+        yield put({
             type: 'SET_UPDATE',
             payload: bookUpdates
         })
     }
     catch (error) {
         console.log('ERROR WITH updateSaga.', error);
-
+ 
     }
 }
+
+
 
 function* updateSaga() {
     yield takeEvery('UPDATE_USER_BOOK', updateBook);

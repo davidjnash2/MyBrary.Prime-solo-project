@@ -6,8 +6,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { Paper } from '@mui/material';
+import { CardActionArea, Paper } from '@mui/material';
+
+
+
 
 
 function LibraryBook({ userBook }) {
@@ -25,25 +27,31 @@ function LibraryBook({ userBook }) {
         })
     }
 
+
     return (
         <>
-            {/* <div onClick={clickCover}>
-                <img src={userBook.cover_url} />
-                <p>Title: {userBook.title}</p>
-                <p>Author: {userBook.author}</p>
-            </div> */}
-            <Card 
-            sx={{ maxWidth: 345,
-                objectFit: "contain",
-            }}
-            elevation={16}>
+            <Card
+                onClick={clickCover}
+                sx={{
+                    maxWidth: 300,
+                    objectFit: "contain",
+                    maxHeight: 425,
+                    minHeight: 425,
+                }}
+                elevation={16}
+            >
                 <Paper>
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            height="140"
+                            // height="350"
                             image={userBook.cover_url}
                             alt="book cover"
+                            sx={{
+                                objectFit: "contain",
+                                maxHeight: "100%",
+                                maxWidth: "100%",
+                            }}
                         />
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="div">

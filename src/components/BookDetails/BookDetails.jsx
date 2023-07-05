@@ -306,13 +306,14 @@ function BookDetails({ }) {
                     {bookDetails && bookDetails.length > 0 && (
                         <div className="details-container">
                             <Grid container spacing={1}>
-                                <Grid item xs={12}>
+                                <Grid item xs={12}
+                                >
                                     <h1>{bookDetails[0].title}</h1>
                                 </Grid>
-                                <Grid item xs={12} lg={4}>
+                                <Grid item xs={12} md={6} lg={4}>
                                     <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
                                 </Grid>
-                                <Grid item xs={12} lg={4}>
+                                <Grid item xs={12} md={1} lg={6}>
                                     {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
                                         <p>Subtitle: n/a</p>
                                     ) : (
@@ -352,7 +353,7 @@ function BookDetails({ }) {
                                     ) : (
                                         <p>Description: {bookDetails[0].description}</p>
                                     )}
-                                    <Grid item xs={12} lg={4}>
+                                    <Grid item xs={12} md={6} lg={4}>
                                         <h2>Your info</h2>
 
                                         {/* yes/no toggle box here */}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from 'react-redux';
 import LibraryBook from '../LibraryBook/LibraryBook';
+import { Grid, Card, Paper, makeStyles } from '@mui/material'
 
 function LibraryList() {
 
@@ -35,11 +36,15 @@ function LibraryList() {
     //  values present before mapping so as not to crash DOM
     return (
         <>
-            {library && library.map((userBook, i) => (
-                <div key={i}>
-                    <LibraryBook userBook={userBook} />
-                </div>
-            ))}
+            <Grid container spacing={2} justifyContent="center">
+                {library && library.map((userBook, i) => (
+                    <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
+                        {/* <div key={i}> */}
+                        <LibraryBook userBook={userBook} />
+                        {/* </div> */}
+                    </Grid>
+                ))}
+            </Grid>
         </>
     )
 }

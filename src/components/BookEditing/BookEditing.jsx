@@ -2,7 +2,6 @@ import react from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import './BookDetails.css';
 import { Grid, Button } from '@mui/material';
 
 function BookEditing({ }) {
@@ -48,17 +47,6 @@ function BookEditing({ }) {
             payload: bookId.id
         });
     }
-
-    // const deleteUserBook = (event) => {
-    //     event.preventDefault();
-    //     console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
-    //     dispatch({
-    //         type: 'DELETE_USER_BOOK',
-    //         payload: bookDetails[0].book_id
-    //     });
-    //     history.push('/library');
-    // }
-
 
     const updateUserBook = (event) => {
         event.preventDefault();

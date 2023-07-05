@@ -44,6 +44,11 @@ function BookDetails({ }) {
 
     const switchEditing = () => {
         setEditing(!editing);
+        dispatch({
+            type: 'FETCH_DETAILS',
+            payload: bookId.id
+        });
+        history.push(`/edit/${bookId.id}`)
     }
 
     const deleteUserBook = (event) => {
@@ -79,6 +84,10 @@ function BookDetails({ }) {
             },
         });
         switchEditing();
+        dispatch({
+            type: 'FETCH_DETAILS',
+            payload: bookDetails[0].book_id
+        })
     };
 
 
@@ -99,6 +108,26 @@ function BookDetails({ }) {
         return options;
     }
 
+    const cancelEditing = () => {
+        switchEditing();
+        dispatch({
+            type: 'FETCH_DETAILS',
+            payload: bookDetails[0].book_id
+        });
+        setSubtitle(bookDetails[0]?.subtitle || '');
+        setPublisher(bookDetails[0]?.publisher || '');
+        setPublished(bookDetails[0]?.published || '');
+        setGenre(bookDetails[0]?.genre || '');
+        setPages(bookDetails[0]?.pages || '');
+        setDescription(bookDetails[0]?.description || '');
+        setRead(bookDetails[0]?.read_status || '');
+        setRating(bookDetails[0]?.rating || '');
+        setReview(bookDetails[0]?.review || '');
+        setBorrowed(bookDetails[0]?.borrowed || '');
+        setBorrower(bookDetails[0]?.borrower || '');
+        setBorrowedDate(bookDetails[0]?.borrowed_date || '');
+    
+    }
 
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
@@ -119,7 +148,7 @@ function BookDetails({ }) {
 
     return (
         <>
-
+{/* 
             {editing ? (
                 <>
                     {bookDetails && bookDetails.length > 0 && (
@@ -154,7 +183,7 @@ function BookDetails({ }) {
                                                     onChange={(event) => setPublisher(event.target.value)}
                                                     type='text'
                                                     value={publisher}
-                                                    placeholder={bookDetails[0].publisher}
+                                                    // placeholder={bookDetails[0].publisher}
                                                 />
 
                                                 <label htmlFor="published">Published:</label>
@@ -205,25 +234,25 @@ function BookDetails({ }) {
                             </label>
                             <p>Read it? {bookDetails.read_status}</p> */}
 
-
+{/* 
                                             <label htmlFor="read">Read?</label>
                                             <input
                                                 onChange={(event) => setRead(event.target.value)}
                                                 type='text'
                                                 value={read}
                                                 placholder={bookDetails[0].read_status}
-                                            />
+                                            /> */}
 
 
                                             {/* need to add slider or stars for rating */}
-                                            <label htmlFor="rating">Rating:</label>
+                                            {/* <label htmlFor="rating">Rating:</label> */}
                                             {/* <input
                                 onChange={(event) => setComments(event.target.value)}
                                 type='text'
                                 value={rating}
                                 placeholder={bookDetails[0].rating}
                             /> */}
-                                            <input
+                                            {/* <input
                                                 onChange={(event) => setRating(event.target.value)}
                                                 type='number'
                                                 min='0'
@@ -239,20 +268,20 @@ function BookDetails({ }) {
                                                 type='text'
                                                 value={review}
                                                 placholder={bookDetails[0].review}
-                                            />
+                                            /> */}
 
 
                                             {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
 
 
-                                            <label htmlFor="borrowed">Borrowed:</label>
+                                            {/* <label htmlFor="borrowed">Borrowed:</label>
                                             <input
                                                 onChange={(event) => setBorrowed(event.target.value)}
                                                 type='text'
                                                 value={borrowed}
                                                 placeholder={bookDetails[0].borrowed}
-                                            />
+                                            /> */}
                                             {/* <label>
                                 <input
                                     onChange={(event) => setBorrowed(event.target.checked)}
@@ -264,7 +293,7 @@ function BookDetails({ }) {
 
 
 
-                                            <label htmlFor="borrower">Borrower:</label>
+                                            {/* <label htmlFor="borrower">Borrower:</label>
                                             <input
                                                 onChange={(event) => setBorrower(event.target.value)}
                                                 type='text'
@@ -280,7 +309,7 @@ function BookDetails({ }) {
                                                 value={borrowedDate}
                                                 placeholder={bookDetails[0].borrowed_date}
                                                 onChange={(event) => setBorrowedDate(event.target.value)}
-                                            />
+                                            /> */}
 
                                             {/* <label htmlFor="borrowed_date">Borrowed date:</label>
                             use MUI datepicker here
@@ -290,8 +319,8 @@ function BookDetails({ }) {
                                 value={borrowedDate}
                                 placeholder={bookDetails[0].borrowed_date}
                             /> */}
-
-                                            <button
+{/* 
+/* {<button
                                                 type="submit"
                                             >
                                                 SAVE CHANGES
@@ -299,7 +328,7 @@ function BookDetails({ }) {
                                         </form>
                                         <button
                                             type="cancel"
-                                            onClick={switchEditing}
+                                            onClick={cancelEditing}
                                         >
                                             Cancel
                                         </button>
@@ -309,7 +338,7 @@ function BookDetails({ }) {
                         </div>
                     )}
                 </>
-            ) : (
+            ) : (} } */}
                 <>
                     {bookDetails && bookDetails.length > 0 && (
                         <div className="details-container">

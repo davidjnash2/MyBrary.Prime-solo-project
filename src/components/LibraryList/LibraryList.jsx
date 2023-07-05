@@ -39,9 +39,7 @@ function LibraryList() {
             <Grid container spacing={2} justifyContent="center">
                 {library && library.map((userBook, i) => (
                     <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
-                        {/* <div key={i}> */}
                         <LibraryBook userBook={userBook} />
-                        {/* </div> */}
                     </Grid>
                 ))}
             </Grid>

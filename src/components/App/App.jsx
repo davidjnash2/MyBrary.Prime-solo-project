@@ -25,6 +25,7 @@ import SearchList from '../SearchList/SearchList';
 import LibraryList from '../LibraryList/LibraryList';
 import BookDetails from '../BookDetails/BookDetails';
 import SignInSide from '../SignInSide/SignInSide';
+import BookEditing from '../BookEditing/BookEditing';
 
 import './App.css';
 
@@ -104,6 +105,14 @@ function App() {
             path="/details/:id" // added :id to allow for useParams hook on this component, to allow for state to persist on refresh
           >
             <BookDetails />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows library else shows LoginPage
+            exact
+            path="/edit/:id"
+          >
+            <BookEditing />
           </ProtectedRoute>
 
           <Route

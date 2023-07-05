@@ -86,6 +86,7 @@ function BookEditing({ }) {
             type: 'FETCH_DETAILS',
             payload: bookDetails[0].book_id
         })
+        history.push(`/details/${bookId.id}`);
     };
 
 
@@ -106,7 +107,8 @@ function BookEditing({ }) {
         return <div>{options}</div>;
     }
 
-    const cancelEditing = () => {
+    const cancelEditing = (event) => {
+        event.preventDefault();
         switchEditing();
         dispatch({
             type: 'FETCH_DETAILS',
@@ -124,7 +126,7 @@ function BookEditing({ }) {
         setBorrowed(bookDetails[0]?.borrowed || '');
         setBorrower(bookDetails[0]?.borrower || '');
         setBorrowedDate(bookDetails[0]?.borrowed_date || '');
-
+        history.push(`/details/${bookId.id}`);
     }
 
     const [isLoading, setIsLoading] = useState(true);
@@ -148,78 +150,88 @@ function BookEditing({ }) {
         <>
             {bookDetails && bookDetails.length > 0 && (
                 <div className="details-container">
-                    <Grid container spacing={1}>
-                        <Grid item xs={12}
-                        >
+                    <Grid container spacing={1} id="book-container">
+                        <Grid item xs={12} id="title-section">
                             <h1>{bookDetails[0].title}</h1>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Grid container spacing={1}>
-                                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
-                                </Grid>
-                                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <form
-                                        onSubmit={updateUserBook}
-                                    >
-                                        <label htmlFor="subtitle">Subtitle:</label>
-                                        <input
-                                            onChange={(event) => setSubtitle(event.target.value)}
-                                            type='text'
-                                            value={subtitle}
-                                            placeholder={bookDetails[0].subtitle}
-                                        />
+                        <Grid container item xs={12} id="info-section">
+                            <Grid item id="book-cover" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
+                                <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
+                            </Grid>
+                            <Grid item id="book-info" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
+                                <form
+                                    onSubmit={updateUserBook}
+                                >
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            <h2>Book Stuff</h2>
+                                            <label htmlFor="subtitle">Subtitle:</label>
+                                            <input
+                                                onChange={(event) => setSubtitle(event.target.value)}
+                                                type='text'
+                                                value={subtitle}
+                                                placeholder={bookDetails[0].subtitle}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <p>Author: {bookDetails[0].author}</p>
+                                        </Grid>
+                                        <Grid item>
+                                            <label htmlFor="publisher">Publisher:</label>
+                                            <input
+                                                onChange={(event) => setPublisher(event.target.value)}
+                                                type='text'
+                                                value={publisher}
+                                            // placeholder={bookDetails[0].publisher}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <label htmlFor="published">Published:</label>
+                                            <select onChange={(event) => setPublished(event.target.value)} value={published}>
+                                                {renderYearOptions()}
+                                            </select>
+                                        </Grid>
 
-                                        <p>Author: {bookDetails[0].author}</p>
+                                        <Grid item>
+                                            <label htmlFor="genre">Genre:</label>
+                                            <input
+                                                onChange={(event) => setGenre(event.target.value)}
+                                                type='text'
+                                                value={genre}
+                                                placeholder={bookDetails[0].genre}
+                                            />
+                                        </Grid>
 
-
-                                        <label htmlFor="publisher">Publisher:</label>
-                                        <input
-                                            onChange={(event) => setPublisher(event.target.value)}
-                                            type='text'
-                                            value={publisher}
-                                        // placeholder={bookDetails[0].publisher}
-                                        />
-
-                                        <label htmlFor="published">Published:</label>
-                                        <select onChange={(event) => setPublished(event.target.value)} value={published}>
-                                            {renderYearOptions()}
-                                        </select>
-
-
-
-                                        <label htmlFor="genre">Genre:</label>
-                                        <input
-                                            onChange={(event) => setGenre(event.target.value)}
-                                            type='text'
-                                            value={genre}
-                                            placeholder={bookDetails[0].genre}
-                                        />
-
-
-                                        <label htmlFor="pages">Pages:</label>
-                                        <input
-                                            onChange={(event) => setPages(event.target.value)}
-                                            type='number'
-                                            value={pages}
-                                            placeholder={bookDetails[0].pages}
-                                        />
-
-                                        <p>ISBN: {bookDetails[0].isbn}</p>
-
-                                        <label htmlFor="description">Description:</label>
-                                        <input
-                                            onChange={(event) => setDescription(event.target.value)}
-                                            type='text'
-                                            value={description}
-                                            placeholder={bookDetails[0].description}
-                                        />
-                                    </form>
-                                </Grid>
-                                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}></Grid>
-                                <h2>Your info</h2>
-                                <form onSubmit={updateUserBook}>
-                                    {/* yes/no toggle box here
+                                        <Grid item>
+                                            <label htmlFor="pages">Pages:</label>
+                                            <input
+                                                onChange={(event) => setPages(event.target.value)}
+                                                type='number'
+                                                value={pages}
+                                                placeholder={bookDetails[0].pages}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <p>ISBN: {bookDetails[0].isbn}</p>
+                                        </Grid>
+                                        <Grid item>
+                                            <label htmlFor="description">Description:</label>
+                                            <input
+                                                onChange={(event) => setDescription(event.target.value)}
+                                                type='text'
+                                                value={description}
+                                                placeholder={bookDetails[0].description}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </form>
+                            </Grid>
+                            <Grid item id="you-stuff" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
+                            <h2>You stuff</h2>
+                            <form onSubmit={updateUserBook}>
+                                <Grid container direction="column" spacing={1}>
+                                    <Grid item>
+                                        {/* yes/no toggle box here
                             <label className="switch">
                                 <input
                                     onChange={(event) => setRead(event.target.checked)}
@@ -230,46 +242,46 @@ function BookEditing({ }) {
                             <p>Read it? {bookDetails.read_status}</p> */}
 
 
-                                    <label htmlFor="read">Read?</label>
-                                    <input
-                                        onChange={(event) => setRead(event.target.value)}
-                                        type='text'
-                                        value={read}
-                                        placeholder={bookDetails[0].read_status}
-                                    />
-
-
-                                    {/* need to add slider or stars for rating */}
-                                    <label htmlFor="rating">Rating:</label>
-                                    {/* <input
+                                        <label htmlFor="read">Read?</label>
+                                        <input
+                                            onChange={(event) => setRead(event.target.value)}
+                                            type='text'
+                                            value={read}
+                                            placeholder={bookDetails[0].read_status}
+                                        />
+                                    </Grid>
+                                    <Grid item>
+                                        {/* need to add slider or stars for rating */}
+                                        <label htmlFor="rating">Rating:</label>
+                                        {/* <input
                                 onChange={(event) => setComments(event.target.value)}
                                 type='text'
                                 value={rating}
                                 placeholder={bookDetails[0].rating}
                             /> */}
-                                    <input
-                                        onChange={(event) => setRating(event.target.value)}
-                                        type='number'
-                                        min='0'
-                                        max='5'
-                                        value={rating}
-                                        placeholder={bookDetails[0].rating}
-                                    />
+                                        <input
+                                            onChange={(event) => setRating(event.target.value)}
+                                            type='number'
+                                            min='0'
+                                            max='5'
+                                            value={rating}
+                                            placeholder={bookDetails[0].rating}
+                                        />
+                                    </Grid>
+                                    <Grid item>
+                                        <label htmlFor="review">Review:</label>
+                                        <input
+                                            onChange={(event) => setReview(event.target.value)}
+                                            type='text'
+                                            value={review}
+                                            placholder={bookDetails[0].review}
+                                        />
 
-
-                                    <label htmlFor="review">Review:</label>
-                                    <input
-                                        onChange={(event) => setReview(event.target.value)}
-                                        type='text'
-                                        value={review}
-                                        placholder={bookDetails[0].review}
-                                    />
-
-
+                                    </Grid>
                                     {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
 
-
+                                    <Grid item></Grid>
                                     <label htmlFor="borrowed">Borrowed:</label>
                                     <input
                                         onChange={(event) => setBorrowed(event.target.value)}
@@ -285,9 +297,9 @@ function BookEditing({ }) {
                                     value={borrowed} />
                                 <span class="slider round"></span>
                             </label> */}
+                                </Grid>
 
-
-
+                                <Grid item>
                                     <label htmlFor="borrower">Borrower:</label>
                                     <input
                                         onChange={(event) => setBorrower(event.target.value)}
@@ -295,8 +307,8 @@ function BookEditing({ }) {
                                         value={borrower}
                                         placeholder={bookDetails[0].borrower}
                                     />
-
-
+                                </Grid>
+                                <Grid item>
                                     <label htmlFor="borrowed_date">Borrowed date:</label>
                                     <input
                                         type="date"
@@ -314,24 +326,29 @@ function BookEditing({ }) {
                                 value={borrowedDate}
                                 placeholder={bookDetails[0].borrowed_date}
                             /> */}
-
-                                    <button
+                                </Grid>
+                                <Grid item>
+                                    <Button
                                         type="submit"
                                     >
                                         SAVE CHANGES
-                                    </button>
-                                </form>
-                                <button
-                                    type="cancel"
-                                    onClick={cancelEditing}
-                                >
-                                    Cancel
-                                </button>
+                                    </Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button
+                                        type="cancel"
+                                        onClick={cancelEditing}
+                                    >
+                                        CANCEL
+                                    </Button>
+                                </Grid>
+                            </form>
                             </Grid>
                         </Grid>
-                    </Grid>
-                </div>
-            )}
+                    </Grid >
+                </div >
+            )
+            }
         </>
     )
 }

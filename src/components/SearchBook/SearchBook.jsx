@@ -33,9 +33,6 @@ function SearchBook({ book }) {
         })
     }
 
-    // const thumbnailUrl = book?.volumeInfo?.imageLinks?.thumbnail;
-    // const largeUrl = thumbnailUrl.replace("zoom=1", "zoom=0");
-
 
     const thumbnailUrl = book?.volumeInfo?.imageLinks?.thumbnail;
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : book?.volumeInfo?.imageLinks?.thumbnail;

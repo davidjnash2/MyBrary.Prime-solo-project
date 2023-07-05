@@ -31,6 +31,10 @@ function BookEditing({ }) {
     const [borrower, setBorrower] = useState(bookDetails[0]?.borrower || '');
     const [borrowedDate, setBorrowedDate] = useState(bookDetails[0]?.borrowed_date || '');
 
+    const thumbnailUrl = bookDetails[0].cover_url;
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
+    console.log('largeUrl is:', largeUrl);
+
 
     useEffect(() => {
         dispatch({
@@ -144,7 +148,7 @@ function BookEditing({ }) {
                         </Grid>
                         <Grid container item xs={12} id="info-section">
                             <Grid item id="book-cover" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
+                                <img src={largeUrl} alt={bookDetails[0].title} />
                             </Grid>
                             <Grid item id="book-info" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
                                 <form

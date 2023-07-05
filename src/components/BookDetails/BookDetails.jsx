@@ -18,6 +18,10 @@ function BookDetails({ }) {
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
+    const thumbnailUrl = bookDetails[0].cover_url;
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
+    console.log('largeUrl is:', largeUrl);
+
     // const [editing, setEditing] = useState(false);
 
     // const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
@@ -158,7 +162,7 @@ function BookDetails({ }) {
                         <Grid item xs={12}>
                             <Grid container spacing={3}>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
+                                    <img src={largeUrl} alt={bookDetails[0].title} />
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <h2>Book Stuff</h2>

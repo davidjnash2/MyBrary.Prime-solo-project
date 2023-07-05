@@ -17,6 +17,12 @@ function LibraryBook({ userBook }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+
+
+    const thumbnailUrl = userBook.cover_url;
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : userBook.cover_url;
+    console.log('largeUrl is:', largeUrl);
+
     // user click on book will bring to details page for that book
     const clickCover = () => {
         console.log('clicked userBook.book_id is', userBook.book_id);
@@ -35,8 +41,8 @@ function LibraryBook({ userBook }) {
                 sx={{
                     maxWidth: 300,
                     objectFit: "contain",
-                    maxHeight: 425,
-                    minHeight: 425,
+                    maxHeight: 350,
+                    minHeight: 350,
                 }}
                 elevation={16}
             >
@@ -45,7 +51,8 @@ function LibraryBook({ userBook }) {
                         <CardMedia
                             component="img"
                             // height="350"
-                            image={userBook.cover_url}
+                            image={largeUrl}
+                            // image={userBook.cover_url}
                             alt="book cover"
                             sx={{
                                 objectFit: "contain",
@@ -53,14 +60,14 @@ function LibraryBook({ userBook }) {
                                 maxWidth: "100%",
                             }}
                         />
-                        <CardContent>
+                        {/* <CardContent>
                             <Typography gutterBottom variant="h5" component="div">
                                 {userBook.title}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                                 {userBook.author}
                             </Typography>
-                        </CardContent>
+                        </CardContent> */}
                     </CardActionArea>
 
                 </Paper>

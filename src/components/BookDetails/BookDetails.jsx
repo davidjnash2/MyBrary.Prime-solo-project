@@ -38,35 +38,13 @@ function BookDetails({ }) {
         dispatch({
             type: 'FETCH_DETAILS',
             payload: bookId.id
-            });
-        }, []);
-
-
-
-    //     if (bookDetails && bookDetails.length > 0) {
-    //         const book = bookDetails[0];
-    //         setSubtitle(book.subtitle || '');
-    //         setPublisher(book.publisher || '');
-    //         setPublished(book.published || '');
-    //         setGenre(book.genre || '');
-    //         setPages(book.pages || '');
-    //         setDescription(book.description || '');
-    //         setRead(book.read_status || '');
-    //         setRating(book.rating || '');
-    //         setReview(book.review || '');
-    //         setBorrowed(book.borrowed || '');
-    //         setBorrower(book.borrower || '');
-    //         setBorrowedDate(book.borrowed_date || '');
-    //         }
-    //     }, [bookDetails]);
-
+        });
+    }, []);
 
 
     const switchEditing = () => {
         setEditing(!editing);
     }
-
-
 
     const deleteUserBook = (event) => {
         event.preventDefault();
@@ -77,6 +55,7 @@ function BookDetails({ }) {
         });
         history.push('/library');
     }
+
 
     const updateUserBook = (event) => {
         event.preventDefault();
@@ -100,21 +79,9 @@ function BookDetails({ }) {
             },
         });
         switchEditing();
-        // setSubtitle(book.subtitle || '');
-        //     setPublisher(book.publisher || '');
-        //     setPublished(book.published || '');
-        //     setGenre(book.genre || '');
-        //     setPages(book.pages || '');
-        //     setDescription(book.description || '');
-        //     setRead(book.read_status || '');
-        //     setRating(book.rating || '');
-        //     setReview(book.review || '');
-        //     setBorrowed(book.borrowed || '');
-        //     setBorrower(book.borrower || '');
-        //     setBorrowedDate(book.borrowed_date || '')
     };
 
-
+    
 
     function renderYearOptions() {
         const currentYear = new Date().getFullYear();
@@ -157,7 +124,9 @@ function BookDetails({ }) {
                 <>
                     {bookDetails && bookDetails.length > 0 && (
                         <div>
-                            <form onSubmit={updateUserBook}>
+                            <form
+                                onSubmit={updateUserBook}
+                            >
                                 <h2>Book Info</h2>
                                 <img src={bookDetails[0].cover_url} />
                                 <p>Title: {bookDetails[0].title}</p>
@@ -255,13 +224,6 @@ function BookDetails({ }) {
                                 />
 
 
-
-
-
-
-
-
-
                                 <label htmlFor="review">Review:</label>
                                 <input
                                     onChange={(event) => setReview(event.target.value)}
@@ -349,7 +311,7 @@ function BookDetails({ }) {
                                 </Grid>
                                 <Grid item xs={12} lg={4}>
                                     <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
-                                </Grid> 
+                                </Grid>
                                 <Grid item xs={12} lg={4}>
                                     {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
                                         <p>Subtitle: n/a</p>
@@ -415,24 +377,24 @@ function BookDetails({ }) {
                                         <p>Who? {bookDetails[0].borrower}</p>
                                         <p>Since when? {bookDetails[0].borrowed_date}</p>
 
-                                    <button
-                                        type="button"
-                                        onClick={switchEditing}
-                                    >
-                                        EDIT
-                                    </button>
-                                    <button
-                                        name="delete"
-                                        onClick={deleteUserBook}
-                                    >
-                                        DELETE BOOK
-                                    </button>
-                                    <button
-                                        name="back_to_library"
-                                        onClick={() => history.push('/library')}
-                                    >
-                                        BACK TO LIBRARY
-                                    </button>
+                                        <button
+                                            type="button"
+                                            onClick={switchEditing}
+                                        >
+                                            EDIT
+                                        </button>
+                                        <button
+                                            name="delete"
+                                            onClick={deleteUserBook}
+                                        >
+                                            DELETE BOOK
+                                        </button>
+                                        <button
+                                            name="back_to_library"
+                                            onClick={() => history.push('/library')}
+                                        >
+                                            BACK TO LIBRARY
+                                        </button>
                                     </Grid>
                                 </Grid>
                             </Grid>

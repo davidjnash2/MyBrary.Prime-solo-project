@@ -13,12 +13,18 @@ function* updateBook(action) {
             type: 'SET_UPDATE',
             payload: bookUpdates
         })
+        yield put({
+            type: 'FETCH_DETAILS',
+            payload: bookUpdates.id
+        })
     }
     catch (error) {
         console.log('ERROR WITH updateSaga.', error);
-
+ 
     }
 }
+
+
 
 function* updateSaga() {
     yield takeEvery('UPDATE_USER_BOOK', updateBook);

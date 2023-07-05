@@ -16,7 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
+import ToRead from '../ToRead/ToRead';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -24,6 +24,8 @@ import ApiSearch from '../ApiSearch/ApiSearch';
 import SearchList from '../SearchList/SearchList';
 import LibraryList from '../LibraryList/LibraryList';
 import BookDetails from '../BookDetails/BookDetails';
+import SignInSide from '../SignInSide/SignInSide';
+import BookEditing from '../BookEditing/BookEditing';
 
 import './App.css';
 
@@ -84,9 +86,9 @@ function App() {
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
             exact
-            path="/info"
+            path="/toRead"
           >
-            <InfoPage />
+            <ToRead />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -100,9 +102,17 @@ function App() {
 
           <ProtectedRoute
             exact
-            path="/details"
+            path="/details/:id" // added :id to allow for useParams hook on this component, to allow for state to persist on refresh
           >
             <BookDetails />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows library else shows LoginPage
+            exact
+            path="/edit/:id"
+          >
+            <BookEditing />
           </ProtectedRoute>
 
           <Route
@@ -115,7 +125,8 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
-              <LoginPage />
+              // <LoginPage />
+              <SignInSide />
             }
           </Route>
 

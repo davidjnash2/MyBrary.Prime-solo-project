@@ -1,0 +1,9 @@
+.details-container {
+    max-width: 75%;
+    margin: auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: auto;
+    background-color: #390854;
+    color: white;
+}

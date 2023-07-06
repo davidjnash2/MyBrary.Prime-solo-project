@@ -42,18 +42,37 @@ function LibraryBook({ userBook }) {
                 onClick={clickCover}
                 sx={{
                     maxWidth: 300,
-                    maxHeight: "100%",
-                    objectFit: "contain",
-                    maxHeight: 350,
-                    minHeight: 350,
+                    // maxHeight: "100%",
+                    // objectFit: "contain",
+                    maxHeight: 500,
+                    minHeight: 500,
                 }}
                 elevation={16}
             >
-                <Paper sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                    <CardActionArea>
+                <CardActionArea>
+                <Paper 
+                sx={{ 
+                    // display: 'flex', 
+                    // alignItems: 'center', 
+                    height: '100%',
+                    width: "100%", 
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    }}>
+                    {/* <CardActionArea> */}
+                    <CardContent
+                        sx={{
+                            height: 500,
+                            // width: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                          }}
+                        >
                         <CardMedia
                             component="img"
-                            height="350"
+                            minHeight={250}
+                            maxHeight={250}
                             // image={largeUrl}
                             // image={thumbnailUrl}
                             image={userBook.cover_url}
@@ -64,16 +83,19 @@ function LibraryBook({ userBook }) {
                                 width: "100%",
                             }}
                         />
-                        {/* <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
+                        {/* <CardContent
+                        height="100%"
+                        > */}
+                            <Typography gutterBottom variant="body2" component="div">
                                 {userBook.title}
                             </Typography>
                             <Typography variant="body2" color="text.secondary">
                                 {userBook.author}
                             </Typography>
-                        </CardContent> */}
-                    </CardActionArea>
+                        </CardContent>
+                    {/* </CardActionArea> */}
                 </Paper>
+                </CardActionArea>
             </Card>
         </>
     )

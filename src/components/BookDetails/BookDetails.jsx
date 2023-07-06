@@ -22,7 +22,7 @@ function BookDetails({ }) {
     // const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
     // console.log('largeUrl is:', largeUrl);
 
-    
+
     useEffect(() => {
         dispatch({
             type: 'FETCH_DETAILS',
@@ -75,6 +75,14 @@ function BookDetails({ }) {
     }
 
 
+    const borrowedDate = bookDetails[0].borrowed_date;
+    const formattedDate = new Date(borrowedDate).toLocaleDateString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+    });
+
+
     return (
         <>
             {bookDetails && bookDetails.length > 0 && (
@@ -87,11 +95,11 @@ function BookDetails({ }) {
                         <Grid item xs={12}>
                             <Grid container spacing={3}>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <img 
-                                    className="details-cover-image"
-                                    // src={largeUrl} 
-                                    src={bookDetails[0].cover_url} 
-                                    alt={bookDetails[0].title} />
+                                    <img
+                                        className="details-cover-image"
+                                        // src={largeUrl} 
+                                        src={bookDetails[0].cover_url}
+                                        alt={bookDetails[0].title} />
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <h2>Book Stuff</h2>
@@ -129,7 +137,7 @@ function BookDetails({ }) {
 
                                     <p>ISBN-13: {bookDetails[0].isbn}</p>
 
-                                
+
                                     {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
                                         <p>Description: n/a</p>
                                     ) : (
@@ -141,6 +149,23 @@ function BookDetails({ }) {
 
                                     {/* yes/no toggle box here */}
                                     <p>Read it? {bookDetails[0].read_status}</p>
+
+                                    {bookDetails[0].read_status ? (
+                                        <>
+                                            <p> {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                                <p>Like it?  n/a</p>
+                                            ) : (
+                                                <p>Like it? {bookDetails[0].rating}</p>
+                                            )}</p>
+                                            <p>{(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                                <p>Like it?  n/a</p>
+                                            ) : (
+                                                <p>Like it? {bookDetails[0].rating}</p>
+                                            )}</p>
+                                        </>
+                                    ) : (
+                                        null
+                                    )}
 
                                     {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
                                         <p>Like it?  n/a</p>
@@ -158,9 +183,14 @@ function BookDetails({ }) {
                                 and if yes, then render the borrowed data fields below */}
                                     <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
 
-                                    <p>Who? {bookDetails[0].borrower}</p>
-                                    <p>Since when? {bookDetails[0].borrowed_date}</p>
-
+                                    {bookDetails[0].borrowed ? (
+                                        <>
+                                            <p>Who? {bookDetails[0].borrower}</p>
+                                            <p>Since when? {formattedDate}</p>
+                                        </>
+                                    ) : (
+                                        null
+                                    )}
                                     <Button
                                         type="button"
                                         onClick={() => history.push(`/edit/${bookId.id}`)}

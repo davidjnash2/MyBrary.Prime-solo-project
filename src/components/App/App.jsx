@@ -26,6 +26,7 @@ import BookDetails from '../BookDetails/BookDetails';
 import SignInSide from '../SignInSide/SignInSide';
 import BookEditing from '../BookEditing/BookEditing';
 import ToRead from '../ToRead/ToRead';
+import LibraryBook from '../LibraryBook/LibraryBook';
 
 import './App.css';
 

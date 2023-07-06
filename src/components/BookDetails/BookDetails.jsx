@@ -18,9 +18,9 @@ function BookDetails({ }) {
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
-    const thumbnailUrl = bookDetails[0].cover_url;
-    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
-    console.log('largeUrl is:', largeUrl);
+    const thumbnailUrl = bookDetails && bookDetails.length > 0 ? bookDetails[0].cover_url : '';
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
+
 
 
     useEffect(() => {
@@ -64,7 +64,7 @@ function BookDetails({ }) {
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 10);
+        }, 25);
     }, []); // Empty dependency array to run the effect only once
 
     // ...
@@ -97,7 +97,7 @@ function BookDetails({ }) {
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <img
                                         className="details-cover-image"
-                                        src={largeUrl} 
+                                        src={largeUrl}
                                         // src={bookDetails[0].cover_url}
                                         alt={bookDetails[0].title} />
                                 </Grid>

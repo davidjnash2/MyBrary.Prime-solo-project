@@ -22,7 +22,7 @@ function LibraryList() {
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 50);
+        }, 25);
     }, []); // Empty dependency array to run the effect only once
 
     // ...
@@ -36,13 +36,24 @@ function LibraryList() {
     //  values present before mapping so as not to crash DOM
     return (
         <>
-            <Grid container spacing={2} justifyContent="center">
+            <Grid
+                container spacing={3}
+                justifyContent="flex-start"
+                sx={{
+                    backgroundColor: '#2e9cca',
+                }}
+            >
                 {library && library.map((userBook, i) => (
                     <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
                         <LibraryBook userBook={userBook} />
                     </Grid>
                 ))}
+                <br />
+                <br />
+                <br />
+                <br />
             </Grid>
+            
         </>
     )
 }

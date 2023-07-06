@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-// import SearchList from '../SearchList/SearchList';
+import { Box } from '@mui/material';
 
 function ApiSearch() {
 
@@ -23,25 +23,58 @@ function ApiSearch() {
     // ensure universal button styling on submit button
     return (
         <>
-            <form
-                id="user-search"
-                onSubmit={sendSearch}
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100vh', // Adjust the height as per your requirement
+                    marginTop: '-20vh',
+                }}
             >
-                <label
-                    htmlFor="search-input">
-                    WHAT BOOK DO YOU WANT?
-                </label>
-                <input
-                    id="search-input"
-                    onChange={(event) => setSearch(event.target.value)}
-                    type="text"
-                    placeholder="Pick a book, any book."
-                    required
-                    autoComplete="on"
-                    value={search}
-                />
-                <button type="submit">GET THAT BOOK</button>
-            </form>
+                <form
+                    id="user-search"
+                    onSubmit={sendSearch}
+                >
+                    <label
+                        htmlFor="search-input"
+                        style={{
+                            display: 'block',
+                            textAlign: 'center',
+                            marginBottom: '1rem',
+                            fontSize: '1.75rem', 
+                            fontWeight: 'bold',
+                        }}
+                    >
+                        WHAT BOOK DO YOU WANT?
+                    </label>
+                    <input
+                        id="search-input"
+                        onChange={(event) => setSearch(event.target.value)}
+                        type="text"
+                        placeholder="Pick a book, any book."
+                        required
+                        autoComplete="on"
+                        value={search}
+                        style={{
+                            display: 'block',
+                            margin: '0 auto',
+                            width: '90%',
+                            padding: '0.5rem',
+                            marginBottom: '1rem',
+                        }}
+                    />
+                    <button
+                        type="submit"
+                        style={{
+                            display: 'block',
+                            margin: '0 auto',
+                        }}
+                    >
+                        GET THAT BOOK
+                    </button>
+                </form>
+            </Box >
         </>
     )
 }

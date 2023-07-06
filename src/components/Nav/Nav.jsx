@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import { useSelector } from 'react-redux';
+import { Avatar } from '@mui/material';
 
 function Nav() {
   const user = useSelector((store) => store.user);
+  console.log('user is:', user);
 
   return (
     <div className="nav">
@@ -28,7 +30,6 @@ function Nav() {
             </Link>
           </>
         )}
-
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
@@ -48,6 +49,11 @@ function Nav() {
               About
             </Link>
             <LogOutButton className="navLink" />
+            {/* <Avatar className="avatar"
+              alt="user avatar"
+              src="unsplash.com/photos/FTfjMijq-Ws"
+              sx={{ width: 56, height: 56 }}
+            /> */}
           </>
         )}
       </div>

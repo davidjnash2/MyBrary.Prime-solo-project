@@ -78,7 +78,7 @@ function BookEditing({ }) {
             type: 'FETCH_DETAILS',
             payload: bookDetails[0].book_id
         })
-        history.push(`/details/${bookId.id}`);
+        history.push('/library');
     };
 
 

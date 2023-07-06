@@ -31,7 +31,7 @@ function UserPage() {
   return (
     <>
     <div className="container">
-      <h2>Welcome back, {user.username}!</h2>
+      <h1>Welcome back, {user.username}!</h1>
       {/* <p>Your ID is: {user.id}</p> */}
       <p>You've got {library.length} books in your MyBrary!</p>
       <div>

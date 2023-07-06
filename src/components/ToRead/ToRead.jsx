@@ -53,7 +53,11 @@ function ToRead() {
   return (
     <>
       <h1>Where shall we begin?</h1>
-      <Grid container spacing={2} justifyContent="center">
+      <Grid 
+      container 
+      spacing={2} 
+      justifyContent="flex-start"
+      >
         {unreadBooks.map((userBook, i) => (
           <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
             <LibraryBook userBook={userBook} />

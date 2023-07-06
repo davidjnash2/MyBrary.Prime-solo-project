@@ -32,7 +32,7 @@ function UserPage() {
     <>
     <div className="container">
       <h2>Welcome back, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+      {/* <p>Your ID is: {user.id}</p> */}
       <p>You've got {library.length} books in your MyBrary!</p>
       <div>
         <h3>Your recent additions are...</h3>

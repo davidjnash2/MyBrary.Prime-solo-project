@@ -33,13 +33,10 @@ function SearchBook({ book }) {
         })
     }
 
+
     // const thumbnailUrl = book?.volumeInfo?.imageLinks?.thumbnail;
-    // const largeUrl = thumbnailUrl.replace("zoom=1", "zoom=0");
-
-
-    const thumbnailUrl = book?.volumeInfo?.imageLinks?.thumbnail;
-    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : book?.volumeInfo?.imageLinks?.thumbnail;
-    console.log('largeUrl is:', largeUrl);
+    // const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : book?.volumeInfo?.imageLinks?.thumbnail;
+    // console.log('largeUrl is:', largeUrl);
 
     // using conditional rendering, optional chaining, and &&/AND operators to ensure that only results which contain
     // the information I want for POST is accessible and available as choice options for user
@@ -64,8 +61,8 @@ function SearchBook({ book }) {
                 (
                     <div>
                         <img
-                            // src={book?.volumeInfo?.imageLinks?.thumbnail}
-                            src={largeUrl}
+                            src={book?.volumeInfo?.imageLinks?.thumbnail}
+                            // src={largeUrl}
                             onClick={addBook}>
                         </img>
                         {book?.volumeInfo?.title && book?.volumeInfo?.title !== 0 && book?.volumeInfo?.title !== undefined && <p>Title: {book.volumeInfo.title}</p>}

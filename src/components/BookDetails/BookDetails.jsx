@@ -18,20 +18,9 @@ function BookDetails({ }) {
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
-    // const [editing, setEditing] = useState(false);
+    const thumbnailUrl = bookDetails && bookDetails.length > 0 ? bookDetails[0].cover_url : '';
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
 
-    // const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
-    // const [publisher, setPublisher] = useState(bookDetails[0]?.publisher || '');
-    // const [published, setPublished] = useState(bookDetails[0]?.published || '');
-    // const [genre, setGenre] = useState(bookDetails[0]?.genre || '');
-    // const [pages, setPages] = useState(bookDetails[0]?.pages || '');
-    // const [description, setDescription] = useState(bookDetails[0]?.description || '');
-    // const [read, setRead] = useState(bookDetails[0]?.read_status || '');
-    // const [rating, setRating] = useState(bookDetails[0]?.rating || '');
-    // const [review, setReview] = useState(bookDetails[0]?.review || '');
-    // const [borrowed, setBorrowed] = useState(bookDetails[0]?.borrowed || '');
-    // const [borrower, setBorrower] = useState(bookDetails[0]?.borrower || '');
-    // const [borrowedDate, setBorrowedDate] = useState(bookDetails[0]?.borrowed_date || '');
 
 
     useEffect(() => {
@@ -42,15 +31,6 @@ function BookDetails({ }) {
     }, []);
 
 
-    // const switchEditing = () => {
-    //     // setEditing(!editing);
-    //     dispatch({
-    //         type: 'FETCH_DETAILS',
-    //         payload: bookId.id
-    //     });
-    //     history.push(`/edit/${bookId.id}`)
-    // }
-
     const deleteUserBook = (event) => {
         event.preventDefault();
         console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
@@ -60,36 +40,6 @@ function BookDetails({ }) {
         });
         history.push('/library');
     }
-
-
-    // const updateUserBook = (event) => {
-    //     event.preventDefault();
-    //     console.log('in updateUserBook');
-    //     dispatch({
-    //         type: 'UPDATE_USER_BOOK',
-    //         payload: {
-    //             id: bookDetails[0].book_id,
-    //             subtitle,
-    //             publisher,
-    //             published,
-    //             genre,
-    //             pages,
-    //             description,
-    //             read,
-    //             rating,
-    //             review,
-    //             borrowed,
-    //             borrowedDate,
-    //             borrower,
-    //         },
-    //     });
-    //     switchEditing();
-    //     dispatch({
-    //         type: 'FETCH_DETAILS',
-    //         payload: bookDetails[0].book_id
-    //     })
-    // };
-
 
 
     // function renderYearOptions() {
@@ -108,34 +58,13 @@ function BookDetails({ }) {
     //     return options;
     // }
 
-    // const cancelEditing = () => {
-    //     switchEditing();
-    //     dispatch({
-    //         type: 'FETCH_DETAILS',
-    //         payload: bookDetails[0].book_id
-    //     });
-    //     setSubtitle(bookDetails[0]?.subtitle || '');
-    //     setPublisher(bookDetails[0]?.publisher || '');
-    //     setPublished(bookDetails[0]?.published || '');
-    //     setGenre(bookDetails[0]?.genre || '');
-    //     setPages(bookDetails[0]?.pages || '');
-    //     setDescription(bookDetails[0]?.description || '');
-    //     setRead(bookDetails[0]?.read_status || '');
-    //     setRating(bookDetails[0]?.rating || '');
-    //     setReview(bookDetails[0]?.review || '');
-    //     setBorrowed(bookDetails[0]?.borrowed || '');
-    //     setBorrower(bookDetails[0]?.borrower || '');
-    //     setBorrowedDate(bookDetails[0]?.borrowed_date || '');
-
-    // }
-
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         // Simulate an asynchronous API call to fetch book details
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 10);
+        }, 25);
     }, []); // Empty dependency array to run the effect only once
 
     // ...
@@ -144,6 +73,14 @@ function BookDetails({ }) {
         // Render a loading state or a placeholder component
         return <div>Loading...</div>;
     }
+
+
+    const borrowedDate = bookDetails[0].borrowed_date;
+    const formattedDate = new Date(borrowedDate).toLocaleDateString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+    });
 
 
     return (
@@ -158,7 +95,11 @@ function BookDetails({ }) {
                         <Grid item xs={12}>
                             <Grid container spacing={3}>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <img src={bookDetails[0].cover_url} alt={bookDetails[0].title} />
+                                    <img
+                                        className="details-cover-image"
+                                        src={largeUrl}
+                                        // src={bookDetails[0].cover_url}
+                                        alt={bookDetails[0].title} />
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <h2>Book Stuff</h2>
@@ -196,7 +137,7 @@ function BookDetails({ }) {
 
                                     <p>ISBN-13: {bookDetails[0].isbn}</p>
 
-                                
+
                                     {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
                                         <p>Description: n/a</p>
                                     ) : (
@@ -208,6 +149,23 @@ function BookDetails({ }) {
 
                                     {/* yes/no toggle box here */}
                                     <p>Read it? {bookDetails[0].read_status}</p>
+
+                                    {bookDetails[0].read_status ? (
+                                        <>
+                                            <p> {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                                <p>Like it?  n/a</p>
+                                            ) : (
+                                                <p>Like it? {bookDetails[0].rating}</p>
+                                            )}</p>
+                                            <p>{(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                                <p>Like it?  n/a</p>
+                                            ) : (
+                                                <p>Like it? {bookDetails[0].rating}</p>
+                                            )}</p>
+                                        </>
+                                    ) : (
+                                        null
+                                    )}
 
                                     {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
                                         <p>Like it?  n/a</p>
@@ -225,9 +183,14 @@ function BookDetails({ }) {
                                 and if yes, then render the borrowed data fields below */}
                                     <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
 
-                                    <p>Who? {bookDetails[0].borrower}</p>
-                                    <p>Since when? {bookDetails[0].borrowed_date}</p>
-
+                                    {bookDetails[0].borrowed ? (
+                                        <>
+                                            <p>Who? {bookDetails[0].borrower}</p>
+                                            <p>Since when? {formattedDate}</p>
+                                        </>
+                                    ) : (
+                                        null
+                                    )}
                                     <Button
                                         type="button"
                                         onClick={() => history.push(`/edit/${bookId.id}`)}

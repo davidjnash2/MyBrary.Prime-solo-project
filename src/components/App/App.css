@@ -2,7 +2,13 @@ html,
 body,
 #react-root {
   height: 100%;
+  background-color: #2E9CCA;
+
 }
+
+/* .background-gradient {
+  background-image: radial-gradient(circle, #2E9CCA, #390854);
+} */
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +18,22 @@ body {
 img {
   display: inline-block;
   max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p,
+li,
+link,
+.nav,
+.navlink,
+button,
+label,
+input,
+.title,
+.author {
+  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
 }
 
 /* --------------------------------------------------------------------------------

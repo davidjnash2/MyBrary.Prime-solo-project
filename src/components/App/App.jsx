@@ -16,7 +16,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import ToRead from '../ToRead/ToRead';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -26,6 +25,8 @@ import LibraryList from '../LibraryList/LibraryList';
 import BookDetails from '../BookDetails/BookDetails';
 import SignInSide from '../SignInSide/SignInSide';
 import BookEditing from '../BookEditing/BookEditing';
+import ToRead from '../ToRead/ToRead';
+import LibraryBook from '../LibraryBook/LibraryBook';
 
 import './App.css';
 
@@ -40,7 +41,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div id="background-gradient">
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
@@ -56,7 +57,7 @@ function App() {
           </Route>
 
           <Route
-            // shows AboutPage at all times (logged in or not)
+            // shows ApiSearch page at all times (logged in or not)
             exact
             path="/search"
           >

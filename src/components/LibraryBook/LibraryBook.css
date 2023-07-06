@@ -6,3 +6,7 @@
     height: 300;
 } */
 
+.title, 
+.author  { 
+	font-family: Rockwell Extra Bold,Rockwell Bold,monospace; 
+}

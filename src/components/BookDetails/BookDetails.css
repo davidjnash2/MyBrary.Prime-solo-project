@@ -4,6 +4,12 @@
     padding-top: 20px;
     padding-bottom: 20px;
     height: auto;
-    background-color: #390854;
-    color: white;
+    /* background-color: #390854; */
+    /* color: white; */
+
+    color: 390854;
 }
+
+/* .details-cover-image{
+    width: 400px;
+} */

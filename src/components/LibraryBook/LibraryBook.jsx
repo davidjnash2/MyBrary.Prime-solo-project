@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Paper } from '@mui/material';
+import {useEffect, useRef } from 'react';
 
 
 
@@ -22,6 +23,7 @@ function LibraryBook({ userBook }) {
     const thumbnailUrl = userBook.cover_url;
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : userBook.cover_url;
     console.log('largeUrl is:', largeUrl);
+
 
     // user click on book will bring to details page for that book
     const clickCover = () => {
@@ -40,24 +42,25 @@ function LibraryBook({ userBook }) {
                 onClick={clickCover}
                 sx={{
                     maxWidth: 300,
+                    maxHeight: "100%",
                     objectFit: "contain",
                     maxHeight: 350,
                     minHeight: 350,
                 }}
                 elevation={16}
             >
-                <Paper>
+                <Paper sx={{ display: 'flex', alignItems: 'center', height: '100%' }}>
                     <CardActionArea>
                         <CardMedia
                             component="img"
-                            // height="350"
-                            image={largeUrl}
-                            // image={userBook.cover_url}
+                            height="350"
+                            // image={largeUrl}
+                            image={userBook.cover_url}
+                            objectFit= "contain"
                             alt="book cover"
                             sx={{
                                 objectFit: "contain",
-                                maxHeight: "100%",
-                                maxWidth: "100%",
+                                width: "100%",
                             }}
                         />
                         {/* <CardContent>
@@ -69,7 +72,6 @@ function LibraryBook({ userBook }) {
                             </Typography>
                         </CardContent> */}
                     </CardActionArea>
-
                 </Paper>
             </Card>
         </>
@@ -79,27 +81,3 @@ function LibraryBook({ userBook }) {
 
 export default LibraryBook;
 
-
-// export default function ActionAreaCard() {
-//   return (
-//     <Card sx={{ maxWidth: 345 }}>
-//       <CardActionArea>
-//         <CardMedia
-//           component="img"
-//           height="140"
-//           image="/static/images/cards/contemplative-reptile.jpg"
-//           alt="green iguana"
-//         />
-//         <CardContent>
-//           <Typography gutterBottom variant="h5" component="div">
-//             Lizard
-//           </Typography>
-//           <Typography variant="body2" color="text.secondary">
-//             Lizards are a widespread group of squamate reptiles, with over 6,000
-//             species, ranging across all continents except Antarctica
-//           </Typography>
-//         </CardContent>
-//       </CardActionArea>
-//     </Card>
-//   );
-// }

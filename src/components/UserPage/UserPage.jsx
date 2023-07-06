@@ -1,16 +1,53 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {useSelector} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Grid, Card, Paper, makeStyles } from '@mui/material'
+
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
+  const dispatch = useDispatch();
+  const library = useSelector((store) => store.library);
+  console.log('library is:', library);
+
+  const selectRecents = () =>{
+    for (userBook of library) {
+    userBook.time_added
+  }
+
+  useEffect(() => {
+    dispatch({
+      type: 'FETCH_LIBRARY' 
+    })
+  }, []);
+
   return (
+    <>
     <div className="container">
       <h2>Welcome back, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      <p>You've got {library.length} books in your MyBrary!</p>
+      <div>
+      <Grid container spacing={2} justifyContent="center">
+                {library && library.map((userBook, i) => (
+                    <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
+                        <LibraryBook userBook={userBook} />
+                    </Grid>
+                ))}
+            </Grid>
+      </div>
+      
     </div>
+    
+    
+    
+    
+    
+    <LogOutButton className="btn" />
+
+
+    </>
   );
 }
 

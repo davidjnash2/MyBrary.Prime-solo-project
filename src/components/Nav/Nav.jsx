@@ -20,8 +20,11 @@ function Nav() {
             <Link className="navLink" to="/login">
               Login / Register
             </Link>
-            <Link className="navLink" to="/search">
+            {/* <Link className="navLink" to="/search">
               Search
+            </Link> */}
+            <Link className="navLink" to="/about">
+              About
             </Link>
           </>
         )}
@@ -41,13 +44,12 @@ function Nav() {
             <Link className="navLink" to="/toRead">
               To Read
             </Link>
+            <Link className="navLink" to="/about">
+              About
+            </Link>
             <LogOutButton className="navLink" />
           </>
         )}
-
-        <Link className="navLink" to="/about">
-          About
-        </Link>
       </div>
     </div>
   );

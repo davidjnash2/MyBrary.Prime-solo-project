@@ -56,7 +56,7 @@ function App() {
           </Route>
 
           <Route
-            // shows AboutPage at all times (logged in or not)
+            // shows ApiSearch page at all times (logged in or not)
             exact
             path="/search"
           >

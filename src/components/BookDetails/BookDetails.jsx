@@ -162,7 +162,10 @@ function BookDetails({ }) {
                         <Grid item xs={12}>
                             <Grid container spacing={3}>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                    <img src={largeUrl} alt={bookDetails[0].title} />
+                                    <img 
+                                    src={largeUrl} 
+                                    // src={bookDetails[0].cover_url} 
+                                    alt={bookDetails[0].title} />
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <h2>Book Stuff</h2>

@@ -22,7 +22,7 @@ function LibraryBook({ userBook }) {
 
     const thumbnailUrl = userBook.cover_url;
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : userBook.cover_url;
-    console.log('largeUrl is:', largeUrl);
+    // console.log('largeUrl is:', largeUrl);
 
 
     // user click on book will bring to details page for that book
@@ -57,7 +57,7 @@ function LibraryBook({ userBook }) {
                             // image={largeUrl}
                             // image={thumbnailUrl}
                             image={userBook.cover_url}
-                            objectFit= "contain"
+                            objectfit= "contain"
                             alt="book cover"
                             sx={{
                                 objectFit: "contain",

@@ -16,7 +16,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
-import ToRead from '../ToRead/ToRead';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
@@ -26,6 +25,7 @@ import LibraryList from '../LibraryList/LibraryList';
 import BookDetails from '../BookDetails/BookDetails';
 import SignInSide from '../SignInSide/SignInSide';
 import BookEditing from '../BookEditing/BookEditing';
+import ToRead from '../ToRead/ToRead';
 
 import './App.css';
 

@@ -55,6 +55,7 @@ function LibraryBook({ userBook }) {
                             component="img"
                             height="350"
                             // image={largeUrl}
+                            // image={thumbnailUrl}
                             image={userBook.cover_url}
                             objectFit= "contain"
                             alt="book cover"

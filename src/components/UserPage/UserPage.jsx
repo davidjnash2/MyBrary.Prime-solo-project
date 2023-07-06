@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid, Card, Paper, makeStyles } from '@mui/material'
+import { Grid, Card, Paper, makeStyles } from '@mui/material';
+import LibraryBook from '../LibraryBook/LibraryBook';
 
 
 function UserPage() {
@@ -12,9 +13,14 @@ function UserPage() {
   console.log('library is:', library);
 
   const selectRecents = () =>{
-    for (userBook of library) {
-    userBook.time_added
+    const sortedLibrary = library.sort((a,b) => b.id - a.id);
+    console.log('sortedLibrary is:', sortedLibrary);
+    const recentBooks = sortedLibrary.slice(0, 5);
+    console.log('recentBooks are:', recentBooks);
+    return recentBooks;
   }
+
+  const recentBooks = selectRecents();
 
   useEffect(() => {
     dispatch({
@@ -29,8 +35,9 @@ function UserPage() {
       <p>Your ID is: {user.id}</p>
       <p>You've got {library.length} books in your MyBrary!</p>
       <div>
+        <h3>Your recent additions are...</h3>
       <Grid container spacing={2} justifyContent="center">
-                {library && library.map((userBook, i) => (
+                {recentBooks.map((userBook, i) => (
                     <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
                         <LibraryBook userBook={userBook} />
                     </Grid>

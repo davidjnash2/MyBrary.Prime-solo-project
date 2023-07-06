@@ -18,26 +18,11 @@ function BookDetails({ }) {
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
-    const thumbnailUrl = bookDetails[0].cover_url;
-    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
-    console.log('largeUrl is:', largeUrl);
+    // const thumbnailUrl = bookDetails[0].cover_url;
+    // const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
+    // console.log('largeUrl is:', largeUrl);
 
-    // const [editing, setEditing] = useState(false);
-
-    // const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
-    // const [publisher, setPublisher] = useState(bookDetails[0]?.publisher || '');
-    // const [published, setPublished] = useState(bookDetails[0]?.published || '');
-    // const [genre, setGenre] = useState(bookDetails[0]?.genre || '');
-    // const [pages, setPages] = useState(bookDetails[0]?.pages || '');
-    // const [description, setDescription] = useState(bookDetails[0]?.description || '');
-    // const [read, setRead] = useState(bookDetails[0]?.read_status || '');
-    // const [rating, setRating] = useState(bookDetails[0]?.rating || '');
-    // const [review, setReview] = useState(bookDetails[0]?.review || '');
-    // const [borrowed, setBorrowed] = useState(bookDetails[0]?.borrowed || '');
-    // const [borrower, setBorrower] = useState(bookDetails[0]?.borrower || '');
-    // const [borrowedDate, setBorrowedDate] = useState(bookDetails[0]?.borrowed_date || '');
-
-
+    
     useEffect(() => {
         dispatch({
             type: 'FETCH_DETAILS',
@@ -45,15 +30,6 @@ function BookDetails({ }) {
         });
     }, []);
 
-
-    // const switchEditing = () => {
-    //     // setEditing(!editing);
-    //     dispatch({
-    //         type: 'FETCH_DETAILS',
-    //         payload: bookId.id
-    //     });
-    //     history.push(`/edit/${bookId.id}`)
-    // }
 
     const deleteUserBook = (event) => {
         event.preventDefault();
@@ -64,36 +40,6 @@ function BookDetails({ }) {
         });
         history.push('/library');
     }
-
-
-    // const updateUserBook = (event) => {
-    //     event.preventDefault();
-    //     console.log('in updateUserBook');
-    //     dispatch({
-    //         type: 'UPDATE_USER_BOOK',
-    //         payload: {
-    //             id: bookDetails[0].book_id,
-    //             subtitle,
-    //             publisher,
-    //             published,
-    //             genre,
-    //             pages,
-    //             description,
-    //             read,
-    //             rating,
-    //             review,
-    //             borrowed,
-    //             borrowedDate,
-    //             borrower,
-    //         },
-    //     });
-    //     switchEditing();
-    //     dispatch({
-    //         type: 'FETCH_DETAILS',
-    //         payload: bookDetails[0].book_id
-    //     })
-    // };
-
 
 
     // function renderYearOptions() {
@@ -110,27 +56,6 @@ function BookDetails({ }) {
     //         );
     //     }
     //     return options;
-    // }
-
-    // const cancelEditing = () => {
-    //     switchEditing();
-    //     dispatch({
-    //         type: 'FETCH_DETAILS',
-    //         payload: bookDetails[0].book_id
-    //     });
-    //     setSubtitle(bookDetails[0]?.subtitle || '');
-    //     setPublisher(bookDetails[0]?.publisher || '');
-    //     setPublished(bookDetails[0]?.published || '');
-    //     setGenre(bookDetails[0]?.genre || '');
-    //     setPages(bookDetails[0]?.pages || '');
-    //     setDescription(bookDetails[0]?.description || '');
-    //     setRead(bookDetails[0]?.read_status || '');
-    //     setRating(bookDetails[0]?.rating || '');
-    //     setReview(bookDetails[0]?.review || '');
-    //     setBorrowed(bookDetails[0]?.borrowed || '');
-    //     setBorrower(bookDetails[0]?.borrower || '');
-    //     setBorrowedDate(bookDetails[0]?.borrowed_date || '');
-
     // }
 
     const [isLoading, setIsLoading] = useState(true);
@@ -163,8 +88,8 @@ function BookDetails({ }) {
                             <Grid container spacing={3}>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <img 
-                                    src={largeUrl} 
-                                    // src={bookDetails[0].cover_url} 
+                                    // src={largeUrl} 
+                                    src={bookDetails[0].cover_url} 
                                     alt={bookDetails[0].title} />
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>

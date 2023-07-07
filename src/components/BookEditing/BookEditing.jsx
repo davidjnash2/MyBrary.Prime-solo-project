@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Button } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 function BookEditing({ }) {
 
@@ -142,7 +145,7 @@ function BookEditing({ }) {
         <>
             {bookDetails && bookDetails.length > 0 && (
                 <div className="details-container">
-                    <Grid container spacing={1} id="book-container">
+                    <Grid container spacing={3} id="book-container">
                         <Grid item xs={12} id="title-section">
                             <h1>{bookDetails[0].title}</h1>
                         </Grid>
@@ -219,11 +222,11 @@ function BookEditing({ }) {
                                 </form>
                             </Grid>
                             <Grid item id="you-stuff" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
-                            <h2>You stuff</h2>
-                            <form onSubmit={updateUserBook}>
-                                <Grid container direction="column" spacing={1}>
-                                    <Grid item>
-                                        {/* yes/no toggle box here
+                                <h2>You stuff</h2>
+                                <form onSubmit={updateUserBook}>
+                                    <Grid container direction="column" spacing={1}>
+                                        <Grid item>
+                                            {/* yes/no toggle box here
                             <label className="switch">
                                 <input
                                     onChange={(event) => setRead(event.target.checked)}
@@ -234,54 +237,54 @@ function BookEditing({ }) {
                             <p>Read it? {bookDetails.read_status}</p> */}
 
 
-                                        <label htmlFor="read">Read?</label>
-                                        <input
-                                            onChange={(event) => setRead(event.target.value)}
-                                            type='text'
-                                            value={read}
-                                            placeholder={bookDetails[0].read_status}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        {/* need to add slider or stars for rating */}
-                                        <label htmlFor="rating">Rating:</label>
-                                        {/* <input
+                                            <label htmlFor="read">Read?</label>
+                                            <input
+                                                onChange={(event) => setRead(event.target.value)}
+                                                type='text'
+                                                value={read}
+                                                placeholder={bookDetails[0].read_status}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            {/* need to add slider or stars for rating */}
+                                            <label htmlFor="rating">Rating:</label>
+                                            {/* <input
                                 onChange={(event) => setComments(event.target.value)}
                                 type='text'
                                 value={rating}
                                 placeholder={bookDetails[0].rating}
                             /> */}
-                                        <input
-                                            onChange={(event) => setRating(event.target.value)}
-                                            type='number'
-                                            min='0'
-                                            max='5'
-                                            value={rating}
-                                            placeholder={bookDetails[0].rating}
-                                        />
-                                    </Grid>
-                                    <Grid item>
-                                        <label htmlFor="review">Review:</label>
-                                        <input
-                                            onChange={(event) => setReview(event.target.value)}
-                                            type='text'
-                                            value={review}
-                                            placholder={bookDetails[0].review}
-                                        />
+                                            <input
+                                                onChange={(event) => setRating(event.target.value)}
+                                                type='number'
+                                                min='0'
+                                                max='5'
+                                                value={rating}
+                                                placeholder={bookDetails[0].rating}
+                                            />
+                                        </Grid>
+                                        <Grid item>
+                                            <label htmlFor="review">Review:</label>
+                                            <input
+                                                onChange={(event) => setReview(event.target.value)}
+                                                type='text'
+                                                value={review}
+                                                placholder={bookDetails[0].review}
+                                            />
 
-                                    </Grid>
-                                    {/* yes/no toggle box here, too
+                                        </Grid>
+                                        {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
 
-                                    <Grid item></Grid>
-                                    <label htmlFor="borrowed">Borrowed:</label>
-                                    <input
-                                        onChange={(event) => setBorrowed(event.target.value)}
-                                        type='text'
-                                        value={borrowed}
-                                        placeholder={bookDetails[0].borrowed}
-                                    />
-                                    {/* <label>
+                                        <Grid item>
+                                        <label htmlFor="borrowed">Borrowed:</label>
+                                        <input
+                                            onChange={(event) => setBorrowed(event.target.value)}
+                                            type='text'
+                                            value={borrowed}
+                                            placeholder={bookDetails[0].borrowed}
+                                        />
+                                        {/* <label>
                                 <input
                                     onChange={(event) => setBorrowed(event.target.checked)}
                                     className="switch"
@@ -289,28 +292,28 @@ function BookEditing({ }) {
                                     value={borrowed} />
                                 <span class="slider round"></span>
                             </label> */}
-                                </Grid>
+                                    </Grid>
 
-                                <Grid item>
-                                    <label htmlFor="borrower">Borrower:</label>
-                                    <input
-                                        onChange={(event) => setBorrower(event.target.value)}
-                                        type='text'
-                                        value={borrower}
-                                        placeholder={bookDetails[0].borrower}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <label htmlFor="borrowed_date">Borrowed date:</label>
-                                    <input
-                                        type="date"
-                                        id="borrowed_date"
-                                        value={borrowedDate}
-                                        placeholder={bookDetails[0].borrowed_date}
-                                        onChange={(event) => setBorrowedDate(event.target.value)}
-                                    />
+                                    <Grid item>
+                                        <label htmlFor="borrower">Borrower:</label>
+                                        <input
+                                            onChange={(event) => setBorrower(event.target.value)}
+                                            type='text'
+                                            value={borrower}
+                                            placeholder={bookDetails[0].borrower}
+                                        />
+                                    </Grid>
+                                    <Grid item>
+                                        <label htmlFor="borrowed_date">Borrowed date:</label>
+                                        <input
+                                            type="date"
+                                            id="borrowed_date"
+                                            value={borrowedDate}
+                                            placeholder={bookDetails[0].borrowed_date}
+                                            onChange={(event) => setBorrowedDate(event.target.value)}
+                                        />
 
-                                    {/* <label htmlFor="borrowed_date">Borrowed date:</label>
+                                        {/* <label htmlFor="borrowed_date">Borrowed date:</label>
                             use MUI datepicker here
                             <input
                                 onChange={(event) => setBorrowedDate(event.target.value)}
@@ -318,23 +321,30 @@ function BookEditing({ }) {
                                 value={borrowedDate}
                                 placeholder={bookDetails[0].borrowed_date}
                             /> */}
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        type="submit"
-                                    >
-                                        SAVE CHANGES
-                                    </Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button
-                                        type="cancel"
-                                        onClick={cancelEditing}
-                                    >
-                                        CANCEL
-                                    </Button>
-                                </Grid>
-                            </form>
+                                    </Grid>
+                                    
+                                        <Stack direction="row" spacing={2}>
+                                            <Button
+                                                variant="contained"
+                                                startIcon={<SaveIcon />}
+                                                name="save"
+                                                type="submit"
+                                            >
+                                                SAVE CHANGES
+                                            </Button>
+                                    
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<CancelIcon />}
+                                            name="cancel"
+                                            type="cancel"
+                                            onClick={cancelEditing}
+                                        >
+                                            CANCEL
+                                        </Button>
+                                        </Stack>
+                                   </Grid>
+                                </form>
                             </Grid>
                         </Grid>
                     </Grid >

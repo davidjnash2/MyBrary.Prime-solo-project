@@ -36,32 +36,30 @@ function LibraryList() {
     //  values present before mapping so as not to crash DOM
     return (
         <>
-        <div className="user-library">
-            
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-            >
-                <Grid
-                    container spacing={2}
-                    justifyContent="flex-start"
-                    sx={{
-                        marginTop: "120px",
-                        marginBottom: "60px",
-                        // marginLeft: "10px",
-                        // marginRight: "10px",
-                        width: "90%",
-                    }}
+            <div className="user-library">
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    minHeight="100vh"
                 >
-                    {library && library.map((userBook, i) => (
-                        <Grid item xs={12} sm={4} md={4} lg={4} xl={2} key={i}>
-                            <LibraryBook userBook={userBook} />
-                        </Grid>
-                    ))}
-                </Grid>
-            </Box>
+                    <Grid
+                        container
+                        spacing={2}
+                        justifyContent="flex-start"
+                        sx={{
+                            marginTop: "120px",
+                            marginBottom: "60px",
+                            width: "90%",
+                        }}
+                    >
+                        {library && library.map((userBook, i) => (
+                            <Grid item xs={12} sm={4} md={4} lg={3} xl={2} key={i}>
+                                <LibraryBook userBook={userBook} />
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Box>
             </div>
         </>
     )

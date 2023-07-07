@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 
 function ApiSearch() {
 
@@ -37,6 +37,7 @@ function ApiSearch() {
                     onSubmit={sendSearch}
                 >
                     <label
+                        id="search-label"
                         htmlFor="search-input"
                         style={{
                             display: 'block',
@@ -64,7 +65,7 @@ function ApiSearch() {
                             marginBottom: '1rem',
                         }}
                     />
-                    <button
+                    <Button
                         type="submit"
                         style={{
                             display: 'block',
@@ -72,7 +73,7 @@ function ApiSearch() {
                         }}
                     >
                         GET THAT BOOK
-                    </button>
+                    </Button>
                 </form>
             </Box >
         </>

@@ -3,22 +3,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  margin: 0 0 30px;
+  
+  /* margin: 0 0 30px; */
   background-color: #390854;
   overflow: hidden;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
 }
+
 
 .nav a {
   text-decoration: none;
 }
 
 .nav-title {
-  font-size: 36px;
+  font-size: 48px;
   font-weight: 700;
   color: #f2f2f2;
   padding-left: 30px;
   margin: 0;
+  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
+
 }
 
 .navLink {

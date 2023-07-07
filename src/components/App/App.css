@@ -2,13 +2,18 @@ html,
 body,
 #react-root {
   height: 100%;
-  background-color: #2E9CCA;
-
+  /* background-color: #2E9CCA; */
+  overscroll-behavior: none;
+  background-image: radial-gradient(#2E9CCA, #390854);
 }
 
-/* .background-gradient {
-  background-image: radial-gradient(circle, #2E9CCA, #390854);
-} */
+.App {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  /* position: absolute; */
+  background-image: radial-gradient(#2E9CCA, #390854);
+}
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -20,10 +25,9 @@ img {
   max-width: 100%;
 }
 
-h1,
+/* h1,
 h2,
 h3,
-p,
 li,
 link,
 .nav,
@@ -35,6 +39,66 @@ input,
 .author {
   font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
 }
+
+h1 {
+  font-size:48px;
+}
+
+p {
+
+  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
+  font-size: 24px;
+} */
+
+
+h1, #search-label {
+  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
+  font-size: 48px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+
+h3 {
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 15.4px;
+
+}
+
+p {
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+blockquote {
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  font-size: 21px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 30px;
+}
+
+pre {
+  font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+  font-size: 13px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 18.5714px;
+}
+
+
+
 
 /* --------------------------------------------------------------------------------
 Container

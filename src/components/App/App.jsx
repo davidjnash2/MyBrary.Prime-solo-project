@@ -27,6 +27,7 @@ import SignInSide from '../SignInSide/SignInSide';
 import BookEditing from '../BookEditing/BookEditing';
 import ToRead from '../ToRead/ToRead';
 import LibraryBook from '../LibraryBook/LibraryBook';
+import OnLoan from '../OnLoan/OnLoan';
 
 import './App.css';
 
@@ -45,7 +46,7 @@ function App() {
         <Nav />
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+          <Redirect exact from="/" to="/registration" />
 
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
@@ -109,11 +110,19 @@ function App() {
           </ProtectedRoute>
 
           <ProtectedRoute
-            // logged in shows library else shows LoginPage
+            // logged in shows BookEditing view, with :id to allow useParams
             exact
             path="/edit/:id"
           >
             <BookEditing />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows
+            exact
+            path="/onLoan"
+          >
+            <OnLoan />
           </ProtectedRoute>
 
           <Route
@@ -144,7 +153,7 @@ function App() {
               <RegisterPage />
             }
           </Route>
-
+{/* 
           <Route
             exact
             path="/home"
@@ -157,7 +166,7 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
-          </Route>
+          </Route> */}
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

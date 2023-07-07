@@ -49,17 +49,29 @@ function ToRead() {
     return <div>Loading...</div>;
   }
 
+  if (unreadBooks.length === 0) {
+    return (
+      <div className="to-reads">
+        <h1 className="centered-content">Where to begin?</h1>
+        <h2>Congratulations, you've read 'em all!</h2>
+      </div>)
+  }
+
+
   // map over new unread array
   return (
     <>
       <div className="to-reads">
-
         <h1 className="centered-content">Where to begin?</h1>
         <Box
+        sx={{
+          marginTop: "60px",
+        }}
           display="flex"
           justifyContent="center"
           alignItems="center"
-          minHeight="100vh"
+          // minHeight="100vh"
+          minHeight="400px"
         >
           <Grid
             container
@@ -68,8 +80,6 @@ function ToRead() {
             sx={{
               marginTop: "30px",
               marginBottom: "60px",
-              // marginLeft: "10px",
-              // marginRight: "10px",
               width: "90%",
             }}
           >
@@ -80,7 +90,7 @@ function ToRead() {
             ))}
           </Grid>
         </Box>
-      </div>
+      </div >
     </>
   )
 }

@@ -145,7 +145,7 @@ function BookEditing({ }) {
         <>
             {bookDetails && bookDetails.length > 0 && (
                 <div className="details-container">
-                    <Grid container spacing={1} id="book-container">
+                    <Grid container spacing={3} id="book-container">
                         <Grid item xs={12} id="title-section">
                             <h1>{bookDetails[0].title}</h1>
                         </Grid>
@@ -276,7 +276,7 @@ function BookEditing({ }) {
                                         {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
 
-                                        <Grid item></Grid>
+                                        <Grid item>
                                         <label htmlFor="borrowed">Borrowed:</label>
                                         <input
                                             onChange={(event) => setBorrowed(event.target.value)}
@@ -343,7 +343,7 @@ function BookEditing({ }) {
                                             CANCEL
                                         </Button>
                                         </Stack>
-                                   
+                                   </Grid>
                                 </form>
                             </Grid>
                         </Grid>

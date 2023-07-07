@@ -36,10 +36,10 @@ function LibraryBook({ userBook }) {
                 sx={{
                     minWidth: 200,
                     maxWidth: 300,
-                    maxHeight: 375,
-                    minHeight: 375,
+                    maxHeight: 335,
+                    minHeight: 335,
                 }}
-                elevation={16}
+                elevation={3}
             >
                 <CardActionArea>
                     <Paper
@@ -53,7 +53,7 @@ function LibraryBook({ userBook }) {
                         }}>
                         <CardContent
                             sx={{
-                                height: 350,
+                                height: 370,
                                 // height: '85%',
                                 width: '95%',
                                 flexDirection: 'column',
@@ -63,8 +63,8 @@ function LibraryBook({ userBook }) {
                         >
                             <CardMedia
                                 component="img"
-                                minHeight={350}
-                                maxHeight={350}
+                                minHeight={370}
+                                maxHeight={370}
                                 image={largeUrl}
                                 // image={thumbnailUrl}
                                 // image={userBook.cover_url}

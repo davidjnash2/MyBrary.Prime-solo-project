@@ -56,7 +56,7 @@ function LibraryList() {
                     }}
                 >
                     {library && library.map((userBook, i) => (
-                        <Grid item xs={12} sm={4} md={4} lg={4} xl={2} key={i}>
+                        <Grid item xs={12} sm={2} md={2} lg={2} xl={2} key={i}>
                             <LibraryBook userBook={userBook} />
                         </Grid>
                     ))}

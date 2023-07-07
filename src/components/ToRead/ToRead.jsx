@@ -74,7 +74,7 @@ function ToRead() {
         }}
         >
           {unreadBooks.map((userBook, i) => (
-            <Grid item xs={12} sm={5} md={5} lg={5} xl={2} key={i}>
+            <Grid item xs={12} sm={2} md={2} lg={2} xl={2} key={i}>
               <LibraryBook userBook={userBook} />
             </Grid>
           ))}

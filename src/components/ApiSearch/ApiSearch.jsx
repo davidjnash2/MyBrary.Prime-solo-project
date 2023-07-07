@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 function ApiSearch() {
 
@@ -35,6 +38,9 @@ function ApiSearch() {
                 <form
                     id="user-search"
                     onSubmit={sendSearch}
+                    style={{ 
+                        textAlign: 'center' 
+                    }}
                 >
                     <label
                         id="search-label"
@@ -43,7 +49,7 @@ function ApiSearch() {
                             display: 'block',
                             textAlign: 'center',
                             marginBottom: '1rem',
-                            fontSize: '1.75rem', 
+                            fontSize: '1.75rem',
                             fontWeight: 'bold',
                         }}
                     >
@@ -65,15 +71,16 @@ function ApiSearch() {
                             marginBottom: '1rem',
                         }}
                     />
-                    <Button
-                        type="submit"
-                        style={{
-                            display: 'block',
-                            margin: '0 auto',
-                        }}
-                    >
-                        GET THAT BOOK
-                    </Button>
+                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button
+                            variant="contained"
+                            startIcon={<SearchIcon />}
+                            name="search"
+                            type="submit"
+                        >
+                            GET THAT BOOK
+                        </Button>
+                    </div>
                 </form>
             </Box >
         </>

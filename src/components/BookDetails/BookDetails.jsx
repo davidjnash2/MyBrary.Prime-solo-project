@@ -3,7 +3,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './BookDetails.css';
 import { Grid, Button } from '@mui/material';
-
+import DeleteIcon from '@mui/icons-material/Delete';
+import Stack from '@mui/material/Stack';
+import EditIcon from '@mui/icons-material/Edit';
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 
 function BookDetails({ }) {
@@ -90,6 +93,12 @@ function BookDetails({ }) {
                         <Grid item xs={12}
                         >
                             <h1>{bookDetails[0].title}</h1>
+                            <h3>{(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
+                                <p></p>
+                            ) : (<>
+                                <p>{bookDetails[0].subtitle}</p>
+                            </>
+                            )}</h3>
                         </Grid>
                         <Grid item xs={12}>
                             <Grid container spacing={3}>
@@ -102,11 +111,12 @@ function BookDetails({ }) {
                                 </Grid>
                                 <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <h2>Book Stuff</h2>
-                                    {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
+                                    {/* {(bookDetails[0].subtitle === undefined || bookDetails[0].subtitle === null || bookDetails[0].subtitle === 0) ? (
                                         <p>Subtitle: n/a</p>
-                                    ) : (
-                                        <p>Subtitle: {bookDetails[0].subtitle}</p>
-                                    )}
+                                    ) : (<>
+                                        <p>Subtitle:{bookDetails[0].subtitle}</p>
+                                        </>
+                                    )} */}
 
                                     <p>Author: {bookDetails[0].author}</p>
 
@@ -190,24 +200,32 @@ function BookDetails({ }) {
                                     ) : (
                                         null
                                     )}
-                                    <Button
-                                        type="button"
-                                        onClick={() => history.push(`/edit/${bookId.id}`)}
-                                    >
-                                        EDIT STUFF
-                                    </Button>
-                                    <Button
-                                        name="delete"
-                                        onClick={deleteUserBook}
-                                    >
-                                        DELETE BOOK
-                                    </Button>
-                                    <Button
-                                        name="back_to_library"
-                                        onClick={() => history.push('/library')}
-                                    >
-                                        BACK TO LIBRARY
-                                    </Button>
+                                    <Stack direction="row" spacing={2}>
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<EditIcon />}
+                                            name="edit"
+                                            onClick={() => history.push(`/edit/${bookId.id}`)}
+                                        >
+                                            EDIT STUFF
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<DeleteIcon />}
+                                            name="delete"
+                                            onClick={deleteUserBook}
+                                        >
+                                            DELETE BOOK
+                                        </Button>
+                                        <Button
+                                            variant="contained"
+                                            startIcon={<LibraryBooksIcon />}
+                                            name="back_to_library"
+                                            onClick={() => history.push('/library')}
+                                        >
+                                            BACK TO LIBRARY
+                                        </Button>
+                                    </Stack>
                                 </Grid>
                             </Grid>
                         </Grid>

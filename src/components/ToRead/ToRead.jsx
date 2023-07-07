@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LibraryBook from '../LibraryBook/LibraryBook';
-import { Grid, Card, Paper } from '@mui/material'
-
+import { Box, Grid, Card, Paper } from '@mui/material'
+import './ToRead.css';
 
 
 
@@ -52,18 +52,35 @@ function ToRead() {
   // map over new unread array
   return (
     <>
-      <h1>Where shall we begin?</h1>
-      <Grid 
-      container 
-      spacing={2} 
-      justifyContent="flex-start"
+    <div className="to-reads">
+
+      <h1 className="centered-content">Where to begin?</h1>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight="100vh"
       >
-        {unreadBooks.map((userBook, i) => (
-          <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
-            <LibraryBook userBook={userBook} />
-          </Grid>
-        ))}
-      </Grid>
+        <Grid
+          container
+          spacing={2}
+          justifyContent="flex-start"
+          sx={{
+            marginTop: "30px",
+            marginBottom: "60px",
+            // marginLeft: "10px",
+            // marginRight: "10px",
+            width: "90%",
+        }}
+        >
+          {unreadBooks.map((userBook, i) => (
+            <Grid item xs={12} sm={5} md={5} lg={5} xl={2} key={i}>
+              <LibraryBook userBook={userBook} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
+      </div>
     </>
   )
 }

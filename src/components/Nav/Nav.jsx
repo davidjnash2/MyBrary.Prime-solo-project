@@ -12,7 +12,7 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">MyBrary</h2>
+        <h1 className="nav-title">MyBrary</h1>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
@@ -40,7 +40,7 @@ function Nav() {
               Search
             </Link>
             <Link className="navLink" to="/library">
-              Library
+              Mybrary
             </Link>
             <Link className="navLink" to="/toRead">
               To Read

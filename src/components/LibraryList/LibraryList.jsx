@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import LibraryBook from '../LibraryBook/LibraryBook';
-import { Grid, Card, Paper, makeStyles } from '@mui/material'
+import { Box, Grid, Card, Paper, makeStyles } from '@mui/material'
 
 function LibraryList() {
 
@@ -36,24 +36,33 @@ function LibraryList() {
     //  values present before mapping so as not to crash DOM
     return (
         <>
-            <Grid
-                container spacing={3}
-                justifyContent="flex-start"
-                sx={{
-                    backgroundColor: '#2e9cca',
-                }}
-            >
-                {library && library.map((userBook, i) => (
-                    <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>
-                        <LibraryBook userBook={userBook} />
-                    </Grid>
-                ))}
-                <br />
-                <br />
-                <br />
-                <br />
-            </Grid>
+        <div className="user-library">
             
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                minHeight="100vh"
+            >
+                <Grid
+                    container spacing={2}
+                    justifyContent="flex-start"
+                    sx={{
+                        marginTop: "120px",
+                        marginBottom: "60px",
+                        // marginLeft: "10px",
+                        // marginRight: "10px",
+                        width: "90%",
+                    }}
+                >
+                    {library && library.map((userBook, i) => (
+                        <Grid item xs={12} sm={4} md={4} lg={4} xl={2} key={i}>
+                            <LibraryBook userBook={userBook} />
+                        </Grid>
+                    ))}
+                </Grid>
+            </Box>
+            </div>
         </>
     )
 }

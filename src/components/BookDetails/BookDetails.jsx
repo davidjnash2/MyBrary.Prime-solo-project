@@ -22,7 +22,6 @@ function BookDetails({ }) {
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
 
 
-
     useEffect(() => {
         dispatch({
             type: 'FETCH_DETAILS',

@@ -11,7 +11,7 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
+      <Link to="/login">
         <h1 className="nav-title">MyBrary</h1>
       </Link>
       <div>
@@ -44,6 +44,9 @@ function Nav() {
             </Link>
             <Link className="navLink" to="/toRead">
               To Read
+            </Link>
+            <Link className="navLink" to="/onLoan">
+              On Loan
             </Link>
             <Link className="navLink" to="/about">
               About

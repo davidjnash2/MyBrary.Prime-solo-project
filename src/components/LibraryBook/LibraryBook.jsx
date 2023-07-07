@@ -60,26 +60,18 @@ function LibraryBook({ userBook }) {
 
                             }}
                         >
-                            {/* <div
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'flex-start',
-                                    height: '100%',
+                            <CardMedia
+                                component="img"
+                                image={largeUrl}
+                                alt={userBook.title}
+                                sx={{
+                                    objectFit: "contain",
+                                    width: "100%",
+                                    height: "100%",
+                                    maxWidth: "100%",
+                                    maxHeight: "100%",
                                 }}
-                            > */}
-                                <CardMedia
-                                    component="img"
-                                    image={largeUrl}
-                                    alt={userBook.title}
-                                    sx={{
-                                        objectFit: "contain",
-                                        width: "100%",
-                                        height: "100%",
-                                        maxWidth: "100%",
-                                        maxHeight: "100%",
-                                    }}
-                                />
-                            {/* </div> */}
+                            />
                         </CardContent>
                     </Paper>
                 </CardActionArea>

@@ -37,7 +37,6 @@ function LibraryList() {
     return (
         <>
             <div className="user-library">
-
                 <Box
                     display="flex"
                     justifyContent="center"
@@ -45,7 +44,8 @@ function LibraryList() {
                     minHeight="100vh"
                 >
                     <Grid
-                        container spacing={2}
+                        container 
+                        spacing={2}
                         justifyContent="flex-start"
                         sx={{
                             marginTop: "120px",

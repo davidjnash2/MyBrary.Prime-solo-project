@@ -36,8 +36,8 @@ function LibraryBook({ userBook }) {
                 sx={{
                     minWidth: 200,
                     maxWidth: 300,
-                    maxHeight: 335,
-                    minHeight: 335,
+                    maxHeight: 375,
+                    minHeight: 375,
                 }}
                 elevation={3}
             >
@@ -45,7 +45,7 @@ function LibraryBook({ userBook }) {
                     <Paper
                         sx={{
                             display: "flex",
-                            alignItems: 'center', 
+                            alignItems: 'center',
                             height: '100%',
                             width: "100%",
                             flexDirection: 'column',
@@ -53,28 +53,33 @@ function LibraryBook({ userBook }) {
                         }}>
                         <CardContent
                             sx={{
-                                height: 370,
-                                // height: '85%',
+                                height: 350,
                                 width: '95%',
                                 flexDirection: 'column',
                                 justifyContent: 'space-between',
-                                
+
                             }}
                         >
-                            <CardMedia
-                                component="img"
-                                minHeight={370}
-                                maxHeight={370}
-                                image={largeUrl}
-                                // image={thumbnailUrl}
-                                // image={userBook.cover_url}
-                                objectfit="contain"
-                                alt={userBook.title}
-                                sx={{
-                                    objectFit: "contain",
-                                    width: "100%",
+                            {/* <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-start',
+                                    height: '100%',
                                 }}
-                            />
+                            > */}
+                                <CardMedia
+                                    component="img"
+                                    image={largeUrl}
+                                    alt={userBook.title}
+                                    sx={{
+                                        objectFit: "contain",
+                                        width: "100%",
+                                        height: "100%",
+                                        maxWidth: "100%",
+                                        maxHeight: "100%",
+                                    }}
+                                />
+                            {/* </div> */}
                         </CardContent>
                     </Paper>
                 </CardActionArea>

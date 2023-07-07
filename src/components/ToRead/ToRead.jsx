@@ -52,34 +52,34 @@ function ToRead() {
   // map over new unread array
   return (
     <>
-    <div className="to-reads">
+      <div className="to-reads">
 
-      <h1 className="centered-content">Where to begin?</h1>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        minHeight="100vh"
-      >
-        <Grid
-          container
-          spacing={2}
-          justifyContent="flex-start"
-          sx={{
-            marginTop: "30px",
-            marginBottom: "60px",
-            // marginLeft: "10px",
-            // marginRight: "10px",
-            width: "90%",
-        }}
+        <h1 className="centered-content">Where to begin?</h1>
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
         >
-          {unreadBooks.map((userBook, i) => (
-            <Grid item xs={12} sm={2} md={2} lg={2} xl={2} key={i}>
-              <LibraryBook userBook={userBook} />
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
+          <Grid
+            container
+            spacing={2}
+            justifyContent="flex-start"
+            sx={{
+              marginTop: "30px",
+              marginBottom: "60px",
+              // marginLeft: "10px",
+              // marginRight: "10px",
+              width: "90%",
+            }}
+          >
+            {unreadBooks.map((userBook, i) => (
+              <Grid item xs={12} sm={4} md={4} lg={3} xl={3} key={i}>
+                <LibraryBook userBook={userBook} />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </div>
     </>
   )

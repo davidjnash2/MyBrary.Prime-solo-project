@@ -44,20 +44,17 @@ function LibraryList() {
                     minHeight="100vh"
                 >
                     <Grid
-                        container 
+                        container
                         spacing={2}
                         justifyContent="flex-start"
                         sx={{
                             marginTop: "120px",
                             marginBottom: "60px",
-                            // marginLeft: "10px",
-                            // marginRight: "10px",
                             width: "90%",
                         }}
                     >
                         {library && library.map((userBook, i) => (
                             <Grid item xs={12} sm={4} md={4} lg={3} xl={2} key={i}>
-
                                 <LibraryBook userBook={userBook} />
                             </Grid>
                         ))}

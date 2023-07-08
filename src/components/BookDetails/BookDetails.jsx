@@ -7,7 +7,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Stack from '@mui/material/Stack';
 import EditIcon from '@mui/icons-material/Edit';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
 
 function BookDetails({ }) {
 
@@ -17,7 +18,7 @@ function BookDetails({ }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
-
+    const MySwal = withReactContent(Swal)
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
@@ -33,16 +34,47 @@ function BookDetails({ }) {
     }, []);
 
 
+    // const deleteUserBook = (event) => {
+    //     event.preventDefault();
+    //     console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
+    //     dispatch({
+    //         type: 'DELETE_USER_BOOK',
+    //         payload: bookDetails[0].book_id
+    //     });
+    //     history.push('/library');
+    // }
+
+
     const deleteUserBook = (event) => {
         event.preventDefault();
-        console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
-        dispatch({
-            type: 'DELETE_USER_BOOK',
-            payload: bookDetails[0].book_id
-        });
-        history.push('/library');
-    }
-
+        MySwal.fire({
+            title: "Please confirm you want to delete this book from your MyBrary.",
+            text: "Click confirm to complete deletion.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Delete",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                MySwal.fire("Book deleted!", {
+                    icon: "success",
+                    timer: 1500,
+                    buttons: false,
+                });
+                dispatch({
+                    type: 'DELETE_USER_BOOK',
+                    payload: bookDetails[0].book_id
+                });
+                history.push('/library');
+            } else {
+                MySwal.fire("Delete canceled!", {
+                    icon: "info",
+                    timer: 1500,
+                    buttons: false,
+                })
+            }
+        })
+    };
 
     // function renderYearOptions() {
     //     const currentYear = new Date().getFullYear();

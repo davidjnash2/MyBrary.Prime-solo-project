@@ -65,7 +65,7 @@ function ToRead() {
         <h1 className="centered-content">Where to begin?</h1>
         <Box
         sx={{
-          marginTop: "60px",
+          marginTop: "25px",
         }}
           display="flex"
           justifyContent="center"
@@ -78,7 +78,7 @@ function ToRead() {
             spacing={2}
             justifyContent="flex-start"
             sx={{
-              marginTop: "30px",
+              marginTop: "25px",
               marginBottom: "60px",
               width: "90%",
             }}

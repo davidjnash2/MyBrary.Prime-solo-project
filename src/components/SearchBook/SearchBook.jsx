@@ -68,6 +68,7 @@ function SearchBook({ book }) {
             title: `${book.volumeInfo.title} has been added to your MyBrary!`,
             text: "Search again or see your books?",
             icon: "success",
+            showCloseButton: true,
             showDenyButton: true,
             confirmButtonText: 'Search',
             denyButtonText: `MyBrary`,

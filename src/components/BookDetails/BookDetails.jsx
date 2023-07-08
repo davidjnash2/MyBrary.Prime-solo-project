@@ -18,7 +18,7 @@ function BookDetails({ }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const MySwal = withReactContent(Swal)
+    const MySwal = withReactContent(Swal);
     const bookId = useParams();
     console.log('bookId is:', bookId);
 

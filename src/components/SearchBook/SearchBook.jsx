@@ -13,15 +13,42 @@ import withReactContent from 'sweetalert2-react-content';
 function SearchBook({ book }) {
 
     const dispatch = useDispatch();
+    const MySwal = withReactContent(Swal);
+    const history = useHistory();
 
-    const addBook = () => {
 
+    // const addBook = () => {
+
+    //     const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
+    //         book.volumeInfo.industryIdentifiers[0].identifier
+    //         :
+    //         book.volumeInfo.industryIdentifiers[1].identifier);
+    //     console.log('this addBook isbn is:', isbn);
+
+    //     dispatch({
+    //         type: 'ADD_BOOK',
+    //         payload: {
+    //             cover_url: book.volumeInfo.imageLinks.thumbnail,
+    //             title: book.volumeInfo.title,
+    //             subtitle: book.volumeInfo.subtitle,
+    //             author: book.volumeInfo.authors,
+    //             publisher: book.volumeInfo.publisher,
+    //             published: book.volumeInfo.publishedDate,
+    //             genre: book.volumeInfo.categories,
+    //             pages: book.volumeInfo.pageCount,
+    //             description: book.volumeInfo.description,
+    //             isbn: isbn,
+    //         }
+    //     })
+    // }
+
+    const addBook = (event) => {
         const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
             book.volumeInfo.industryIdentifiers[0].identifier
             :
             book.volumeInfo.industryIdentifiers[1].identifier);
         console.log('this addBook isbn is:', isbn);
-
+        event.preventDefault();
         dispatch({
             type: 'ADD_BOOK',
             payload: {
@@ -36,8 +63,25 @@ function SearchBook({ book }) {
                 description: book.volumeInfo.description,
                 isbn: isbn,
             }
+        });
+        MySwal.fire({
+            title: `${book.volumeInfo.title} has been added to your MyBrary!`,
+            text: "Search again or see your books?",
+            icon: "success",
+            showDenyButton: true,
+            confirmButtonText: 'Search',
+            denyButtonText: `MyBrary`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                history.push('/search');
+            } else if (result.isDenied) {
+                history.push('/library');
+            }
         })
-    }
+
+    };
+
+
 
     // using conditional rendering, optional chaining, and &&/AND operators to ensure that only results which contain
     // the information I want for POST is accessible and available as choice options for user
@@ -98,17 +142,6 @@ function SearchBook({ book }) {
                             </Paper>
                         </CardActionArea>
                     </Card>
-                    // </>
-                    // <div>
-                    //     <img
-                    //         src={book?.volumeInfo?.imageLinks?.thumbnail}
-                    //         onClick={addBook}>
-                    //     </img>
-                    //     {book?.volumeInfo?.title && book?.volumeInfo?.title !== 0 && book?.volumeInfo?.title !== undefined && <p>Title: {book.volumeInfo.title}</p>}
-                    //     {book?.volumeInfo?.subtitle && book?.volumeInfo?.subtitle !== 0 && book?.volumeInfo?.subtitle !== undefined && <p>Subtitle: {book.volumeInfo.subtitle}</p>}
-                    //     {book?.volumeInfo?.authors && book?.volumeInfo?.authors !== 0 && book?.volumeInfo?.authors !== undefined && <p>Author: {book.volumeInfo.authors}</p>}
-                    //     {book?.volumeInfo?.publishedDate && book?.volumeInfo?.publishedDate !== 0 && book?.volumeInfo?.publishedDate !== undefined && <p>Published: {book.volumeInfo.publishedDate}</p>}
-                    // </div>
                 ))}
         </>
     )

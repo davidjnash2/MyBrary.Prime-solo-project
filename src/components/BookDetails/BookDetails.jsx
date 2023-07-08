@@ -20,7 +20,7 @@ function BookDetails({ }) {
     const history = useHistory();
     const MySwal = withReactContent(Swal);
     const bookId = useParams();
-    console.log('bookId is:', bookId);
+    // console.log('bookId is:', bookId);
 
     const thumbnailUrl = bookDetails && bookDetails.length > 0 ? bookDetails[0].cover_url : '';
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
@@ -120,70 +120,102 @@ function BookDetails({ }) {
     return (
         <>
             {bookDetails && bookDetails.length > 0 && (
-                <Container maxWidth="lg">
-                    <Grid container spacing={1}
-                        sx={{
-                            m: 0,
-                        }}>
+                <Container maxWidth="xl">
+                    <Grid container spacing={2} sx={{ m: 3 }}>
                         <Grid item xs={12}>
                             <Typography sx={{
                                 mt: 10,
                                 fontFamily: "Rockwell Extra Bold, Rockwell Bold, monospace",
+                                fontSize: "5rem",
                             }}
-                                variant="h1">{bookDetails[0].title}</Typography>
-                            <h3>{bookDetails[0].subtitle}</h3>
+                                variant="h1"
+                            >
+                                {bookDetails[0].title}
+                            </Typography>
                         </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <img
-                                    className="details-cover-image"
-                                    src={largeUrl}
-                                    alt={bookDetails[0].title} />
-                            </Grid>
-                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <h2>Book Stuff</h2>
-                                <p>Author: {bookDetails[0].author}</p>
+                        <Grid item xs={12}>
+                            <Typography sx={{
+                                marginBottom: 5,
+                                textAlign: "center",
+                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif"
+                            }}
+                                variant="h3"
+                            >
+                                {bookDetails[0].subtitle}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                            <img
+                                className="details-cover-image"
+                                src={largeUrl}
+                                alt={bookDetails[0].title} />
+                        </Grid>
+                        <Grid item xs={12} sm={5} md={5} lg={5} xl={5}
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'flex-start',
+                            }}
+                        >
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    marginBottom: 0,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1.75rem",
+                                }}>
+                                Book Stuff
+                            </Typography>
+                            <p>Author: {bookDetails[0].author}</p>
 
-                                {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
-                                    <p>Publisher: n/a</p>
-                                ) : (
-                                    <p>Publisher: {bookDetails[0].publisher}</p>
-                                )}
+                            {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
+                                <p>Publisher: n/a</p>
+                            ) : (
+                                <p>Publisher: {bookDetails[0].publisher}</p>
+                            )}
 
-                                {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
-                                    <p>Published: n/a</p>
-                                ) : (
-                                    <p>Published: {bookDetails[0].published}</p>
-                                )}
+                            {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
+                                <p>Published: n/a</p>
+                            ) : (
+                                <p>Published: {bookDetails[0].published}</p>
+                            )}
 
-                                {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
-                                    <p>Genre: n/a</p>
-                                ) : (
-                                    <p>Genre: {bookDetails[0].genre}</p>
-                                )}
+                            {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
+                                <p>Genre: n/a</p>
+                            ) : (
+                                <p>Genre: {bookDetails[0].genre}</p>
+                            )}
 
-                                {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
-                                    <p>Pages: n/a</p>
-                                ) : (
-                                    <p>Pages: {bookDetails[0].pages}</p>
-                                )}
+                            {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
+                                <p>Pages: n/a</p>
+                            ) : (
+                                <p>Pages: {bookDetails[0].pages}</p>
+                            )}
 
-                                <p>ISBN-13: {bookDetails[0].isbn}</p>
+                            <p>ISBN-13: {bookDetails[0].isbn}</p>
 
 
-                                {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
-                                    <p>Description: n/a</p>
-                                ) : (
-                                    <p>Description: {bookDetails[0].description}</p>
-                                )}
-                            </Grid>
-                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <h2>You stuff</h2>
+                            {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
+                                <p>Description: n/a</p>
+                            ) : (
+                                <p>Description: {bookDetails[0].description}</p>
+                            )}
+                        </Grid>
+                        <Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    marginBottom: 0,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1.75rem",
+                                }}>You stuff</Typography>
 
-                                {/* yes/no toggle box here */}
-                                <p>Read it? {bookDetails[0].read_status}</p>
+                            {/* yes/no toggle box here */}
+                            <p>Read it? {bookDetails[0].read_status}</p>
 
-                                {/* {bookDetails[0].read_status ? (
+                            {/* {bookDetails[0].read_status ? (
                                     <>
                                         {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
                                             <p>Like it?  n/a</p>
@@ -195,64 +227,64 @@ function BookDetails({ }) {
                                     null
                                 )} */}
 
-                                {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                    <p>Like it?  n/a</p>
-                                ) : (
-                                    <p>Like it? {bookDetails[0].rating}</p>
-                                )}
+                            {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
+                                <p>Like it?  n/a</p>
+                            ) : (
+                                <p>Like it? {bookDetails[0].rating}</p>
+                            )}
 
-                                {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                    <p>What'd you think? n/a</p>
-                                ) : (
-                                    <p>What'd you think? {bookDetails[0].review}</p>
-                                )}
+                            {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
+                                <p>What'd you think? n/a</p>
+                            ) : (
+                                <p>What'd you think? {bookDetails[0].review}</p>
+                            )}
 
-                                {/* yes/no toggle box here, too
+                            {/* yes/no toggle box here, too
                                 and if yes, then render the borrowed data fields below */}
-                                <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
+                            <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
 
-                                {bookDetails[0].borrowed ? (
-                                    <>
-                                        <p>Who? {bookDetails[0].borrower}</p>
-                                        <p>Since when? {formattedDate}</p>
-                                    </>
-                                ) : (
-                                    null
-                                )}
-                                <Stack direction="column" spacing={2}>
-                                    <Button
-                                        variant="contained"
-                                        startIcon={<EditIcon />}
-                                        name="edit"
-                                        onClick={() => history.push(`/edit/${bookId.id}`)}
-                                    >
-                                        EDIT STUFF
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        // startIcon={<DeleteIcon />}
-                                        name="delete"
-                                        sx={{
-                                            p: 1,
-                                        }}
-                                        onClick={deleteUserBook}
-                                    >
-                                        <DeleteIcon /> DELETE BOOK
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        startIcon={<LibraryBooksIcon />}
-                                        name="back_to_library"
-                                        onClick={() => history.push('/library')}
-                                    >
-                                        BACK TO LIBRARY
-                                    </Button>
-                                </Stack>
-                            </Grid>
+                            {bookDetails[0].borrowed ? (
+                                <>
+                                    <p>Who? {bookDetails[0].borrower}</p>
+                                    <p>Since when? {formattedDate}</p>
+                                </>
+                            ) : (
+                                null
+                            )}
+                            <Stack direction="column" spacing={2}>
+                                <Button
+                                    variant="contained"
+                                    startIcon={<EditIcon />}
+                                    name="edit"
+                                    onClick={() => history.push(`/edit/${bookId.id}`)}
+                                >
+                                    EDIT STUFF
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    // startIcon={<DeleteIcon />}
+                                    name="delete"
+                                    sx={{
+                                        p: 1,
+                                    }}
+                                    onClick={deleteUserBook}
+                                >
+                                    <DeleteIcon /> DELETE BOOK
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    startIcon={<LibraryBooksIcon />}
+                                    name="back_to_library"
+                                    onClick={() => history.push('/library')}
+                                >
+                                    BACK TO LIBRARY
+                                </Button>
+                            </Stack>
                         </Grid>
                     </Grid>
-                </Container>
-            )}
+                </Container >
+            )
+            }
         </>
     );
 }

@@ -74,7 +74,6 @@ function SearchBook({ book }) {
             denyButtonText: `MyBrary`,
             confirmButtonColor: "#2E9CCA",
             denyButtonColor: "#390854",
-            returnFocus: false,
         }).then((result) => {
             if (result.isConfirmed) {
                 history.push('/search');

@@ -61,7 +61,7 @@ function ApiSearch() {
                         type="text"
                         placeholder="Pick a book, any book."
                         required
-                        autoComplete="on"
+                        autoComplete="off"
                         value={search}
                         style={{
                             display: 'block',

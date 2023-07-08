@@ -6,7 +6,7 @@ import { Box, Grid, Card, Paper, makeStyles } from '@mui/material'
 function LibraryList() {
 
     const dispatch = useDispatch();
-
+    const user = useSelector((store) => store.user);
     const library = useSelector(store => store.library);
 
     useEffect(() => {
@@ -37,24 +37,26 @@ function LibraryList() {
     return (
         <>
             <div className="user-library">
+            <h1 className="centered-content">{user.username}'s MyBrary</h1>
                 <Box
                     display="flex"
                     justifyContent="center"
                     alignItems="center"
-                    minHeight="100vh"
+                    // minHeight="100vh"
+                    minHeight="400px"
                 >
                     <Grid
                         container
-                        spacing={2}
+                        spacing={6}
                         justifyContent="flex-start"
                         sx={{
-                            marginTop: "120px",
+                            marginTop: "25px",
                             marginBottom: "60px",
-                            width: "90%",
+                            width: "95%",
                         }}
                     >
                         {library && library.map((userBook, i) => (
-                            <Grid item xs={12} sm={4} md={4} lg={3} xl={2} key={i}>
+                            <Grid item xs={12} sm={6} md={3} lg={2} xl={2} key={i}>
                                 <LibraryBook userBook={userBook} />
                             </Grid>
                         ))}

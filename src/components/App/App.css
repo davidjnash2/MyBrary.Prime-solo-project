@@ -25,7 +25,7 @@ img {
   max-width: 100%;
 }
 
-/* h1,
+/* /* h1,
 h2,
 h3,
 li,
@@ -36,11 +36,13 @@ button,
 label,
 input,
 .title,
-.author {
+.author  */
+
+link {
   font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
 }
 
-h1 {
+/* h1 {
   font-size:48px;
 }
 
@@ -48,7 +50,7 @@ p {
 
   font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
   font-size: 24px;
-} */
+} */ 
 
 
 h1, #search-label {
@@ -71,7 +73,7 @@ h2, h3 {
   color: white; 
 }
 
-p {
+p, link {
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
   font-size: 16px;
   font-style: normal;

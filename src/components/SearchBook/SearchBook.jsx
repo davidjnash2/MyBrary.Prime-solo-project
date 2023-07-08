@@ -7,7 +7,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Paper } from '@mui/material';
 import { useEffect, useRef } from 'react';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 function SearchBook({ book }) {
 

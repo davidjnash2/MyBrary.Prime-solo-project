@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import EditIcon from '@mui/icons-material/Edit';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content'
+import withReactContent from 'sweetalert2-react-content';
 
 function BookDetails({ }) {
 

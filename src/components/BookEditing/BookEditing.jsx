@@ -14,7 +14,13 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import TextField from '@mui/material/TextField';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import './BookEditing.css';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+
+
 
 function BookEditing({ }) {
 
@@ -26,6 +32,12 @@ function BookEditing({ }) {
     const history = useHistory();
 
     const MySwal = withReactContent(Swal);
+
+    // const today = dayjs();
+    // const yesterday = dayjs().subtract(1, 'day');
+    // const todayStartOfTheDay = today.startOf('day');
+    // const tomorrow = dayjs().add(1, 'day');
+
 
     const bookId = useParams();
     console.log('bookId is:', bookId);
@@ -195,14 +207,35 @@ function BookEditing({ }) {
                                 <Typography
                                     variant="h2"
                                     sx={{
-                                        marginBottom: 0,
+                                        marginBottom: 5,
                                         textAlign: "left",
                                         fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                         fontSize: "1.75rem",
                                     }}>
                                     Book Stuff
                                 </Typography>
-                                <p>Author: {bookDetails[0].author}</p>
+
+                                <TextField
+                                    fullWidth
+                                    margin="normal"
+                                    id="subtitle-controlled"
+                                    label="Subtitle"
+                                    value={subtitle}
+                                    onChange={(event) => setSubtitle(event.target.value)}
+                                />
+
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Author: {bookDetails[0].author}
+                                </Typography>
 
                                 <TextField
                                     fullWidth
@@ -213,10 +246,10 @@ function BookEditing({ }) {
                                     onChange={(event) => setPublisher(event.target.value)}
                                 />
 
-                                <label htmlFor="published">Published:</label>
+                                {/* <label htmlFor="published">Published:</label>
                                 <select onChange={(event) => setPublished(event.target.value)} value={published}>
                                     {renderYearOptions()}
-                                </select>
+                                </select> */}
 
 
                                 <TextField
@@ -228,16 +261,28 @@ function BookEditing({ }) {
                                     onChange={(event) => setGenre(event.target.value)}
                                 />
 
-                                <label htmlFor="pages">Pages:</label>
+                                {/* <label htmlFor="pages">Pages:</label>
                                 <input
                                     sx={{ width: "100%", marginBottom: 2 }}
                                     onChange={(event) => setPages(event.target.value)}
                                     type='number'
                                     value={pages}
                                     placeholder={bookDetails[0].pages}
-                                />
+                                /> */}
 
-                                <p>ISBN: {bookDetails[0].isbn}</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    ISBN: {bookDetails[0].isbn}
+                                </Typography>
+
 
 
                                 <TextField
@@ -287,14 +332,14 @@ function BookEditing({ }) {
                                 value={rating}
                                 placeholder={bookDetails[0].rating}
                             /> */}
-                                <input
+                                {/* <input
                                     onChange={(event) => setRating(event.target.value)}
                                     type='number'
                                     min='0'
                                     max='5'
                                     value={rating}
                                     placeholder={bookDetails[0].rating}
-                                />
+                                /> */}
 
                                 <TextField
                                     fullWidth
@@ -328,15 +373,20 @@ function BookEditing({ }) {
                                     onChange={(event) => setBorrower(event.target.value)}
                                 />
 
-                                <label htmlFor="borrowed_date">Borrowed date:</label>
+                                {/* <label htmlFor="borrowed_date">Borrowed date:</label>
                                 <input
                                     type="date"
                                     id="borrowed_date"
                                     value={borrowedDate}
                                     placeholder={bookDetails[0].borrowed_date}
                                     onChange={(event) => setBorrowedDate(event.target.value)}
-                                />
+                                /> */}
 
+                                <DatePicker
+                                    label="Borrowed Date"
+                                    disableFuture
+                                    onChange={setBorrowedDate}
+                                />
 
                                 <Stack direction="row" spacing={2}>
                                     <Button

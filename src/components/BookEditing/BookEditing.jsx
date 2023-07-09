@@ -12,8 +12,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-
-
+import TextField from '@mui/material/TextField';
+import OutlinedInput from '@mui/material/OutlinedInput';
 import './BookEditing.css';
 
 function BookEditing({ }) {
@@ -24,12 +24,12 @@ function BookEditing({ }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    
+
     const MySwal = withReactContent(Swal);
-    
+
     const bookId = useParams();
     console.log('bookId is:', bookId);
-    
+
     const [editing, setEditing] = useState(false);
 
     const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
@@ -49,14 +49,12 @@ function BookEditing({ }) {
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
     // console.log('largeUrl is:', largeUrl);
 
-
     useEffect(() => {
         dispatch({
             type: 'FETCH_DETAILS',
             payload: bookId.id
         });
     }, []);
-
 
     const switchEditing = () => {
         setEditing(!editing);
@@ -92,7 +90,7 @@ function BookEditing({ }) {
             type: 'FETCH_DETAILS',
             payload: bookDetails[0].book_id
         })
-        history.push('/library');
+        history.push(`/details/${bookId.id}`);
         MySwal.fire({
             title: "Changes saved!",
             icon: "success",
@@ -146,8 +144,6 @@ function BookEditing({ }) {
             setIsLoading(false);
         }, 10);
     }, []); // Empty dependency array to run the effect only once
-
-    // ...
 
     if (isLoading) {
         // Render a loading state or a placeholder component
@@ -208,12 +204,13 @@ function BookEditing({ }) {
                                 </Typography>
                                 <p>Author: {bookDetails[0].author}</p>
 
-                                <label htmlFor="publisher">Publisher:</label>
-                                <input
-                                    onChange={(event) => setPublisher(event.target.value)}
-                                    type='text'
+                                <TextField
+                                    fullWidth
+                                    margin="normal"
+                                    id="publisher-controlled"
+                                    label="Publisher"
                                     value={publisher}
-                                // placeholder={bookDetails[0].publisher}
+                                    onChange={(event) => setPublisher(event.target.value)}
                                 />
 
                                 <label htmlFor="published">Published:</label>
@@ -222,17 +219,18 @@ function BookEditing({ }) {
                                 </select>
 
 
-                                <label htmlFor="genre">Genre:</label>
-                                <input
-                                    onChange={(event) => setGenre(event.target.value)}
-                                    type='text'
+                                <TextField
+                                    fullWidth
+                                    margin="normal"
+                                    id="genre-controlled"
+                                    label="Genre"
                                     value={genre}
-                                    placeholder={bookDetails[0].genre}
+                                    onChange={(event) => setGenre(event.target.value)}
                                 />
-
 
                                 <label htmlFor="pages">Pages:</label>
                                 <input
+                                    sx={{ width: "100%", marginBottom: 2 }}
                                     onChange={(event) => setPages(event.target.value)}
                                     type='number'
                                     value={pages}
@@ -241,12 +239,16 @@ function BookEditing({ }) {
 
                                 <p>ISBN: {bookDetails[0].isbn}</p>
 
-                                <label htmlFor="description">Description:</label>
-                                <input
-                                    onChange={(event) => setDescription(event.target.value)}
-                                    type='text'
+
+                                <TextField
+                                    fullWidth
+                                    margin="normal"
+                                    id="description-controlled"
+                                    label="Description"
                                     value={description}
-                                    placeholder={bookDetails[0].description}
+                                    multiline
+                                    maxRows={4}
+                                    onChange={(event) => setDescription(event.target.value)}
                                 />
 
                             </Grid>
@@ -264,13 +266,13 @@ function BookEditing({ }) {
                                         fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                         fontSize: "1.75rem",
                                     }}>You stuff</Typography>
-                               
+
                                 <InputLabel id="read-status-selector-label">Read it?</InputLabel>
                                 <Select
                                     labelId="read-status-selector-label"
                                     id="read-status-selector-helper"
                                     value={read}
-                                    label="Read it?"
+                                    input={<OutlinedInput label="Read it?" />}
                                     onChange={(event) => setRead(event.target.value)}
                                 >
                                     <MenuItem value={false}>Nope</MenuItem>
@@ -294,26 +296,18 @@ function BookEditing({ }) {
                                     placeholder={bookDetails[0].rating}
                                 />
 
-                                <label htmlFor="review">Review:</label>
-                                <input
-                                    onChange={(event) => setReview(event.target.value)}
-                                    type='text'
+                                <TextField
+                                    fullWidth
+                                    margin="normal"
+                                    id="review-controlled"
+                                    label="Review"
                                     value={review}
-                                    placholder={bookDetails[0].review}
+                                    multiline
+                                    maxRows={4}
+                                    onChange={(event) => setReview(event.target.value)}
                                 />
 
-
-                                {/* yes/no toggle box here, too
-                                and if yes, then render the borrowed data fields below */}
-                                {/* <label htmlFor="borrowed">Borrowed:</label>
-                                <input
-                                    onChange={(event) => setBorrowed(event.target.value)}
-                                    type='text'
-                                    value={borrowed}
-                                    placeholder={bookDetails[0].borrowed}
-                                /> */}
-                               
-                               <InputLabel id="borrowed-status-selector-label">Somebody have it?</InputLabel>
+                                <InputLabel id="borrowed-status-selector-label">Somebody have it?</InputLabel>
                                 <Select
                                     labelId="borrowed-status-selector-label"
                                     id="borrowed-status-selector-helper"
@@ -325,13 +319,13 @@ function BookEditing({ }) {
                                     <MenuItem value={true}>Yep!</MenuItem>
                                 </Select>
 
-
-                                <label htmlFor="borrower">Borrower:</label>
-                                <input
-                                    onChange={(event) => setBorrower(event.target.value)}
-                                    type='text'
+                                <TextField
+                                    fullWidth
+                                    margin="normal"
+                                    id="borrower-controlled"
+                                    label="Borrower"
                                     value={borrower}
-                                    placeholder={bookDetails[0].borrower}
+                                    onChange={(event) => setBorrower(event.target.value)}
                                 />
 
                                 <label htmlFor="borrowed_date">Borrowed date:</label>
@@ -343,14 +337,6 @@ function BookEditing({ }) {
                                     onChange={(event) => setBorrowedDate(event.target.value)}
                                 />
 
-                                {/* <label htmlFor="borrowed_date">Borrowed date:</label>
-                            use MUI datepicker here
-                            <input
-                                onChange={(event) => setBorrowedDate(event.target.value)}
-                                type='text'
-                                value={borrowedDate}
-                                placeholder={bookDetails[0].borrowed_date}
-                            /> */}
 
                                 <Stack direction="row" spacing={2}>
                                     <Button

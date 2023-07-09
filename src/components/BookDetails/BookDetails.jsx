@@ -47,7 +47,7 @@ function BookDetails({ }) {
             if (result.isConfirmed) {
                 MySwal.fire("Book deleted!", {
                     icon: "success",
-                    timer: 1500,
+                    timer: 1000,
                     buttons: false,
                 });
                 dispatch({
@@ -182,44 +182,42 @@ function BookDetails({ }) {
                                     fontSize: "1.75rem",
                                 }}>You stuff</Typography>
 
-                            {/* yes/no toggle box here */}
-                            <p>Read it? {bookDetails[0].read_status}</p>
-
-                            {/* {bookDetails[0].read_status ? (
-                                    <>
-                                        {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                            <p>Like it?  n/a</p>
-                                        ) : (
-                                            <p>Like it? {bookDetails[0].rating}</p>
-                                        )}
-                                    </>
-                                ) : (
-                                    null
-                                )} */}
-
-                            {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                <p>Like it?  n/a</p>
+                            {/* {(bookDetails[0].read_status === false || bookDetails[0].read_status === undefined || bookDetails[0].read_status === null || bookDetails[0].read_status === 0) ? ( */}
+                            {bookDetails[0].read_status ? (
+                                <>
+                                    <p>Read it? Yup!</p>
+                                    {(bookDetails[0].rating === undefined || bookDetails[0].rating === null) ? (
+                                        null
+                                    ) : (
+                                        <p>Was it good? {bookDetails[0].rating}</p>
+                                    )}
+                                    {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
+                                        null
+                                    ) : (
+                                        <p>What'd you think? {bookDetails[0].review}</p>
+                                    )}
+                                </>
                             ) : (
-                                <p>Like it? {bookDetails[0].rating}</p>
+                                <>
+                                    <p>Read it? Nope.</p>
+                                </>
+
+
                             )}
 
-                            {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                <p>What'd you think? n/a</p>
-                            ) : (
-                                <p>What'd you think? {bookDetails[0].review}</p>
-                            )}
 
-                            {/* yes/no toggle box here, too
-                                and if yes, then render the borrowed data fields below */}
-                            <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
+
 
                             {bookDetails[0].borrowed ? (
                                 <>
-                                    <p>Who? {bookDetails[0].borrower}</p>
-                                    <p>Since when? {formattedDate}</p>
+                                    <p>Somebody got it currently? Yup.</p>
+                                    <p>{bookDetails[0].borrower} has it.</p>
+                                    <p>...and has since {formattedDate}.</p>
                                 </>
                             ) : (
-                                null
+                                <>
+                                    <p>Somebody got it currently? Nope.</p>
+                                </>
                             )}
                             <Stack direction="column" spacing={2}>
                                 <Button

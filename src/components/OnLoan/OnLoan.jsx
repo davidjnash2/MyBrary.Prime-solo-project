@@ -59,7 +59,9 @@ function OnLoan() {
     }
 
     // when time allows, will build out this function to allow 
-    // user to click cover on this view to return book to livary
+    // user to click cover on this view to return book to libary
+    // add this prop to the LibraryBook tag here when activating this function
+    // onClickCover={returnBook}
     // const returnBook = () => {
 
     // }
@@ -89,7 +91,7 @@ function OnLoan() {
                     >
                         {loaners.map((userBook, i) => (
                             <Grid item xs={12} sm={4} md={4} lg={3} xl={3} key={i}>
-                                <LibraryBook userBook={userBook}  onClickCover={returnBook}/>
+                                <LibraryBook userBook={userBook}  />
                             </Grid>
                         ))}
                     </Grid>

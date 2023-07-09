@@ -143,55 +143,210 @@ function BookDetails({ }) {
                                 }}>
                                 Book Stuff
                             </Typography>
-                            <p>Author: {bookDetails[0].author}</p>
+
+                            <Typography
+                                variant="p"
+                                sx={{
+                                    marginBottom: 0,
+                                    marginTop: 2,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1rem",
+                                    color: "white",
+                                }}
+                            >
+                                Author: {bookDetails[0].author}
+                            </Typography>
 
                             {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
-                                <p>Publisher: n/a</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Publisher: n/a
+                                </Typography>
                             ) : (
-                                <p>Publisher: {bookDetails[0].publisher}</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Publisher: {bookDetails[0].publisher}
+                                </Typography>
                             )}
 
                             {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
-                                <p>Published: n/a</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Published: n/a
+                                </Typography>
                             ) : (
-                                <p>Published: {formattedPublishedDate}</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Published: {formattedPublishedDate}
+                                </Typography>
                             )}
 
                             {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
-                                <p>Genre: n/a</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Genre: n/a
+                                </Typography>
                             ) : (
-                                <p>Genre: {bookDetails[0].genre}</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Genre: {bookDetails[0].genre}
+                                </Typography>
                             )}
 
                             {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
-                                <p>Pages: n/a</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Pages: n/a
+                                </Typography>
                             ) : (
-                                <p>Pages: {bookDetails[0].pages}</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Pages: {bookDetails[0].pages}
+                                </Typography>
                             )}
 
-                            <p>ISBN-13: {bookDetails[0].isbn}</p>
+                            <Typography
+                                variant="p"
+                                sx={{
+                                    marginBottom: 0,
+                                    marginTop: 2,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1rem",
+                                    color: "white",
+                                }}
+                            >
+                                ISBN-13: {bookDetails[0].isbn}
+                            </Typography>
 
 
                             {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
-                                <p>Description: n/a</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Description: n/a
+                                </Typography>
                             ) : (
-                                <p>Description: {bookDetails[0].description}</p>
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Description: {bookDetails[0].description}
+                                </Typography>
                             )}
                         </Grid>
                         <Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
                             <Typography
                                 variant="h2"
                                 sx={{
-                                    marginBottom: 0,
+                                    marginBottom: 2,
                                     textAlign: "left",
                                     fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                     fontSize: "1.75rem",
                                 }}>You stuff</Typography>
 
-                            {/* {(bookDetails[0].read_status === false || bookDetails[0].read_status === undefined || bookDetails[0].read_status === null || bookDetails[0].read_status === 0) ? ( */}
                             {bookDetails[0].read_status ? (
                                 <>
-                                    <p>Read it? Yup!</p>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >Read it? Yup!
+                                    </Typography>
                                     <Box
                                         sx={{
                                             '& > legend': { mt: 2 },
@@ -218,39 +373,45 @@ function BookDetails({ }) {
                                     </Box>
 
                                     <Typography
-                                            component="legend"
-                                            variant="p"
-                                            sx={{
-                                                marginBottom: 0,
-                                                marginTop: 2,
-                                                textAlign: "left",
-                                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
-                                                fontSize: "1rem",
-                                                color: "white",
-                                            }}>
-                                            Review:
-                                        </Typography>
-                                        <Typography
-                                            component="legend"
-                                            variant="p"
-                                            sx={{
-                                                marginBottom: 0,
-                                                textAlign: "left",
-                                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
-                                                fontSize: "1rem",
-                                                color: "white",
-                                            }}>
-                                            {bookDetails[0].review}
-                                        </Typography>
-                                    {/* {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                        null
-                                    ) : (
-                                        <p>Thoughts about it? {bookDetails[0].review}</p>
-                                    )} */}
+                                        component="legend"
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}>
+                                        Review:
+                                    </Typography>
+                                    <Typography
+                                        component="legend"
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 5,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}>
+                                        {bookDetails[0].review}
+                                    </Typography>
                                 </>
                             ) : (
                                 <>
-                                    <p>Read it? Nope.</p>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >Read it? Nope.
+                                    </Typography>
                                 </>
 
 
@@ -258,18 +419,58 @@ function BookDetails({ }) {
 
                             {bookDetails[0].borrowed ? (
                                 <>
-                                    <p>Somebody got it currently? Yup. {bookDetails[0].borrower} has it.</p>
-                                    {/* <p>{bookDetails[0].borrower} has it.</p> */}
-                                    <p>...and has since {formattedDate}.</p>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 2,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >
+                                        Somebody got it currently? Yup. {bookDetails[0].borrower} has it.
+                                    </Typography>
+                                    <br />
+                                    <br/>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >
+                                        ...and has since {formattedDate}.
+                                    </Typography>
                                 </>
                             ) : (
                                 <>
-                                    <p>Somebody got it currently? Nope.</p>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 3,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >Somebody got it currently? Nope.</Typography>
                                 </>
                             )}
-                            <Stack direction="column" spacing={3}>
+                            <Stack
+                                direction="column"
+                                spacing={3}
+                                marginTop={3}
+                            >
                                 <Button
                                     variant="contained"
+                                    marginTop={3}
                                     startIcon={<EditIcon />}
                                     name="edit"
                                     onClick={() => history.push(`/edit/${bookId.id}`)}

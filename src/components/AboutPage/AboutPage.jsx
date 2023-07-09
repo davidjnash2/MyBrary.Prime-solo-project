@@ -1,65 +1,271 @@
 import React from 'react';
 import './AboutPage.css';
-import { Grid } from '@mui/material';
+import { Grid, Container, Typography, Box } from '@mui/material';
 
 function AboutPage() {
   return (
-    <div className="bio-container">
-      <Grid container spacing={2}>
-        <Grid container xs={6} className="big-grid">
-          <Grid item className="grid-item">
-          <h2>Dave Nash</h2>
-        <img src="Images/IMG_6499.jpeg" className="me-image"/>
-        <p>This about page is all about me!</p>
+    <>
+      <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography sx={{
+              mt: 10,
+              fontFamily: "Rockwell Extra Bold, Rockwell Bold, monospace",
+              fontSize: "4rem",
+              textAlign: "center",
+            }}
+              variant="h2"
+            >Dave Nash
+            </Typography>
+          </Grid>
+          <Grid item xs={4}>
+            <Box sx={{ mt: 2 }}>
+              <img src="Images/IMG_6499.jpeg" className="me-image" />
+            </Box>
+          </Grid>
+          <Grid item xs={4}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="h2"
+              sx={{
+                marginBottom: 0,
+                marginTop: 2,
+                textAlign: "left",
+                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                fontSize: "1.75rem",
+                color: "white",
+              }}
+            >
+              Follow me on LinkedIn!
+            </Typography>
+            <Box sx={{ mt: 2, mb: 0, }}>
+              <img src="/Images/LinkedInQR.png" className="linkedin-qr-image" />
+            </Box>
+          </Grid>
+          <Grid item xs={4}
+           sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: "center",
+          }}>
+            <Typography sx={{
+              mt: 0,
+              fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+              fontSize: "2rem",
+              textAlign: "center",
+            }}
+              variant="h2"
+            >
+              Technologies used:
+            </Typography>
+            <ul>
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  Google Books API
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  React
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  React-Redux
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  Material UI
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  Node.js
+                </Typography>
+              </li>
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  Express
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  Passport
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  JavaScript
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  PostgreSQL
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  VS Code Editor
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  Axios
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  CSS
+                </Typography>
+              </li >
+              <li>
+                <Typography
+                  variant="p"
+                  sx={{
+                    marginBottom: 0,
+                    marginTop: 2,
+                    textAlign: "left",
+                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                    fontSize: "1rem",
+                    color: "white",
+                  }}
+                >
+                  HTML
+                </Typography>
+              </li >
+            </ul >
+          </Grid >
         </Grid>
-     </Grid>
-      <Grid container xs={6} className="big-grid">
-   
-        <h2>Technologies used for this project</h2>
-        <ul>
-          <li>
-            Google Books API
-          </li>
-          <li>
-            React
-          </li>
-          <li>
-            React-Redux
-          </li>
-          <li>
-            Material UI
-          </li>
-          <li>
-            Node.js
-          </li>
-          <li>
-            Express
-          </li>
-          <li>
-            Passport
-          </li>
-          <li>
-            JavaScript
-          </li>
-          <li>
-            PostgreSQL
-          </li>
-          <li>
-            VS Code Editor
-          </li>
-          <li>
-            Axios
-          </li>
-          <li>
-            CSS
-          </li>
-          <li>
-            HTML
-          </li>
-        </ul>
-      </Grid>
-      </Grid>
-    </div>
+      </Container >
+    </>
   );
 }
 

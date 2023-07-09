@@ -100,8 +100,6 @@ function BookEditing({ }) {
         })
     };
 
-
-
     function renderYearOptions() {
         const currentYear = new Date().getFullYear();
         const startYear = currentYear;

@@ -34,17 +34,6 @@ function BookDetails({ }) {
     }, []);
 
 
-    // const deleteUserBook = (event) => {
-    //     event.preventDefault();
-    //     console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
-    //     dispatch({
-    //         type: 'DELETE_USER_BOOK',
-    //         payload: bookDetails[0].book_id
-    //     });
-    //     history.push('/library');
-    // }
-
-
     const deleteUserBook = (event) => {
         event.preventDefault();
         MySwal.fire({
@@ -76,22 +65,6 @@ function BookDetails({ }) {
         })
     };
 
-    // function renderYearOptions() {
-    //     const currentYear = new Date().getFullYear();
-    //     const startYear = currentYear;
-    //     const endYear = currentYear - 999;
-
-    //     const options = [];
-    //     for (let year = startYear; year >= endYear; year--) {
-    //         options.push(
-    //             <option key={year} value={year}>
-    //                 {year}
-    //             </option>
-    //         );
-    //     }
-    //     return options;
-    // }
-
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         // Simulate an asynchronous API call to fetch book details
@@ -101,13 +74,10 @@ function BookDetails({ }) {
         }, 25);
     }, []); // Empty dependency array to run the effect only once
 
-    // ...
-
     if (isLoading) {
         // Render a loading state or a placeholder component
         return <div>Loading...</div>;
     }
-
 
     const borrowedDate = bookDetails[0].borrowed_date;
     const formattedDate = new Date(borrowedDate).toLocaleDateString('en-US', {

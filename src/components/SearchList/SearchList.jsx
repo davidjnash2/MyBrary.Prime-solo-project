@@ -1,13 +1,17 @@
-import React from 'react';
-import { useSelector } from "react-redux";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from 'react-router-dom'
 import SearchBook from '../SearchBook/SearchBook';
 import { Box, Grid, Card, Paper, makeStyles } from '@mui/material';
 import './SearchList.css';
+
+
 function SearchList() {
 
     // access search results from global state via store
     const results = useSelector((store) => store.results);
-
+    const dispatch = useDispatch();
+    const searchTerm = useParams();
 
     const filteredResults = results.items?.filter((book) => {
         return (
@@ -20,13 +24,23 @@ function SearchList() {
             book?.volumeInfo?.authors !== undefined
         );
     });
-    // map over results array, making sure there are actually
+
+
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_RESULTS',
+            payload: searchTerm.id
+        });
+    }, []);
+
+
+    // map over filetereResults array, making sure there are actually
     //  values present before mapping so as not to crash DOM
     return (
         <>
-        <div className="search-results">
-            <h1>The results are in!</h1>
-            <h2>Click book to add it to your MyBrary.</h2>
+            <div className="search-results">
+                <h1>The results are in!</h1>
+                <h2>Click book to add it to your MyBrary.</h2>
                 <Box
                     display="flex"
                     justifyContent="center"

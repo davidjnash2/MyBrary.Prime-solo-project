@@ -15,7 +15,7 @@ function ToRead() {
   const selectUnreads = () => {
     const unreadBooks = [];
     for (const userBook of library) {
-      if (userBook.read_status !== true) {
+      if (userBook && !userBook.read_status) {
         unreadBooks.push(userBook);
       }
     }
@@ -61,6 +61,7 @@ function ToRead() {
   // map over new unread array
   return (
     <>
+    {unreadBooks && unreadBooks.length > 0 && (
       <div className="to-reads">
         <h1 className="centered-content">Where to begin?</h1>
         <Box
@@ -91,6 +92,7 @@ function ToRead() {
           </Grid>
         </Box>
       </div >
+    )}
     </>
   )
 }

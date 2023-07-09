@@ -10,23 +10,29 @@ import { CardActionArea, Paper } from '@mui/material';
 import { useEffect, useRef } from 'react';
 
 
-function LibraryBook({ userBook }) {
+function LibraryBook({ userBook, onClickCover }) {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
     const thumbnailUrl = userBook.cover_url;
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : userBook.cover_url;
-    console.log('largeUrl is:', largeUrl);
+    // console.log('largeUrl is:', largeUrl);
 
     // user click on book will bring to details page for that book
+    // started adding conditional statement for clicks on the OnLoan 
+    // view, so that book can be returned to library more easily
     const clickCover = () => {
-        console.log('clicked userBook.book_id is', userBook.book_id);
-        history.push(`/details/${userBook.book_id}`)
-        dispatch({
-            type: 'FETCH_DETAILS',
-            payload: userBook.book_id
-        })
+        // if (onClickCover) {
+        //     onClickCover();
+        // } else {
+            // console.log('clicked userBook.book_id is', userBook.book_id);
+            history.push(`/details/${userBook.book_id}`);
+            dispatch({
+                type: 'FETCH_DETAILS',
+                payload: userBook.book_id
+            });
+        // }
     }
 
     return (

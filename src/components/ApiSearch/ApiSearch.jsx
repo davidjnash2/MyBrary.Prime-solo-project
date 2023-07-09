@@ -19,7 +19,7 @@ function ApiSearch() {
             type: 'FETCH_RESULTS',
             payload: search
         })
-        history.push('/results');
+        history.push(`/results/${search}`);
     }
 
 

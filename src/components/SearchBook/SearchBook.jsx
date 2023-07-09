@@ -17,31 +17,6 @@ function SearchBook({ book }) {
     const history = useHistory();
 
 
-    // const addBook = () => {
-
-    //     const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
-    //         book.volumeInfo.industryIdentifiers[0].identifier
-    //         :
-    //         book.volumeInfo.industryIdentifiers[1].identifier);
-    //     console.log('this addBook isbn is:', isbn);
-
-    //     dispatch({
-    //         type: 'ADD_BOOK',
-    //         payload: {
-    //             cover_url: book.volumeInfo.imageLinks.thumbnail,
-    //             title: book.volumeInfo.title,
-    //             subtitle: book.volumeInfo.subtitle,
-    //             author: book.volumeInfo.authors,
-    //             publisher: book.volumeInfo.publisher,
-    //             published: book.volumeInfo.publishedDate,
-    //             genre: book.volumeInfo.categories,
-    //             pages: book.volumeInfo.pageCount,
-    //             description: book.volumeInfo.description,
-    //             isbn: isbn,
-    //         }
-    //     })
-    // }
-
     const addBook = (event) => {
         const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
             book.volumeInfo.industryIdentifiers[0].identifier
@@ -68,9 +43,12 @@ function SearchBook({ book }) {
             title: `${book.volumeInfo.title} has been added to your MyBrary!`,
             text: "Search again or see your books?",
             icon: "success",
+            showCloseButton: true,
             showDenyButton: true,
             confirmButtonText: 'Search',
             denyButtonText: `MyBrary`,
+            confirmButtonColor: "#2E9CCA",
+            denyButtonColor: "#390854",
         }).then((result) => {
             if (result.isConfirmed) {
                 history.push('/search');
@@ -78,7 +56,6 @@ function SearchBook({ book }) {
                 history.push('/library');
             }
         })
-
     };
 
 

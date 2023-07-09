@@ -9,6 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 function BookDetails({ }) {
 
@@ -20,7 +22,7 @@ function BookDetails({ }) {
     const history = useHistory();
     const MySwal = withReactContent(Swal);
     const bookId = useParams();
-    console.log('bookId is:', bookId);
+    // console.log('bookId is:', bookId);
 
     const thumbnailUrl = bookDetails && bookDetails.length > 0 ? bookDetails[0].cover_url : '';
     const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
@@ -32,17 +34,6 @@ function BookDetails({ }) {
             payload: bookId.id
         });
     }, []);
-
-
-    // const deleteUserBook = (event) => {
-    //     event.preventDefault();
-    //     console.log('in deleteUserBook, and id to delete is:', bookDetails[0].book_id);
-    //     dispatch({
-    //         type: 'DELETE_USER_BOOK',
-    //         payload: bookDetails[0].book_id
-    //     });
-    //     history.push('/library');
-    // }
 
 
     const deleteUserBook = (event) => {
@@ -58,7 +49,7 @@ function BookDetails({ }) {
             if (result.isConfirmed) {
                 MySwal.fire("Book deleted!", {
                     icon: "success",
-                    timer: 1500,
+                    timer: 1000,
                     buttons: false,
                 });
                 dispatch({
@@ -76,22 +67,6 @@ function BookDetails({ }) {
         })
     };
 
-    // function renderYearOptions() {
-    //     const currentYear = new Date().getFullYear();
-    //     const startYear = currentYear;
-    //     const endYear = currentYear - 999;
-
-    //     const options = [];
-    //     for (let year = startYear; year >= endYear; year--) {
-    //         options.push(
-    //             <option key={year} value={year}>
-    //                 {year}
-    //             </option>
-    //         );
-    //     }
-    //     return options;
-    // }
-
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
         // Simulate an asynchronous API call to fetch book details
@@ -101,13 +76,10 @@ function BookDetails({ }) {
         }, 25);
     }, []); // Empty dependency array to run the effect only once
 
-    // ...
-
     if (isLoading) {
         // Render a loading state or a placeholder component
         return <div>Loading...</div>;
     }
-
 
     const borrowedDate = bookDetails[0].borrowed_date;
     const formattedDate = new Date(borrowedDate).toLocaleDateString('en-US', {
@@ -116,142 +88,418 @@ function BookDetails({ }) {
         year: 'numeric',
     });
 
+    const publishedDate = bookDetails[0].published;
+    const formattedPublishedDate = new Date(publishedDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+    });
 
     return (
         <>
             {bookDetails && bookDetails.length > 0 && (
-                <Container maxWidth="lg">
-                    <Grid container spacing={1}
-                        sx={{
-                            m: 0,
-                        }}>
+                <Container maxWidth="xl">
+                    <Grid container spacing={2} sx={{ m: 3 }}>
                         <Grid item xs={12}>
                             <Typography sx={{
                                 mt: 10,
                                 fontFamily: "Rockwell Extra Bold, Rockwell Bold, monospace",
+                                fontSize: "5rem",
                             }}
-                                variant="h1">{bookDetails[0].title}</Typography>
-                            <h3>{bookDetails[0].subtitle}</h3>
+                                variant="h1"
+                            >
+                                {bookDetails[0].title}
+                            </Typography>
                         </Grid>
-                        <Grid container spacing={4}>
-                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <img
-                                    className="details-cover-image"
-                                    src={largeUrl}
-                                    alt={bookDetails[0].title} />
-                            </Grid>
-                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <h2>Book Stuff</h2>
-                                <p>Author: {bookDetails[0].author}</p>
+                        <Grid item xs={12}>
+                            <Typography sx={{
+                                marginBottom: 5,
+                                textAlign: "center",
+                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif"
+                            }}
+                                variant="h3"
+                            >
+                                {bookDetails[0].subtitle}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                            <img
+                                className="details-cover-image"
+                                src={largeUrl}
+                                alt={bookDetails[0].title} />
+                        </Grid>
+                        <Grid item xs={12} sm={5} md={5} lg={5} xl={5}
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'flex-start',
+                            }}
+                        >
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    marginBottom: 0,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1.75rem",
+                                }}>
+                                Book Stuff
+                            </Typography>
 
-                                {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
-                                    <p>Publisher: n/a</p>
-                                ) : (
-                                    <p>Publisher: {bookDetails[0].publisher}</p>
-                                )}
+                            <Typography
+                                variant="p"
+                                sx={{
+                                    marginBottom: 0,
+                                    marginTop: 2,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1rem",
+                                    color: "white",
+                                }}
+                            >
+                                Author: {bookDetails[0].author}
+                            </Typography>
 
-                                {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
-                                    <p>Published: n/a</p>
-                                ) : (
-                                    <p>Published: {bookDetails[0].published}</p>
-                                )}
+                            {(bookDetails[0].publisher === undefined || bookDetails[0].publisher === null || bookDetails[0].publisher === 0) ? (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Publisher: n/a
+                                </Typography>
+                            ) : (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Publisher: {bookDetails[0].publisher}
+                                </Typography>
+                            )}
 
-                                {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
-                                    <p>Genre: n/a</p>
-                                ) : (
-                                    <p>Genre: {bookDetails[0].genre}</p>
-                                )}
+                            {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Published: n/a
+                                </Typography>
+                            ) : (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Published: {formattedPublishedDate}
+                                </Typography>
+                            )}
 
-                                {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
-                                    <p>Pages: n/a</p>
-                                ) : (
-                                    <p>Pages: {bookDetails[0].pages}</p>
-                                )}
+                            {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Genre: n/a
+                                </Typography>
+                            ) : (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Genre: {bookDetails[0].genre}
+                                </Typography>
+                            )}
 
-                                <p>ISBN-13: {bookDetails[0].isbn}</p>
+                            {(bookDetails[0].pages === undefined || bookDetails[0].pages === null || bookDetails[0].pages === 0) ? (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Pages: n/a
+                                </Typography>
+                            ) : (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Pages: {bookDetails[0].pages}
+                                </Typography>
+                            )}
+
+                            <Typography
+                                variant="p"
+                                sx={{
+                                    marginBottom: 0,
+                                    marginTop: 2,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1rem",
+                                    color: "white",
+                                }}
+                            >
+                                ISBN-13: {bookDetails[0].isbn}
+                            </Typography>
 
 
-                                {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
-                                    <p>Description: n/a</p>
-                                ) : (
-                                    <p>Description: {bookDetails[0].description}</p>
-                                )}
-                            </Grid>
-                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                                <h2>You stuff</h2>
+                            {(bookDetails[0].description === undefined || bookDetails[0].description === null || bookDetails[0].description === 0) ? (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Description: n/a
+                                </Typography>
+                            ) : (
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        marginTop: 2,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Description: {bookDetails[0].description}
+                                </Typography>
+                            )}
+                        </Grid>
+                        <Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    marginBottom: 2,
+                                    textAlign: "left",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                    fontSize: "1.75rem",
+                                }}>You stuff</Typography>
 
-                                {/* yes/no toggle box here */}
-                                <p>Read it? {bookDetails[0].read_status}</p>
-
-                                {/* {bookDetails[0].read_status ? (
-                                    <>
-                                        {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                            <p>Like it?  n/a</p>
-                                        ) : (
-                                            <p>Like it? {bookDetails[0].rating}</p>
-                                        )}
-                                    </>
-                                ) : (
-                                    null
-                                )} */}
-
-                                {(bookDetails[0].rating === undefined || bookDetails[0].rating === null || bookDetails[0].rating === 0) ? (
-                                    <p>Like it?  n/a</p>
-                                ) : (
-                                    <p>Like it? {bookDetails[0].rating}</p>
-                                )}
-
-                                {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                    <p>What'd you think? n/a</p>
-                                ) : (
-                                    <p>What'd you think? {bookDetails[0].review}</p>
-                                )}
-
-                                {/* yes/no toggle box here, too
-                                and if yes, then render the borrowed data fields below */}
-                                <p>Somebody got it currently? {bookDetails[0].borrowed}</p>
-
-                                {bookDetails[0].borrowed ? (
-                                    <>
-                                        <p>Who? {bookDetails[0].borrower}</p>
-                                        <p>Since when? {formattedDate}</p>
-                                    </>
-                                ) : (
-                                    null
-                                )}
-                                <Stack direction="column" spacing={2}>
-                                    <Button
-                                        variant="contained"
-                                        startIcon={<EditIcon />}
-                                        name="edit"
-                                        onClick={() => history.push(`/edit/${bookId.id}`)}
-                                    >
-                                        EDIT STUFF
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        // startIcon={<DeleteIcon />}
-                                        name="delete"
+                            {bookDetails[0].read_status ? (
+                                <>
+                                    <Typography
+                                        variant="p"
                                         sx={{
-                                            p: 1,
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
                                         }}
-                                        onClick={deleteUserBook}
+                                    >Read it? Yup!
+                                    </Typography>
+                                    <Box
+                                        sx={{
+                                            '& > legend': { mt: 2 },
+                                        }}
                                     >
-                                        <DeleteIcon /> DELETE BOOK
-                                    </Button>
-                                    <Button
-                                        variant="contained"
-                                        startIcon={<LibraryBooksIcon />}
-                                        name="back_to_library"
-                                        onClick={() => history.push('/library')}
+                                        <Typography
+                                            component="legend"
+                                            variant="p"
+                                            sx={{
+                                                marginBottom: 0,
+                                                marginTop: 3,
+                                                textAlign: "left",
+                                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                                fontSize: "1rem",
+                                                color: "white",
+                                            }}>
+                                            Rating:
+                                        </Typography>
+                                        <Rating
+                                            name="rating-read-only"
+                                            value={bookDetails[0].rating}
+                                            readOnly
+                                        />
+                                    </Box>
+
+                                    <Typography
+                                        component="legend"
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}>
+                                        Review:
+                                    </Typography>
+                                    <Typography
+                                        component="legend"
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 5,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}>
+                                        {bookDetails[0].review}
+                                    </Typography>
+                                </>
+                            ) : (
+                                <>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >Read it? Nope.
+                                    </Typography>
+                                </>
+
+
+                            )}
+
+                            {bookDetails[0].borrowed ? (
+                                <>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 2,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
                                     >
-                                        BACK TO LIBRARY
-                                    </Button>
-                                </Stack>
-                            </Grid>
+                                        Somebody got it currently? Yup. {bookDetails[0].borrower} has it.
+                                    </Typography>
+                                    <br />
+                                    <br/>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >
+                                        ...and has since {formattedDate}.
+                                    </Typography>
+                                </>
+                            ) : (
+                                <>
+                                    <Typography
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 3,
+                                            marginTop: 2,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}
+                                    >Somebody got it currently? Nope.</Typography>
+                                </>
+                            )}
+                            <Stack
+                                direction="column"
+                                spacing={3}
+                                marginTop={3}
+                            >
+                                <Button
+                                    variant="contained"
+                                    marginTop={3}
+                                    startIcon={<EditIcon />}
+                                    name="edit"
+                                    onClick={() => history.push(`/edit/${bookId.id}`)}
+                                >
+                                    EDIT STUFF
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    name="delete"
+                                    startIcon={<DeleteIcon />}
+                                    sx={{
+                                        p: 1,
+                                    }}
+                                    onClick={deleteUserBook}
+                                >
+                                    DELETE BOOK
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    startIcon={<LibraryBooksIcon />}
+                                    name="back_to_library"
+                                    onClick={() => history.push('/library')}
+                                >
+                                    BACK TO LIBRARY
+                                </Button>
+                            </Stack>
                         </Grid>
                     </Grid>
-                </Container>
+                </Container >
             )}
         </>
     );

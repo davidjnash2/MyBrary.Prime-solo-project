@@ -8,6 +8,8 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -41,6 +43,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
     <Router>
       <div className="App">
         <Nav />
@@ -67,7 +70,7 @@ function App() {
           </Route>
           <Route
             exact
-            path="/results"
+            path="/results/:id"
           >
             <SearchList />
           </Route>
@@ -175,6 +178,7 @@ function App() {
         {/* <Footer /> */}
       </div>
     </Router>
+    </LocalizationProvider>
   );
 }
 

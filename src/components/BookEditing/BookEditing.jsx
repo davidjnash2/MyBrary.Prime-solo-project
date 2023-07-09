@@ -1,12 +1,26 @@
-import react from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Grid, Button, Container, Typography } from '@mui/material';
 import Stack from '@mui/material/Stack';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import TextField from '@mui/material/TextField';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from 'dayjs';
 import './BookEditing.css';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 function BookEditing({ }) {
 
@@ -17,10 +31,21 @@ function BookEditing({ }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const MySwal = withReactContent(Swal);
+
+    // const today = dayjs();
+    // const yesterday = dayjs().subtract(1, 'day');
+    // const todayStartOfTheDay = today.startOf('day');
+    // const tomorrow = dayjs().add(1, 'day');
+
+
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
     const [editing, setEditing] = useState(false);
+
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
     const [publisher, setPublisher] = useState(bookDetails[0]?.publisher || '');
@@ -35,10 +60,9 @@ function BookEditing({ }) {
     const [borrower, setBorrower] = useState(bookDetails[0]?.borrower || '');
     const [borrowedDate, setBorrowedDate] = useState(bookDetails[0]?.borrowed_date || '');
 
-    const thumbnailUrl = bookDetails[0].cover_url;
-    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : bookDetails[0].cover_url;
-    console.log('largeUrl is:', largeUrl);
-
+    const thumbnailUrl = bookDetails[0]?.cover_url || '';
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
+    // console.log('largeUrl is:', largeUrl);
 
     useEffect(() => {
         dispatch({
@@ -46,7 +70,6 @@ function BookEditing({ }) {
             payload: bookId.id
         });
     }, []);
-
 
     const switchEditing = () => {
         setEditing(!editing);
@@ -82,26 +105,22 @@ function BookEditing({ }) {
             type: 'FETCH_DETAILS',
             payload: bookDetails[0].book_id
         })
-        history.push('/library');
+        history.push(`/details/${bookId.id}`);
+        MySwal.fire({
+            title: "Changes saved!",
+            icon: "success",
+            showButtons: false,
+        })
     };
 
 
+    const disableYears = (date) => {
+        const currentYear = dayjs().year();
+        const minYear = 1000;
+        const year = dayjs(date).year();
+        return year < minYear || year > currentYear;
+    };
 
-    function renderYearOptions() {
-        const currentYear = new Date().getFullYear();
-        const startYear = currentYear;
-        const endYear = currentYear - 999;
-
-        const options = [];
-        for (let year = startYear; year >= endYear; year--) {
-            options.push(
-                <option key={year} value={year}>
-                    {year}
-                </option>
-            );
-        }
-        return options;
-    }
 
     const cancelEditing = (event) => {
         event.preventDefault();
@@ -134,8 +153,6 @@ function BookEditing({ }) {
         }, 10);
     }, []); // Empty dependency array to run the effect only once
 
-    // ...
-
     if (isLoading) {
         // Render a loading state or a placeholder component
         return <div>Loading...</div>;
@@ -144,196 +161,263 @@ function BookEditing({ }) {
 
     return (
         <>
-            {/* {bookDetails && bookDetails.length > 0 && ( */}
-            <Container maxWidth="lg">
-                <Grid container spacing={1}
-                    sx={{
-                        m: 0,
-                    }}>
-                    <Grid item xs={12}>
-                        <Typography sx={{
-                            mt: 10,
-                            fontFamily: "Rockwell Extra Bold, Rockwell Bold, monospace",
-                        }}
-                            variant="h1">{bookDetails[0].title}</Typography>
-                        <h3>{bookDetails[0].subtitle}</h3>
-                    </Grid>
-                    <Grid item id="book-info" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
-                        <form
-                            onSubmit={updateUserBook}
-                        >
-                            <Grid container direction="column" spacing={2}>
-                                <Grid item>
-                                    <h2>Book Stuff</h2>
-                                    <label htmlFor="subtitle">Subtitle:</label>
-                                    <input
-                                        onChange={(event) => setSubtitle(event.target.value)}
-                                        type='text'
-                                        value={subtitle}
-                                        placeholder={bookDetails[0].subtitle}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <p>Author: {bookDetails[0].author}</p>
-                                </Grid>
-                                <Grid item>
-                                    <label htmlFor="publisher">Publisher:</label>
-                                    <input
-                                        onChange={(event) => setPublisher(event.target.value)}
-                                        type='text'
-                                        value={publisher}
-                                    // placeholder={bookDetails[0].publisher}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <label htmlFor="published">Published:</label>
-                                    <select onChange={(event) => setPublished(event.target.value)} value={published}>
-                                        {renderYearOptions()}
-                                    </select>
-                                </Grid>
-
-                                <Grid item>
-                                    <label htmlFor="genre">Genre:</label>
-                                    <input
-                                        onChange={(event) => setGenre(event.target.value)}
-                                        type='text'
-                                        value={genre}
-                                        placeholder={bookDetails[0].genre}
-                                    />
-                                </Grid>
-
-                                <Grid item>
-                                    <label htmlFor="pages">Pages:</label>
-                                    <input
-                                        onChange={(event) => setPages(event.target.value)}
-                                        type='number'
-                                        value={pages}
-                                        placeholder={bookDetails[0].pages}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <p>ISBN: {bookDetails[0].isbn}</p>
-                                </Grid>
-                                <Grid item>
-                                    <label htmlFor="description">Description:</label>
-                                    <input
-                                        onChange={(event) => setDescription(event.target.value)}
-                                        type='text'
-                                        value={description}
-                                        placeholder={bookDetails[0].description}
-                                    />
-                                </Grid>
+            {bookDetails && bookDetails.length > 0 && (
+                <Container maxWidth="xl">
+                    <form onSubmit={updateUserBook}>
+                        <Grid container spacing={2} sx={{ m: 3 }}>
+                            <Grid item xs={12}>
+                                <Typography sx={{
+                                    mt: 10,
+                                    fontFamily: "Rockwell Extra Bold, Rockwell Bold, monospace",
+                                    fontSize: "5rem",
+                                }}
+                                    variant="h1"
+                                >
+                                    {bookDetails[0].title}
+                                </Typography>
                             </Grid>
-                        </form>
-                    </Grid>
-                    <Grid item id="you-stuff" className="book-details" xs={4} sm={4} md={4} lg={4} xl={4}>
-                        <h2>You stuff</h2>
-                        <form onSubmit={updateUserBook}>
-                            <Grid container direction="column" spacing={1}>
-                                <Grid item>
-                                    {/* yes/no toggle box here
-                            <label className="switch">
-                                <input
-                                    onChange={(event) => setRead(event.target.checked)}
-                                    type="checkbox"
-                                    value={read} />
-                                <span className="slider round"></span>
-                            </label>
-                            <p>Read it? {bookDetails.read_status}</p> */}
+                            <Grid item xs={12}>
+                                <Typography sx={{
+                                    marginBottom: 5,
+                                    textAlign: "center",
+                                    fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif"
+                                }}
+                                    variant="h3"
+                                >
+                                    {bookDetails[0].subtitle}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                                <img
+                                    className="details-cover-image"
+                                    src={largeUrl}
+                                    alt={bookDetails[0].title} />
+                            </Grid>
+                            <Grid item xs={12} sm={3} md={3} lg={3} xl={3}
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-start',
+                                }}
+                            >
+                                <Typography
+                                    variant="h2"
+                                    sx={{
+                                        marginBottom: 1,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1.75rem",
+                                    }}>
+                                    Book Stuff
+                                </Typography>
+
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="subtitle-controlled"
+                                    label="Subtitle"
+                                    value={subtitle}
+                                    onChange={(event) => setSubtitle(event.target.value)}
+                                />
+
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    Author: {bookDetails[0].author}
+                                </Typography>
+
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="publisher-controlled"
+                                    label="Publisher"
+                                    value={publisher}
+                                    onChange={(event) => setPublisher(event.target.value)}
+                                />
+
+                                <DatePicker
+                                    views={['year']}
+                                    label="Year Published"
+                                    onChange={setPublished}
+                                    shouldDisableDate={disableYears}
+                                    disableFuture
+                                />
+
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="genre-controlled"
+                                    label="Genre"
+                                    value={genre}
+                                    onChange={(event) => setGenre(event.target.value)}
+                                />
 
 
-                                    <label htmlFor="read">Read?</label>
-                                    <input
-                                        onChange={(event) => setRead(event.target.value)}
-                                        type='text'
-                                        value={read}
-                                        placeholder={bookDetails[0].read_status}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    {/* need to add slider or stars for rating */}
-                                    <label htmlFor="rating">Rating:</label>
-                                    {/* <input
-                                onChange={(event) => setComments(event.target.value)}
-                                type='text'
-                                value={rating}
-                                placeholder={bookDetails[0].rating}
-                            /> */}
-                                    <input
-                                        onChange={(event) => setRating(event.target.value)}
-                                        type='number'
-                                        min='0'
-                                        max='5'
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="pages-controlled"
+                                    label="Pages"
+                                    value={pages}
+                                    type="number"
+                                    onChange={(event) => setPages(event.target.value)}
+                                    inputProps={{
+                                        inputMode: 'numeric',
+                                        pattern: '[0-9]*'
+                                    }}
+                                />
+
+
+                                <Typography
+                                    variant="p"
+                                    sx={{
+                                        marginBottom: 0,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1rem",
+                                        color: "white",
+                                    }}
+                                >
+                                    ISBN: {bookDetails[0].isbn}
+                                </Typography>
+
+
+
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="description-controlled"
+                                    label="Description"
+                                    value={description}
+                                    multiline
+                                    maxRows={4}
+                                    onChange={(event) => setDescription(event.target.value)}
+                                />
+
+                            </Grid>
+                            <Grid item id="you-stuff" className="book-details" xs={4} sm={3} md={3} lg={3} xl={3}
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'flex-start',
+                                }}>
+                                <Typography
+                                    variant="h2"
+                                    sx={{
+                                        marginBottom: 0,
+                                        textAlign: "left",
+                                        fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                        fontSize: "1.75rem",
+                                    }}>You stuff</Typography>
+
+                                <InputLabel id="read-status-selector-label">Read it?</InputLabel>
+                                <Select
+                                    labelId="read-status-selector-label"
+                                    id="read-status-selector-helper"
+                                    value={read}
+                                    input={<OutlinedInput label="Read it?" />}
+                                    onChange={(event) => setRead(event.target.value)}
+                                >
+                                    <MenuItem value={false}>Nope</MenuItem>
+                                    <MenuItem value={true}>Yep!</MenuItem>
+                                </Select>
+
+                                {/* need to add slider or stars for rating */}
+                                {/* <input
+                                    onChange={(event) => setRating(event.target.value)}
+                                    type='number'
+                                    min='0'
+                                    max='5'
+                                    value={rating}
+                                    placeholder={bookDetails[0].rating}
+                                /> */}
+
+                                <Box
+                                    sx={{
+                                        '& > legend': { mt: 2 },
+                                    }}
+                                >
+                                    <Typography
+                                        component="legend"
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}>
+                                        Rating
+                                    </Typography>
+                                    <Rating
+                                        name="rating-controlled"
                                         value={rating}
-                                        placeholder={bookDetails[0].rating}
+                                        onChange={(event) => setRating(event.target.value)}
                                     />
-                                </Grid>
-                                <Grid item>
-                                    <label htmlFor="review">Review:</label>
-                                    <input
-                                        onChange={(event) => setReview(event.target.value)}
-                                        type='text'
-                                        value={review}
-                                        placholder={bookDetails[0].review}
-                                    />
+                                </Box>
 
-                                </Grid>
-                                {/* yes/no toggle box here, too
-                                and if yes, then render the borrowed data fields below */}
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="review-controlled"
+                                    label="Thoughts about it?"
+                                    value={review}
+                                    multiline
+                                    maxRows={4}
+                                    onChange={(event) => setReview(event.target.value)}
+                                />
 
-                                <Grid item>
-                                    <label htmlFor="borrowed">Borrowed:</label>
-                                    <input
-                                        onChange={(event) => setBorrowed(event.target.value)}
-                                        type='text'
-                                        value={borrowed}
-                                        placeholder={bookDetails[0].borrowed}
-                                    />
-                                    {/* <label>
-                                <input
-                                    onChange={(event) => setBorrowed(event.target.checked)}
-                                    className="switch"
-                                    type="checkbox"
-                                    value={borrowed} />
-                                <span class="slider round"></span>
-                            </label> */}
-                                </Grid>
+                                <InputLabel id="borrowed-status-selector-label">Somebody have it?</InputLabel>
+                                <Select
+                                    labelId="borrowed-status-selector-label"
+                                    id="borrowed-status-selector-helper"
+                                    value={borrowed}
+                                    label="Somebody have it?"
+                                    input={<OutlinedInput label="Somebody have it?" />}
+                                    onChange={(event) => setBorrowed(event.target.value)}
+                                >
+                                    <MenuItem value={false}>Nope</MenuItem>
+                                    <MenuItem value={true}>Yep!</MenuItem>
+                                </Select>
 
-                                <Grid item>
-                                    <label htmlFor="borrower">Borrower:</label>
-                                    <input
-                                        onChange={(event) => setBorrower(event.target.value)}
-                                        type='text'
-                                        value={borrower}
-                                        placeholder={bookDetails[0].borrower}
-                                    />
-                                </Grid>
-                                <Grid item>
-                                    <label htmlFor="borrowed_date">Borrowed date:</label>
-                                    <input
-                                        type="date"
-                                        id="borrowed_date"
-                                        value={borrowedDate}
-                                        placeholder={bookDetails[0].borrowed_date}
-                                        onChange={(event) => setBorrowedDate(event.target.value)}
-                                    />
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="borrower-controlled"
+                                    label="Borrower"
+                                    value={borrower}
+                                    onChange={(event) => setBorrower(event.target.value)}
+                                />
 
-                                    {/* <label htmlFor="borrowed_date">Borrowed date:</label>
-                            use MUI datepicker here
-                            <input
-                                onChange={(event) => setBorrowedDate(event.target.value)}
-                                type='text'
-                                value={borrowedDate}
-                                placeholder={bookDetails[0].borrowed_date}
-                            /> */}
-                                </Grid>
+                                <DatePicker
+                                    margin="normal"
+                                    label="Borrowed Date"
+                                    disableFuture
+                                    onChange={setBorrowedDate}
+                                />
 
-                                <Stack direction="row" spacing={2}>
+                                <Stack direction="column" spacing={3}
+                                    marginTop={3}>
                                     <Button
                                         variant="contained"
                                         startIcon={<SaveIcon />}
                                         name="save"
                                         type="submit"
+                                        onClick={updateUserBook}
                                     >
                                         SAVE CHANGES
                                     </Button>
@@ -349,15 +433,13 @@ function BookEditing({ }) {
                                     </Button>
                                 </Stack>
                             </Grid>
-                        </form>
-                    </Grid>
-                </Grid>
-
-
-                {/* )
-            } */}
-            </Container>
+                        </Grid>
+                    </form>
+                </Container >
+            )}
         </>
     )
+
 }
+
 export default BookEditing;

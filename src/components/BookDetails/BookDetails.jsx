@@ -9,6 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 function BookDetails({ }) {
 
@@ -190,16 +192,61 @@ function BookDetails({ }) {
                             {bookDetails[0].read_status ? (
                                 <>
                                     <p>Read it? Yup!</p>
-                                    {(bookDetails[0].rating === undefined || bookDetails[0].rating === null) ? (
+                                    <Box
+                                        sx={{
+                                            '& > legend': { mt: 2 },
+                                        }}
+                                    >
+                                        <Typography
+                                            component="legend"
+                                            variant="p"
+                                            sx={{
+                                                marginBottom: 0,
+                                                marginTop: 3,
+                                                textAlign: "left",
+                                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                                fontSize: "1rem",
+                                                color: "white",
+                                            }}>
+                                            Rating:
+                                        </Typography>
+                                        <Rating
+                                            name="rating-read-only"
+                                            value={bookDetails[0].rating}
+                                            readOnly
+                                        />
+                                    </Box>
+
+                                    <Typography
+                                            component="legend"
+                                            variant="p"
+                                            sx={{
+                                                marginBottom: 0,
+                                                marginTop: 2,
+                                                textAlign: "left",
+                                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                                fontSize: "1rem",
+                                                color: "white",
+                                            }}>
+                                            Review:
+                                        </Typography>
+                                        <Typography
+                                            component="legend"
+                                            variant="p"
+                                            sx={{
+                                                marginBottom: 0,
+                                                textAlign: "left",
+                                                fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                                fontSize: "1rem",
+                                                color: "white",
+                                            }}>
+                                            {bookDetails[0].review}
+                                        </Typography>
+                                    {/* {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
                                         null
                                     ) : (
-                                        <p>Was it good? {bookDetails[0].rating}</p>
-                                    )}
-                                    {(bookDetails[0].review === undefined || bookDetails[0].review === null || bookDetails[0].review === 0) ? (
-                                        null
-                                    ) : (
-                                        <p>What'd you think? {bookDetails[0].review}</p>
-                                    )}
+                                        <p>Thoughts about it? {bookDetails[0].review}</p>
+                                    )} */}
                                 </>
                             ) : (
                                 <>
@@ -209,13 +256,10 @@ function BookDetails({ }) {
 
                             )}
 
-
-
-
                             {bookDetails[0].borrowed ? (
                                 <>
-                                    <p>Somebody got it currently? Yup.</p>
-                                    <p>{bookDetails[0].borrower} has it.</p>
+                                    <p>Somebody got it currently? Yup. {bookDetails[0].borrower} has it.</p>
+                                    {/* <p>{bookDetails[0].borrower} has it.</p> */}
                                     <p>...and has since {formattedDate}.</p>
                                 </>
                             ) : (
@@ -223,7 +267,7 @@ function BookDetails({ }) {
                                     <p>Somebody got it currently? Nope.</p>
                                 </>
                             )}
-                            <Stack direction="column" spacing={2}>
+                            <Stack direction="column" spacing={3}>
                                 <Button
                                     variant="contained"
                                     startIcon={<EditIcon />}
@@ -234,14 +278,14 @@ function BookDetails({ }) {
                                 </Button>
                                 <Button
                                     variant="contained"
-                                    // startIcon={<DeleteIcon />}
                                     name="delete"
+                                    startIcon={<DeleteIcon />}
                                     sx={{
                                         p: 1,
                                     }}
                                     onClick={deleteUserBook}
                                 >
-                                    <DeleteIcon /> DELETE BOOK
+                                    DELETE BOOK
                                 </Button>
                                 <Button
                                     variant="contained"
@@ -255,8 +299,7 @@ function BookDetails({ }) {
                         </Grid>
                     </Grid>
                 </Container >
-            )
-            }
+            )}
         </>
     );
 }

@@ -19,8 +19,8 @@ import dayjs from 'dayjs';
 import './BookEditing.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-
-
+import Rating from '@mui/material/Rating';
+import Box from '@mui/material/Box';
 
 function BookEditing({ }) {
 
@@ -43,6 +43,9 @@ function BookEditing({ }) {
     console.log('bookId is:', bookId);
 
     const [editing, setEditing] = useState(false);
+
+    const [errorMessage, setErrorMessage] = useState('');
+
 
     const [subtitle, setSubtitle] = useState(bookDetails[0]?.subtitle || '');
     const [publisher, setPublisher] = useState(bookDetails[0]?.publisher || '');
@@ -200,7 +203,7 @@ function BookEditing({ }) {
                                 <Typography
                                     variant="h2"
                                     sx={{
-                                        marginBottom: 5,
+                                        marginBottom: 1,
                                         textAlign: "left",
                                         fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                         fontSize: "1.75rem",
@@ -210,6 +213,7 @@ function BookEditing({ }) {
 
                                 <TextField
                                     fullWidth
+                                    autoComplete="off"
                                     margin="normal"
                                     id="subtitle-controlled"
                                     label="Subtitle"
@@ -232,6 +236,7 @@ function BookEditing({ }) {
 
                                 <TextField
                                     fullWidth
+                                    autoComplete="off"
                                     margin="normal"
                                     id="publisher-controlled"
                                     label="Publisher"
@@ -249,6 +254,7 @@ function BookEditing({ }) {
 
                                 <TextField
                                     fullWidth
+                                    autoComplete="off"
                                     margin="normal"
                                     id="genre-controlled"
                                     label="Genre"
@@ -256,14 +262,22 @@ function BookEditing({ }) {
                                     onChange={(event) => setGenre(event.target.value)}
                                 />
 
-                                {/* <label htmlFor="pages">Pages:</label>
-                                <input
-                                    sx={{ width: "100%", marginBottom: 2 }}
-                                    onChange={(event) => setPages(event.target.value)}
-                                    type='number'
+
+                                <TextField
+                                    fullWidth
+                                    autoComplete="off"
+                                    margin="normal"
+                                    id="pages-controlled"
+                                    label="Pages"
                                     value={pages}
-                                    placeholder={bookDetails[0].pages}
-                                /> */}
+                                    type="number"
+                                    onChange={(event) => setPages(event.target.value)}
+                                    inputProps={{
+                                        inputMode: 'numeric',
+                                        pattern: '[0-9]*'
+                                    }}
+                                />
+
 
                                 <Typography
                                     variant="p"
@@ -282,6 +296,7 @@ function BookEditing({ }) {
 
                                 <TextField
                                     fullWidth
+                                    autoComplete="off"
                                     margin="normal"
                                     id="description-controlled"
                                     label="Description"
@@ -329,11 +344,36 @@ function BookEditing({ }) {
                                     placeholder={bookDetails[0].rating}
                                 /> */}
 
+                                <Box
+                                    sx={{
+                                        '& > legend': { mt: 2 },
+                                    }}
+                                >
+                                    <Typography
+                                        component="legend"
+                                        variant="p"
+                                        sx={{
+                                            marginBottom: 0,
+                                            textAlign: "left",
+                                            fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
+                                            fontSize: "1rem",
+                                            color: "white",
+                                        }}>
+                                        Rating
+                                    </Typography>
+                                    <Rating
+                                        name="rating-controlled"
+                                        value={rating}
+                                        onChange={(event) => setRating(event.target.value)}
+                                    />
+                                </Box>
+
                                 <TextField
                                     fullWidth
+                                    autoComplete="off"
                                     margin="normal"
                                     id="review-controlled"
-                                    label="Review"
+                                    label="Thoughts about it?"
                                     value={review}
                                     multiline
                                     maxRows={4}
@@ -345,7 +385,8 @@ function BookEditing({ }) {
                                     labelId="borrowed-status-selector-label"
                                     id="borrowed-status-selector-helper"
                                     value={borrowed}
-                                    label="Read it?"
+                                    label="Somebody have it?"
+                                    input={<OutlinedInput label="Somebody have it?" />}
                                     onChange={(event) => setBorrowed(event.target.value)}
                                 >
                                     <MenuItem value={false}>Nope</MenuItem>
@@ -354,6 +395,7 @@ function BookEditing({ }) {
 
                                 <TextField
                                     fullWidth
+                                    autoComplete="off"
                                     margin="normal"
                                     id="borrower-controlled"
                                     label="Borrower"
@@ -361,22 +403,15 @@ function BookEditing({ }) {
                                     onChange={(event) => setBorrower(event.target.value)}
                                 />
 
-                                {/* <label htmlFor="borrowed_date">Borrowed date:</label>
-                                <input
-                                    type="date"
-                                    id="borrowed_date"
-                                    value={borrowedDate}
-                                    placeholder={bookDetails[0].borrowed_date}
-                                    onChange={(event) => setBorrowedDate(event.target.value)}
-                                /> */}
-
                                 <DatePicker
+                                    margin="normal"
                                     label="Borrowed Date"
                                     disableFuture
                                     onChange={setBorrowedDate}
                                 />
 
-                                <Stack direction="row" spacing={2}>
+                                <Stack direction="column" spacing={3}
+                                    marginTop={3}>
                                     <Button
                                         variant="contained"
                                         startIcon={<SaveIcon />}
@@ -400,8 +435,8 @@ function BookEditing({ }) {
                             </Grid>
                         </Grid>
                     </form>
-                </Container >)
-            }
+                </Container >
+            )}
         </>
     )
 

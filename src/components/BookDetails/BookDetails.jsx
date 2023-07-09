@@ -86,6 +86,10 @@ function BookDetails({ }) {
         year: 'numeric',
     });
 
+    const publishedDate = bookDetails[0].published;
+    const formattedPublishedDate = new Date(publishedDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+    });
 
     return (
         <>
@@ -148,7 +152,7 @@ function BookDetails({ }) {
                             {(bookDetails[0].published === undefined || bookDetails[0].published === null || bookDetails[0].published === 0) ? (
                                 <p>Published: n/a</p>
                             ) : (
-                                <p>Published: {bookDetails[0].published}</p>
+                                <p>Published: {formattedPublishedDate}</p>
                             )}
 
                             {(bookDetails[0].genre === undefined || bookDetails[0].genre === null || bookDetails[0].genre === 0) ? (

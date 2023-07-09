@@ -110,21 +110,14 @@ function BookEditing({ }) {
         })
     };
 
-    function renderYearOptions() {
-        const currentYear = new Date().getFullYear();
-        const startYear = currentYear;
-        const endYear = currentYear - 999;
 
-        const options = [];
-        for (let year = startYear; year >= endYear; year--) {
-            options.push(
-                <option key={year} value={year}>
-                    {year}
-                </option>
-            );
-        }
-        return options;
-    }
+    const disableYears = (date) => {
+        const currentYear = dayjs().year();
+        const minYear = 1000;
+        const year = dayjs(date).year();
+        return year < minYear || year > currentYear;
+    };
+
 
     const cancelEditing = (event) => {
         event.preventDefault();
@@ -246,11 +239,13 @@ function BookEditing({ }) {
                                     onChange={(event) => setPublisher(event.target.value)}
                                 />
 
-                                {/* <label htmlFor="published">Published:</label>
-                                <select onChange={(event) => setPublished(event.target.value)} value={published}>
-                                    {renderYearOptions()}
-                                </select> */}
-
+                                <DatePicker
+                                    views={['year']}
+                                    label="Year Published"
+                                    onChange={setPublished}
+                                    shouldDisableDate={disableYears}
+                                    disableFuture
+                                />
 
                                 <TextField
                                     fullWidth
@@ -325,13 +320,6 @@ function BookEditing({ }) {
                                 </Select>
 
                                 {/* need to add slider or stars for rating */}
-                                <label htmlFor="rating">Rating:</label>
-                                {/* <input
-                                onChange={(event) => setComments(event.target.value)}
-                                type='text'
-                                value={rating}
-                                placeholder={bookDetails[0].rating}
-                            /> */}
                                 {/* <input
                                     onChange={(event) => setRating(event.target.value)}
                                     type='number'

@@ -1,5 +1,5 @@
-.me-image {
-    width: 250px;
+.me-image, .linkedin-qr-image {
+    width: 300px;
     height: auto;
 }
 
@@ -62,7 +62,7 @@
 
 
 
-.bio-container {
+/* .bio-container {
   max-width: 75%;
   margin: auto;
   padding-top: 20px;
@@ -82,4 +82,4 @@
 .grid-item img {
   display: block;
   margin: 0 auto;
-}
+} */

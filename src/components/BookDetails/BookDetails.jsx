@@ -323,7 +323,7 @@ function BookDetails({ }) {
                                 </Typography>
                             )}
                         </Grid>
-                        <Grid item xs={12} sm={2} md={2} lg={2} xl={2}>
+                        <Grid item xs={12} sm={2} md={2} lg={2} xl={2} spacing={2}>
                             <Typography
                                 variant="h2"
                                 sx={{
@@ -349,7 +349,7 @@ function BookDetails({ }) {
                                     </Typography>
                                     <Box
                                         sx={{
-                                            '& > legend': { mt: 2 },
+                                            '& > legend': { mt: 2, mb: 3, },
                                         }}
                                     >
                                         <Typography
@@ -403,7 +403,7 @@ function BookDetails({ }) {
                                     <Typography
                                         variant="p"
                                         sx={{
-                                            marginBottom: 0,
+                                            marginBottom: 2,
                                             marginTop: 2,
                                             textAlign: "left",
                                             fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
@@ -416,6 +416,9 @@ function BookDetails({ }) {
 
 
                             )}
+
+                            <br />
+                            <br />
 
                             {bookDetails[0].borrowed ? (
                                 <>

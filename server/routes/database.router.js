@@ -4,7 +4,8 @@ const router = express.Router();
 
 
 // full library GET route
-// first two queries are to scrub curlies and quotation marks from author and genre db table columns
+// first two queries are to scrub curlies and quotation marks from author and genre db table columns,
+// so that data renders cleanly on dom
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
     const userId = req.user.id;
@@ -128,6 +129,10 @@ router.get('/details/:id', (req, res) => {
 }); // end detail view GET route
 
 // POST route
+// this makes two posts, 
+// first posts book data from api search to book table, 
+// and second uses the newly returned id for the new book, and 
+// posts the user-book relational data to that table
 router.post('/', (req, res) => {
   if (req.isAuthenticated()) {
     console.log('IN SERVER POST, AND req.body is:', req.body);

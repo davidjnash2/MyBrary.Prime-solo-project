@@ -11,10 +11,12 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+
+
+
 
 function Copyright(props) {
     return (
@@ -29,23 +31,14 @@ function Copyright(props) {
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-
-const defaultTheme = createTheme();
+// sign in template found via mui, incorporated login code 
 
 export default function SignInSide() {
-    //   const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     const data = new FormData(event.currentTarget);
-    //     console.log({
-    //       username: data.get('username'),
-    //       password: data.get('password'),
-    //     });
+
 
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    //   const errors = useSelector(store => store.errors);
     const dispatch = useDispatch();
 
     const handleSubmit = (event) => {
@@ -67,10 +60,10 @@ export default function SignInSide() {
 
     return (
         <ThemeProvider theme={defaultTheme}>
-            <Grid container component="main" 
-            sx={{ 
-                marginTop: "60px",
-                height: '100vh' 
+            <Grid container component="main"
+                sx={{
+                    marginTop: "60px",
+                    height: '100vh'
                 }}>
                 <CssBaseline />
                 <Grid

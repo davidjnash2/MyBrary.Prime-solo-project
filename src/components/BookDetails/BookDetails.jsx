@@ -24,8 +24,11 @@ function BookDetails({ }) {
     const bookId = useParams();
     // console.log('bookId is:', bookId);
 
-    const thumbnailUrl = bookDetails && bookDetails.length > 0 ? bookDetails[0].cover_url : '';
-    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : '';
+    const thumbnailUrl = bookDetails && bookDetails.length > 0 ? bookDetails[0].cover_url  : '';
+    // const thumbnailUrl = bookDetails[0].cover_url;
+    const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0"): '';
+    // console.log('bookDetails[0].cover_url is:', bookDetails[0].cover_url);
+    // console.log('largeUrl is', largeUrl);
 
 
     useEffect(() => {
@@ -124,6 +127,8 @@ function BookDetails({ }) {
                             <img
                                 className="details-cover-image"
                                 src={largeUrl}
+                                // src={bookDetails[0].cover_url}
+
                                 alt={bookDetails[0].title} />
                         </Grid>
                         <Grid item xs={12} sm={5} md={5} lg={5} xl={5}
@@ -323,7 +328,7 @@ function BookDetails({ }) {
                                 </Typography>
                             )}
                         </Grid>
-                        <Grid item xs={12} sm={2} md={2} lg={2} xl={2} spacing={2}>
+                        <Grid item  xs={12} sm={2} md={2} lg={2} xl={2} >
                             <Typography
                                 variant="h2"
                                 sx={{
@@ -349,7 +354,7 @@ function BookDetails({ }) {
                                     </Typography>
                                     <Box
                                         sx={{
-                                            '& > legend': { mt: 2, mb: 3, },
+                                            '& > legend': { mt: 2, mb: 1, },
                                         }}
                                     >
                                         <Typography
@@ -389,7 +394,7 @@ function BookDetails({ }) {
                                         component="legend"
                                         variant="p"
                                         sx={{
-                                            marginBottom: 5,
+                                            marginBottom: 3,
                                             textAlign: "left",
                                             fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                             fontSize: "1rem",
@@ -426,7 +431,7 @@ function BookDetails({ }) {
                                         variant="p"
                                         sx={{
                                             marginBottom: 2,
-                                            marginTop: 2,
+                                            marginTop: 1,
                                             textAlign: "left",
                                             fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                             fontSize: "1rem",
@@ -457,7 +462,7 @@ function BookDetails({ }) {
                                         variant="p"
                                         sx={{
                                             marginBottom: 3,
-                                            marginTop: 2,
+                                            marginTop: 1,
                                             textAlign: "left",
                                             fontFamily: "Book Antiqua, Palatino, Palatino Linotype, Palatino LT STD, Georgia, serif",
                                             fontSize: "1rem",
@@ -473,7 +478,7 @@ function BookDetails({ }) {
                             >
                                 <Button
                                     variant="contained"
-                                    marginTop={3}
+                                    margintop={3}
                                     startIcon={<EditIcon />}
                                     name="edit"
                                     onClick={() => history.push(`/edit/${bookId.id}`)}

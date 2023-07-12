@@ -7,8 +7,6 @@ import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -17,28 +15,19 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import './BookEditing.css';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Rating from '@mui/material/Rating';
 import Box from '@mui/material/Box';
 
 function BookEditing({ }) {
 
     const bookDetails = useSelector(store => store.details);
-
-    console.log('in BookDetails, and bookDetails is:', bookDetails);
-
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // bringing in sweetalerts
     const MySwal = withReactContent(Swal);
 
-    // const today = dayjs();
-    // const yesterday = dayjs().subtract(1, 'day');
-    // const todayStartOfTheDay = today.startOf('day');
-    // const tomorrow = dayjs().add(1, 'day');
-
-
+    // bringing in useParams to hold book id in url, so that data persists on refresh/back
     const bookId = useParams();
     console.log('bookId is:', bookId);
 
@@ -79,6 +68,8 @@ function BookEditing({ }) {
         });
     }
 
+    // collects data from all user inputs, and sends to server PUT route
+    // displays sweetalert success message when complete
     const updateUserBook = (event) => {
         event.preventDefault();
         console.log('in updateUserBook');
@@ -113,7 +104,8 @@ function BookEditing({ }) {
         })
     };
 
-
+    // attempt to define available years for date picker on published year input,
+    // but it will not allow years prior to 1900, no matter how I construct this 
     const disableYears = (date) => {
         const currentYear = dayjs().year();
         const minYear = 1000;
@@ -122,6 +114,8 @@ function BookEditing({ }) {
     };
 
 
+    // handles click of cancel button, clears inputs of any new data, does 
+    // not submit anything, and returns to details view
     const cancelEditing = (event) => {
         event.preventDefault();
         switchEditing();
@@ -159,6 +153,9 @@ function BookEditing({ }) {
     }
 
 
+    // form to allow user to edit book data, as well as their own read/rating/review/loan data
+    // will populate inputs with any existing values, so user can edit that and doesn't need to 
+    // start fresh every time
     return (
         <>
             {bookDetails && bookDetails.length > 0 && (
@@ -191,6 +188,7 @@ function BookEditing({ }) {
                                 <img
                                     className="details-cover-image"
                                     src={largeUrl}
+                                    // src={bookDetails[0].cover_url}
                                     alt={bookDetails[0].title} />
                             </Grid>
                             <Grid item xs={12} sm={3} md={3} lg={3} xl={3}

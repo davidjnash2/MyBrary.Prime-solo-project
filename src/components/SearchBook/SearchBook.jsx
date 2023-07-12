@@ -4,19 +4,22 @@ import { useDispatch } from 'react-redux';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import { CardActionArea, Paper } from '@mui/material';
-import { useEffect, useRef } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 function SearchBook({ book }) {
 
     const dispatch = useDispatch();
-    const MySwal = withReactContent(Swal);
     const history = useHistory();
 
+    // bring in sweetalerts
+    const MySwal = withReactContent(Swal);
 
+
+    // harnessing data from api call, and posting to db
+    // presenting success message on dom via sweetalert2,
+    // with option to stay on results, return to search, or move to library
     const addBook = (event) => {
         const isbn = (book.volumeInfo.industryIdentifiers[0].type == 'ISBN_13' ?
             book.volumeInfo.industryIdentifiers[0].identifier

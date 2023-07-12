@@ -2,7 +2,6 @@ html,
 body,
 #react-root {
   height: 100%;
-  /* background-color: #2E9CCA; */
   overscroll-behavior: none;
   background-image: radial-gradient(#2E9CCA, #390854);
 }
@@ -11,7 +10,6 @@ body,
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  /* position: absolute; */
   background-image: radial-gradient(#2E9CCA, #390854);
 }
 
@@ -25,35 +23,15 @@ img {
   max-width: 100%;
 }
 
-/* /* h1,
-h2,
-h3,
-li,
-link,
-.nav,
-.navlink,
-button,
-label,
-input,
-.title,
-.author  */
+
 
 link {
   font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
 }
 
-/* h1 {
-  font-size:48px;
-}
 
-p {
-
-  font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
-  font-size: 24px;
-} */ 
-
-
-h1, #search-label {
+h1,
+#search-label {
   font-family: Rockwell Extra Bold, Rockwell Bold, monospace;
   font-size: 48px;
   font-style: normal;
@@ -63,25 +41,27 @@ h1, #search-label {
   color: white;
 }
 
-h2, h3 {
+h2,
+h3 {
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
   font-size: 24px;
   font-style: normal;
   font-variant: normal;
   font-weight: 700;
   line-height: 15.4px;
-  color: white; 
+  color: white;
   padding: 3px;
 }
 
-p, link {
+p,
+link {
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
   font-size: 16px;
   font-style: normal;
   font-variant: normal;
   font-weight: 400;
   line-height: 20px;
-  color:white;
+  color: white;
 }
 
 blockquote {
@@ -109,7 +89,8 @@ pre {
   font-size: 18px;
 }
 
-.swal2-html-container, .swal2-styled {
+.swal2-html-container,
+.swal2-styled {
   font-family: "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
   font-size: 14px;
 }

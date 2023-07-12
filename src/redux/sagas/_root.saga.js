@@ -14,11 +14,11 @@ export default function* rootSaga() {
     loginSaga(),
     registrationSaga(),
     userSaga(),
-    resultsSaga(),
-    postSaga(),
-    librarySaga(),
-    deleteSaga(),
-    updateSaga(),
-    detailsSaga(),
+    resultsSaga(), // for results from API search/GET
+    postSaga(), // for POSTing new books to user library
+    librarySaga(), // for server GET of full user library
+    deleteSaga(), // for DELETE of user book
+    updateSaga(), // for update PUT of book data from user inputs
+    detailsSaga(), // for GET of individual book details from server
   ]);
 }

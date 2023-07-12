@@ -52,6 +52,10 @@ function Nav() {
               About
             </Link>
             <LogOutButton className="navLink" />
+
+
+            {/* started building avatar render field here, commented out due to 
+            time constraints on getting to functional; keeping for future reference/use */}
             {/* <Avatar className="avatar"
               alt="user avatar"
               src="unsplash.com/photos/FTfjMijq-Ws"

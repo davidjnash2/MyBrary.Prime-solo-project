@@ -1,9 +1,4 @@
-// just getting start of reducer on page, 
-// not yet finished, will need to update
-// this further, spread?
-// import details from './details.reducer';
-// details
-
+// updates state with new user input data on bookEditing view
 const updateReducer = (state = [], action) => {
     console.log('IN updateReducer, and action.payload is:', action.payload);
     const bookUpdates = action.payload;

@@ -15,6 +15,8 @@ function LibraryList() {
         })
     }, []);
 
+    // this loading block all to ensure dom doesn't crash if data isn't back yet from 
+    // the above use effect when page renders
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -37,7 +39,7 @@ function LibraryList() {
     return (
         <>
             <div className="user-library">
-            <h1 className="centered-content">{user.username}'s MyBrary</h1>
+                <h1 className="centered-content">{user.username}'s MyBrary</h1>
                 <Box
                     display="flex"
                     justifyContent="center"

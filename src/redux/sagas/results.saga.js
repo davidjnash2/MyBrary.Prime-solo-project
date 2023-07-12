@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-
+// listens for FETCH_RESULTS from client search input, to trigger
+// API call with those search parameters
+// dispatches to results reducer to hold returned results in state
 function* fetchResults(action) {
 
     try {

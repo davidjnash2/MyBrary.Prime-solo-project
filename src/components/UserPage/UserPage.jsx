@@ -7,12 +7,18 @@ import './UserPage.css';
 
 
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+
+
   const user = useSelector((store) => store.user);
   const dispatch = useDispatch();
+
   const library = useSelector((store) => store.library);
   console.log('library is:', library);
 
+  // loops through library state, sorting that array via biggest id to smalled id, and putting newly-arranged
+  // array into new sortedLibrary array
+  // then, in that new sortedLibrary array, using slice method to remove 5 values, starting at index0
+  // putting those 5 books into new recentBooks array
   const selectRecents = () => {
     const sortedLibrary = library.sort((a, b) => b.id - a.id);
     console.log('sortedLibrary is:', sortedLibrary);
@@ -21,6 +27,7 @@ function UserPage() {
     return recentBooks;
   }
 
+  // declaring variable via calling function
   const recentBooks = selectRecents();
 
   useEffect(() => {
@@ -29,6 +36,9 @@ function UserPage() {
     })
   }, []);
 
+
+  // mapping over recentBooks array to display five most recent additions to user library
+  // also notifying user of total number of volumes in their library
   return (
     <>
       <div className="user-view">
@@ -38,13 +48,10 @@ function UserPage() {
           <p id="mybrary-count">You've got {library.length} books in your MyBrary!</p>
           <div>
             <h3>Your recent additions are...</h3>
-            <Grid 
-            container 
-            spacing={4}
-            justifyContent="center"
-            // sx={{
-            //   marginTop: "25px",
-            // }}
+            <Grid
+              container
+              spacing={4}
+              justifyContent="center"
             >
               {recentBooks.map((userBook, i) => (
                 <Grid item xs={12} sm={6} md={5} lg={2} xl={2} key={i}>

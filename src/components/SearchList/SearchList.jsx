@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from 'react-router-dom'
 import SearchBook from '../SearchBook/SearchBook';
-import { Box, Grid, Card, Paper, makeStyles } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import './SearchList.css';
 
 
@@ -11,8 +11,14 @@ function SearchList() {
     // access search results from global state via store
     const results = useSelector((store) => store.results);
     const dispatch = useDispatch();
+
+    // instituting useParams to hold search input as searchTerm variable in url path, so 
+    // that data can persist on refresh/back button
     const searchTerm = useParams();
 
+
+    // filtering search results to only include items that return from api call with the 
+    // specific data I want to hold/use
     const filteredResults = results.items?.filter((book) => {
         return (
             book &&

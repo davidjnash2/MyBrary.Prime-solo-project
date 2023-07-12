@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
-
+// listening for ADD_BOOK dispatch from searchBook component,
+// to send POST request to server for new book data,
+// and dispatches to library reducer to add new book to state
 function* postBook(action) {
     console.log('IN CLIENT DB postSaga, AND action.payload is:', action.payload);
     try {

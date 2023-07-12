@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { useHistory } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -12,6 +11,9 @@ function ApiSearch() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    // sends user input data to api route
+    // directs to results view
+    // dispatches to results saga
     const sendSearch = (event) => {
         event.preventDefault();
         console.log('Client search term is:', search);
@@ -22,7 +24,7 @@ function ApiSearch() {
         history.push(`/results/${search}`);
     }
 
-
+    // user input for api book search
     // ensure universal button styling on submit button
     return (
         <>
@@ -31,7 +33,7 @@ function ApiSearch() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '100vh', // Adjust the height as per your requirement
+                    height: '100vh',
                     marginTop: '-20vh',
                 }}
             >

@@ -12,6 +12,8 @@ function OnLoan() {
     const library = useSelector(store => store.library);
 
 
+    // looping through library books to find books marked as loaned out, to 
+    // create new array and display those loaned out books on this list
     const selectLoaners = () => {
         const loaners = [];
         for (const userBook of library) {
@@ -23,6 +25,7 @@ function OnLoan() {
         return loaners;
     }
 
+    // calling function to have array available
     const loaners = selectLoaners();
 
     useEffect(() => {
@@ -50,6 +53,7 @@ function OnLoan() {
     }
 
 
+    // handling if no books are out on load, to both notify user and prevent dom failure
     if (loaners.length === 0) {
         return (
             <div className="out-on-loan">
@@ -91,7 +95,7 @@ function OnLoan() {
                     >
                         {loaners.map((userBook, i) => (
                             <Grid item xs={12} sm={4} md={4} lg={3} xl={3} key={i}>
-                                <LibraryBook userBook={userBook}  />
+                                <LibraryBook userBook={userBook} />
                             </Grid>
                         ))}
                     </Grid>

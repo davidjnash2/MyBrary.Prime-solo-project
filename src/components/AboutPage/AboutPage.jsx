@@ -2,6 +2,10 @@ import React from 'react';
 import './AboutPage.css';
 import { Grid, Container, Typography, Box } from '@mui/material';
 
+
+// about page for my info and info about project build
+// more mui grid to get used to, and tried to use mui to style
+// pretty much every element of this view
 function AboutPage() {
   return (
     <>

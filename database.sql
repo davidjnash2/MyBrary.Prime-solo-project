@@ -6,16 +6,13 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
--- all following statements are to create test databse 
--- for "mybrary" solo project, to ensure intended functionality
-
--- creating test avatar table
+-- create avatar table
 CREATE TABLE "avatar" (
 	"id" SERIAL PRIMARY KEY,
 	"img" VARCHAR(1000) NOT NULL
 );
 
--- creating test user table
+-- create user table
 CREATE TABLE "user" (
 	"id" SERIAL PRIMARY KEY,
 	"username" VARCHAR(80) UNIQUE NOT NULL,
@@ -23,8 +20,8 @@ CREATE TABLE "user" (
 	"avatar_id" INT REFERENCES "avatar"
 );
 
--- creating test book table, testing without quotation formatting
--- using INTEGER for publised date, as DATE was causing errors from 
+-- creating book table, testing without quotation formatting
+-- using INTEGER for published date, as DATE was causing errors from 
 -- inconsistent date formatting
 CREATE TABLE book (
 	id SERIAL PRIMARY KEY,
@@ -40,10 +37,9 @@ CREATE TABLE book (
 	isbn VARCHAR(13) NOT NULL
 );
 
--- creating test user_book table
--- changing formatting to include entry timestamp for later sorting purposes
--- added value constraints on rating column; nope removed those
--- updated rating column to varchar, will have input restrictions on client side, instead
+-- creating user_book table
+-- including entry timestamp for sorting
+-- rating column to varchar, input restrictions on client side
 CREATE TABLE user_book (
 	id SERIAL PRIMARY KEY,
 	user_id INT REFERENCES "user"(id),
@@ -59,11 +55,8 @@ CREATE TABLE user_book (
 
 
 -- author and genre columns in book table have started including curly
--- braces and quotes with data entries, so below two queries are to be run
--- sporadically/at end to remove those values
-
--- perhaps there's a way to *saftely* include those queries as part of a get??? but don't want
--- to include something so potentially destructive in a regularly-occuring function juuuust yet
+-- braces and quotes with data entries, so below two queries will
+-- run as part of library GET, to ensure data comes back formatted correclty
 UPDATE book
 SET author = replace(replace(replace(author, '{', ''), '}', ''), '"', '');
 

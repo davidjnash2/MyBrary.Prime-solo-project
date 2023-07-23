@@ -20,9 +20,8 @@ CREATE TABLE "user" (
 	"avatar_id" INT REFERENCES "avatar"
 );
 
--- creating book table, testing without quotation formatting
--- using INTEGER for published date, as DATE was causing errors from 
--- inconsistent date formatting
+-- create book table without quotation formatting
+-- using INTEGER for published date, as DATE was causing errors from inconsistent date formatting
 CREATE TABLE book (
 	id SERIAL PRIMARY KEY,
 	cover_url VARCHAR(500),

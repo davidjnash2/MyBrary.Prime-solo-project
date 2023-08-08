@@ -76,7 +76,7 @@ function BookDetails({ }) {
         setTimeout(() => {
             // Set isLoading to false once the data is fetched
             setIsLoading(false);
-        }, 25);
+        }, 75);
     }, []); // Empty dependency array to run the effect only once
 
     if (isLoading) {
@@ -126,8 +126,8 @@ function BookDetails({ }) {
                         <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                             <img
                                 className="details-cover-image"
-                                src={largeUrl}
-                                // src={bookDetails[0].cover_url}
+                                // src={largeUrl}
+                                src={bookDetails[0].cover_url}
 
                                 alt={bookDetails[0].title} />
                         </Grid>

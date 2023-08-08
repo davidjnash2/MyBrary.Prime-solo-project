@@ -23,7 +23,7 @@ function LibraryBook({ userBook }) {
     // image failure
     // keeping the commented-out code here for future refenence/use
 
-    // const thumbnailUrl = userBook.cover_url;
+    const thumbnailUrl = userBook.cover_url;
     // const largeUrl = thumbnailUrl ? thumbnailUrl.replace("zoom=1", "zoom=0") : userBook.cover_url;
     // console.log('largeUrl is:', largeUrl);
 

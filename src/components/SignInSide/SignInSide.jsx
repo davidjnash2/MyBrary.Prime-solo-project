@@ -59,7 +59,7 @@ export default function SignInSide() {
     };
 
     return (
-        <ThemeProvider theme={defaultTheme}>
+        // <ThemeProvider theme={defaultTheme}>
             <Grid container component="main"
                 sx={{
                     marginTop: "60px",
@@ -153,6 +153,6 @@ export default function SignInSide() {
                     </Box>
                 </Grid>
             </Grid>
-        </ThemeProvider>
+        // </ThemeProvider>
     );
 }
